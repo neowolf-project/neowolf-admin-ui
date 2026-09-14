@@ -69,10 +69,10 @@ window.Neowolf = window.Neowolf || {};
         pageTree.dataset.userLoggedIn !== 'false';
     const editUrlTemplate =
         pageTree.dataset.editUrlTemplate
-        ?? '/admin/page/edit/{id}';
+        ?? '/page/edit/{id}';
     const addUrlTemplate =
         pageTree.dataset.addUrlTemplate
-        ?? '/admin/page/add/{id}';
+        ?? '/page/add/{id}';
 
     const templateSource = pageTree.querySelector(
         '.tree-node[data-page-id]:not([data-page-id="1"])'
