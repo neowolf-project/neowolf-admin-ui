@@ -1,0 +1,16 @@
+{
+    "name": "neowolf/admin-ui",
+    "description": "Development and reference implementation of the Neowolf CMS administration interface.",
+	"license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.5",
+        "nikic/fast-route": "^1.3",
+        "twig/twig": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NeowolfAdmin\\": "src/"
+        }
+    }
+}

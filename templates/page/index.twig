@@ -1,0 +1,359 @@
+{% extends 'base.twig' %}
+
+{% set active_section = 'pages' %}
+
+{% macro nodes(pages) %}
+    {% for page in pages %}
+        <li
+                class="tree-node"
+                data-page-id="{{ page.id }}"
+                data-slug="{{ page.slug }}"
+                data-depth="{{ page.depth }}"
+        >
+            <div class="tree-row">
+                <div class="tree-page">
+                    {% if page.children %}
+                        <button
+                                type="button"
+                                class="tree-toggle"
+                                aria-expanded="{{ page.expanded ? 'true' : 'false' }}"
+                                aria-controls="children-{{ page.id }}"
+                                aria-label="{{ page.expanded ? 'Collapse' : 'Expand' }} {{ page.title }}"
+                                data-tooltip="{{ page.expanded ? 'Collapse' : 'Expand' }} {{ page.title }}"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </button>
+                    {% else %}
+                        <span class="tree-spacer" aria-hidden="true"></span>
+                    {% endif %}
+
+                    <a
+                            class="tree-title"
+                            href="{{ page.href }}"
+                            {% if page.icon %}data-page-icon="{{ page.icon }}"{% endif %}
+                    >
+                        {{ page.title }}
+                    </a>
+
+                    {% if page.movable %}
+                        <button
+                                type="button"
+                                class="drag-handle"
+                                aria-label="Move page"
+                                data-tooltip="Move page"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01"></path>
+                            </svg>
+                        </button>
+                    {% endif %}
+                </div>
+
+                <div class="tree-layout">
+                    <button
+                            type="button"
+                            class="layout-button"
+                            data-tooltip="Change layout"
+                    >
+                        {{ page.layout }}
+                    </button>
+                </div>
+
+                <div class="tree-status">
+                    <button
+                            type="button"
+                            class="status-badge"
+                            data-tooltip="Change status"
+                    >
+                        {{ page.status }}
+                    </button>
+                </div>
+
+                <div class="tree-actions">
+                    <button
+                            type="button"
+                            class="tree-action normal-action view-page-button"
+                            aria-label="View {{ page.title }}"
+                            data-tooltip="View page"
+                            {% if not page.viewable %}disabled{% endif %}
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12"></path>
+                            <circle cx="12" cy="12" r="2.5"></circle>
+                        </svg>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="tree-action normal-action add-page-button"
+                            aria-label="Add page to {{ page.title }}"
+                            data-tooltip="Add page"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="tree-action normal-action secondary copy-button"
+                            aria-label="Copy {{ page.title }}"
+                            data-tooltip="Copy page"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                            <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"></path>
+                        </svg>
+                    </button>
+
+                    <button
+                            type="button"
+                            class="tree-action normal-action secondary delete-button"
+                            aria-label="{{ page.deletable ? 'Delete ' ~ page.title : page.title ~ ' cannot be deleted' }}"
+                            data-tooltip="{{ page.deletable ? 'Delete page' : page.title ~ ' cannot be deleted' }}"
+                            {% if not page.deletable %}disabled{% endif %}
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            {% if page.children %}
+                <ul
+                        id="children-{{ page.id }}"
+                        class="tree-children"
+                        {% if not page.expanded %}hidden{% endif %}
+                >
+                    {{ _self.nodes(page.children) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% block title %}Pages · Neowolf{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/assets/css/page-tree.css">
+{% endblock %}
+
+{% block content %}
+
+    <svg class="svg-sprite" aria-hidden="true">
+        <symbol id="icon-page" viewBox="0 0 24 24">
+            <path d="M6 2h8l4 4v16H6z"></path>
+            <path d="M14 2v5h5"></path>
+        </symbol>
+
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <path d="m3 11 9-8 9 8"></path>
+            <path d="M5 10v11h14V10"></path>
+            <path d="M9 21v-7h6v7"></path>
+        </symbol>
+
+        <symbol id="icon-news" viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z"></path>
+            <path d="M8 8h8"></path>
+            <path d="M8 12h8"></path>
+            <path d="M8 16h5"></path>
+        </symbol>
+
+        <symbol id="icon-article" viewBox="0 0 24 24">
+            <path d="M6 2h8l4 4v16H6z"></path>
+            <path d="M14 2v5h5"></path>
+            <path d="M9 11h6"></path>
+            <path d="M9 15h6"></path>
+        </symbol>
+    </svg>
+
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <h1>Pages</h1>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <button
+                            type="button"
+                            class="secondary"
+                            data-sortable-toggle="page-tree"
+                            aria-pressed="false"
+                            aria-keyshortcuts="Alt+Shift+R"
+                            data-tooltip="Toggle with Alt+Shift+R"
+                            data-placement="left"
+                    >
+                        Reorder
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                            type="button"
+                            id="reset-tree"
+                            class="secondary"
+                    >
+                        Reset
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section aria-labelledby="page-tree-title">
+        <h2 id="page-tree-title" class="visually-hidden">Page tree</h2>
+
+        <div id="page-tree" class="page-tree">
+            <div class="page-tree-columns" aria-hidden="true">
+                <span>Page</span>
+                <span>Layout</span>
+                <span>Status</span>
+                <span>Actions</span>
+            </div>
+
+            <ul class="tree-root">
+                {{ _self.nodes(pages) }}
+            </ul>
+        </div>
+    </section>
+
+    <p
+            id="tree-demo-message"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+    ></p>
+
+<dialog aria-labelledby="layout-page-dialog-title" id="layout-page-dialog">
+<article>
+<header>
+<form method="dialog">
+<button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+</form>
+<h2 id="layout-page-dialog-title">Change Layout</h2>
+</header>
+<form id="layout-page-form">
+<label for="page-layout-field">Layout</label>
+<select id="page-layout-field" name="layout">
+<option value="Default">Default</option>
+<option value="News">News</option>
+<option value="Article">Article</option>
+<option value="Landing">Landing</option>
+<option value="Contact">Contact</option>
+</select>
+</form>
+<footer>
+<button class="secondary" id="cancel-layout-page-button" type="button">
+                Cancel
+            </button>
+<button id="confirm-layout-page-button" type="button">
+                Save
+            </button>
+</footer>
+</article>
+</dialog>
+
+<dialog aria-labelledby="status-page-dialog-title" id="status-page-dialog">
+<article>
+<header>
+<form method="dialog">
+<button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+</form>
+<h2 id="status-page-dialog-title">Change Status</h2>
+</header>
+<form id="status-page-form">
+<label for="page-status-field">Status</label>
+<select id="page-status-field" name="status">
+<option value="Draft">Draft</option>
+<option value="Preview">Preview</option>
+<option value="Published">Published</option>
+<option value="Hidden">Hidden</option>
+<option value="Archived">Archived</option>
+</select>
+</form>
+<footer>
+<button class="secondary" id="cancel-status-page-button" type="button">
+                Cancel
+            </button>
+<button id="confirm-status-page-button" type="button">
+                Save
+            </button>
+</footer>
+</article>
+</dialog>
+
+<dialog aria-describedby="view-page-url" aria-labelledby="view-page-dialog-title" id="view-page-dialog">
+<article>
+<header>
+<form method="dialog">
+<button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+</form>
+<h2 id="view-page-dialog-title">View Page</h2>
+</header>
+<p id="view-page-url"></p>
+<footer>
+<button id="close-view-page-button" type="button">
+                Close
+            </button>
+</footer>
+</article>
+</dialog>
+
+<dialog aria-labelledby="add-page-dialog-title" id="add-page-dialog">
+<article>
+<header>
+<form method="dialog">
+<button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+</form>
+<h2 id="add-page-dialog-title">Add Page</h2>
+</header>
+<form id="add-page-form">
+<label for="page-title-field">Title</label>
+<input autocomplete="off" id="page-title-field" maxlength="255" name="title" required=""/>
+</form>
+<footer>
+<button class="secondary" id="cancel-add-page-button" type="button">
+                Cancel
+            </button>
+<button id="confirm-add-page-button" type="button">
+                Add
+            </button>
+</footer>
+</article>
+</dialog>
+
+<dialog aria-describedby="delete-page-message" aria-labelledby="delete-page-dialog-title" id="delete-page-dialog">
+<article>
+<header>
+<form method="dialog">
+<button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+</form>
+<h2 id="delete-page-dialog-title">Delete Page</h2>
+</header>
+<p id="delete-page-message"></p>
+<footer>
+<button class="secondary" id="cancel-delete-page-button" type="button">
+                Cancel
+            </button>
+<button id="confirm-delete-page-button" type="button">
+                Delete
+            </button>
+</footer>
+</article>
+</dialog>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/assets/js/sortable.min.js"></script>
+    <script src="/assets/js/tree-helpers.js"></script>
+    <script src="/assets/js/sortable-nested-tree.js"></script>
+    <script src="/assets/js/page-tree.js"></script>
+    <script src="/assets/js/page-tree-demo.js"></script>
+{% endblock %}

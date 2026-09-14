@@ -1,0 +1,764 @@
+/*
+ * Neowolf Page Tree.
+ *
+ * Page-index/tree specific styling.
+ * Load after admin.css.
+ */
+
+:root {
+    --tree-actions-width: 10rem;
+    --tree-column-gap: 1rem;
+
+    --tree-indent-step: 1.5rem;
+    --tree-row-padding-x: 0.75rem;
+    --tree-row-padding-y: 0.5rem;
+}
+
+
+.page-tree {
+    container-type: inline-size;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        max-content
+        max-content
+        max-content;
+    column-gap: var(--tree-column-gap);
+
+    width: 100%;
+    min-width: 0;
+}
+
+/*
+ * Keyboard destination feedback for the generic nested sorter.
+ *
+ * The three states deliberately differ by both position and shape so meaning
+ * is not conveyed by colour alone:
+ *
+ * - before: marker along the top edge;
+ * - inside: inset outline plus inward-pointing marker;
+ * - after: marker along the bottom edge.
+ *
+ * The generated markers are visual only. Screen-reader users receive the
+ * complete destination through the sorter's live-region announcement.
+ */
+
+.keyboard-drop-before > .tree-row,
+.keyboard-drop-inside > .tree-row,
+.keyboard-drop-after > .tree-row {
+    position: relative;
+}
+
+.keyboard-drop-before > .tree-row {
+    box-shadow: inset 0 0.2rem 0 var(--pico-primary);
+}
+
+.keyboard-drop-after > .tree-row {
+    box-shadow: inset 0 -0.2rem 0 var(--pico-primary);
+}
+
+.keyboard-drop-inside > .tree-row {
+    outline: 0.2rem solid var(--pico-primary);
+    outline-offset: -0.2rem;
+    background: var(--pico-primary-focus);
+}
+
+.keyboard-drop-before > .tree-row::after,
+.keyboard-drop-inside > .tree-row::after,
+.keyboard-drop-after > .tree-row::after {
+    position: absolute;
+    right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+
+    content: "";
+    background: var(--pico-primary);
+
+    pointer-events: none;
+}
+
+.keyboard-drop-before > .tree-row::after {
+    top: 0.25rem;
+
+    clip-path: polygon(
+        50% 0,
+        100% 65%,
+        68% 65%,
+        68% 100%,
+        32% 100%,
+        32% 65%,
+        0 65%
+    );
+}
+
+.keyboard-drop-inside > .tree-row::after {
+    top: 50%;
+    transform: translateY(-50%);
+
+    clip-path: polygon(
+        0 30%,
+        55% 30%,
+        55% 0,
+        100% 50%,
+        55% 100%,
+        55% 70%,
+        0 70%
+    );
+}
+
+.keyboard-drop-after > .tree-row::after {
+    bottom: 0.25rem;
+
+    clip-path: polygon(
+        32% 0,
+        68% 0,
+        68% 35%,
+        100% 35%,
+        50% 100%,
+        0 35%,
+        32% 35%
+    );
+}
+
+/*
+ * Shared desktop columns.
+ *
+ * The page tree owns one four-column grid. Header, rows and every nested tree
+ * level participate in that same grid through subgrid, so column headers and
+ * row content always align.
+ *
+ * Page is the priority column and receives all remaining width.
+ * Layout, Status and Actions take only the width their content needs.
+ */
+
+.page-tree-columns,
+.tree-row {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+}
+
+.page-tree-columns {
+    padding: var(--tree-row-padding-y) var(--tree-row-padding-x);
+
+    border-bottom: var(--pico-border-width) solid var(--pico-muted-border-color);
+
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.page-tree-columns > * {
+    min-width: 0;
+    margin: 0;
+    justify-self: start;
+}
+
+.page-tree-columns > :not(:first-child),
+.tree-layout,
+.tree-status,
+.tree-actions {
+    justify-self: center;
+}
+
+
+/*
+ * Tree structure.
+ *
+ * Important:
+ * Nested lists themselves are NEVER indented. Every row therefore keeps
+ * the exact same full width and column boundaries, regardless of depth.
+ */
+
+.tree-root,
+.tree-children,
+.tree-node {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tree-root,
+.tree-children {
+    font-size: inherit;
+}
+
+.tree-node::marker {
+    content: "";
+}
+
+.tree-row {
+    min-height: 3rem;
+
+    padding: var(--tree-row-padding-y) var(--tree-row-padding-x);
+
+    border-bottom: var(--pico-border-width) solid var(--pico-muted-border-color);
+}
+
+
+/*
+ * Page column.
+ *
+ * Only this cell is indented. Child lists remain full-width.
+ */
+
+.tree-page {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    min-width: 0;
+    overflow: visible;
+}
+
+.tree-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-inline-end: 0.375rem;
+
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.tree-title a {
+    padding-right: 0.375rem;
+}
+
+.page-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 1rem;
+
+    fill: none;
+    stroke: var(--pico-contrast);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.svg-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+
+/*
+ * Page-tree indentation.
+ *
+ * Browsers without typed attr() display a flat tree.
+ */
+
+.tree-page {
+    padding-left: 0;
+}
+
+@supports (x: attr(x type(*))) {
+    .tree-node {
+        --tree-depth: attr(data-depth type(<number>), 0);
+    }
+
+    .tree-page {
+        padding-left: calc(
+            0.25rem +
+            var(--tree-indent-step) * var(--tree-depth)
+        );
+    }
+}
+
+/*
+ * Layout / Status / Actions columns.
+ */
+
+.tree-layout,
+.tree-status,
+.tree-actions {
+    min-width: 0;
+    margin: 0;
+}
+
+.tree-layout {
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.layout-button {
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    text-align: left;
+    font: inherit;
+    white-space: nowrap;
+}
+
+.layout-button:hover {
+    color: var(--pico-primary);
+    text-decoration: underline;
+}
+
+.tree-status {
+    overflow: visible;
+}
+
+.tree-status .status-badge {
+    transform: translateX(0rem);
+}
+
+.tree-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+
+/*
+ * Tree controls.
+ */
+
+.tree-toggle,
+.tree-action {
+    display: inline-grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.375rem;
+}
+
+.tree-toggle {
+    border: 0;
+    background: transparent;
+    color: inherit;
+}
+
+.tree-toggle svg,
+.tree-action svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tree-toggle svg {
+    transition: transform 0.15s ease;
+}
+
+.tree-toggle[aria-expanded="true"] svg {
+    transform: rotate(90deg);
+}
+
+.tree-spacer {
+    width: 2.25rem;
+    flex: 0 0 2.25rem;
+}
+
+
+/*
+ * Status badges.
+ */
+
+.status-badge {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.15rem 0.5rem;
+
+    overflow: visible;
+    white-space: nowrap;
+
+    border: var(--pico-border-width) solid var(--pico-muted-border-color);
+
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.status-badge:hover {
+    border-color: var(--pico-primary);
+    background: var(--pico-primary-focus);
+}
+
+
+/*
+ * Reorder mode.
+ *
+ * The move handle appears directly after the page title. Pointer users
+ * can drag it with SortableJS; keyboard users can press Space to pick up
+ * a page, use Up/Down to choose a parent, and press Space again to drop.
+ * The normal Actions column is left unchanged.
+ */
+
+.drag-handle {
+    /*
+     * Always reserve the handle's space so switching Reorder mode does
+     * not move page titles or change the width of the Page column.
+     * `visibility: hidden` keeps the button out of sight (and out of
+     * keyboard interaction) until Reorder mode is enabled.
+     */
+    display: inline-grid;
+    visibility: hidden;
+    pointer-events: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    flex: 0 0 1.75rem;
+    margin-left: 0.125rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.drag-handle svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.reorder-mode .drag-handle {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.reorder-mode .drag-handle:active {
+    cursor: grabbing;
+}
+
+.reorder-mode .drag-handle:focus-visible,
+.reorder-mode .drag-handle.keyboard-handle-focus {
+    outline: 3px solid var(--pico-primary);
+    outline-offset: 3px;
+    background: var(--pico-primary-focus);
+    border-radius: var(--pico-border-radius);
+}
+
+.keyboard-move-active .drag-handle.keyboard-picked-up {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: 2px;
+}
+
+/*
+ * Keep a moving subtree visually compact. The descendants stay in the DOM
+ * and move with their parent, but only the selected page row is shown
+ * until the move is dropped or cancelled.
+ */
+/* Keep the complete subtree attached while showing only its parent row during a move. */
+.tree-node.sortable-chosen > .tree-children,
+.tree-node.sortable-drag > .tree-children,
+.tree-node.sortable-fallback > .tree-children {
+    display: none !important;
+}
+
+.keyboard-move-active .tree-node.keyboard-drop-parent > .tree-row {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: -2px;
+}
+
+
+/*
+ * SortableJS feedback.
+ */
+
+.tree-node.sortable-ghost > .tree-row {
+    opacity: 0.35;
+}
+
+.tree-node.sortable-chosen > .tree-row {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: -2px;
+}
+
+
+/*
+ * Child drop targets.
+ *
+ * Every page owns a child <ul>, including leaf pages. During a drag the
+ * list becomes a generous target, so dropping *inside* a page does not
+ * require pixel-perfect positioning. The list itself stays full width;
+ * only its visual feedback changes, so the shared grid columns remain
+ * perfectly aligned.
+ */
+
+.tree-children {
+    position: relative;
+}
+
+.reorder-mode.is-dragging .tree-children {
+    /*
+     * Pull the child list upward over the lower/middle part of its own
+     * page row. This creates a real SortableJS "inside" drop zone on the
+     * page itself, while the compensating padding keeps existing children
+     * in their normal visual position.
+     *
+     * Result: pointer users can choose between dropping before/after a
+     * node or dropping onto the node to make the dragged subtree a child.
+     */
+    min-height: 0.75rem;
+    margin-top: -1.75rem;
+    padding-top: 2rem;
+    border-radius: var(--pico-border-radius);
+}
+
+.reorder-mode.is-dragging .tree-node.drop-inside-target > .tree-row {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: -2px;
+    background: var(--pico-primary-focus);
+}
+
+.reorder-mode.is-dragging .tree-children:empty {
+    min-height: 2.75rem;
+    margin-top: -1.75rem;
+    padding-top: 1.75rem;
+    border: var(--pico-border-width) dashed var(--pico-muted-border-color);
+}
+
+.reorder-mode.is-dragging .tree-children:empty::before {
+    content: attr(data-drop-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding-inline: 0.75rem;
+    color: var(--pico-muted-color);
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.reorder-mode.is-dragging .tree-children.drop-target {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: -2px;
+}
+
+.reorder-mode.is-dragging .tree-children.drop-target:empty::before {
+    color: var(--pico-primary);
+    font-weight: 600;
+}
+
+
+/*
+ * Demo message.
+ */
+
+#tree-demo-message {
+    min-height: 1.5rem;
+    margin-top: 1rem;
+    color: var(--pico-muted-color);
+}
+
+/*
+ * Responsive tree layout.
+ *
+ * The page tree responds to its own available width rather than the browser
+ * viewport. This keeps the component reliable with different sidebar widths,
+ * browser zoom levels and future admin layouts.
+ */
+
+
+/*
+ * Narrow tree.
+ *
+ * Keep the full four-column subgrid above 800px.
+ *
+ * At 800px and below, Layout and Status move below Page while Actions remains
+ * in its own column on the right. The desktop header is hidden because its
+ * four-column labels no longer match the responsive row layout.
+ */
+
+@container (max-width: 800px) {
+    .page-tree {
+        --tree-indent-step: 1.25rem;
+
+        grid-template-columns: minmax(0, 1fr);
+        column-gap: 0;
+    }
+
+    .page-tree-columns {
+        display: none;
+    }
+
+    .tree-row {
+        grid-template-columns:
+            minmax(0, 1fr)
+            var(--tree-actions-width);
+
+        grid-template-areas:
+            "page actions"
+            "layout actions"
+            "status actions";
+
+        row-gap: 0.25rem;
+    }
+
+    .tree-page {
+        grid-area: page;
+    }
+
+    .tree-layout {
+        grid-area: layout;
+    }
+
+    .tree-status {
+        grid-area: status;
+    }
+
+    .tree-actions {
+        grid-area: actions;
+        align-self: center;
+        justify-self: center;
+    }
+
+    /*
+     * Once Layout and Status move below Page, return them to normal
+     * left alignment. Actions remains centered in its own column.
+     *
+     * Secondary information is offset to line up with the page title after
+     * the toggle/spacer. Tree-depth indentation remains exclusive to Page.
+     */
+    .tree-layout,
+    .tree-status {
+        justify-self: start;
+        padding-left: 2.25rem;
+    }
+}
+
+
+/*
+ * Very narrow tree.
+ *
+ * At 620px and below, stack all cells including Actions.
+ *
+ * Titles and layout names may wrap so long text never forces the tree wider
+ * than its container. Once stacked, Layout and Status no longer need the title
+ * offset used by the 800px layout.
+ */
+
+@container (max-width: 620px) {
+    .page-tree {
+        --tree-actions-width: auto;
+        --tree-indent-step: 0.75rem;
+        --tree-row-padding-x: 0.5rem;
+    }
+
+    .tree-row {
+        grid-template-columns: minmax(0, 1fr);
+
+        grid-template-areas:
+            "page"
+            "layout"
+            "status"
+            "actions";
+
+        row-gap: 0.375rem;
+    }
+
+    .tree-page {
+        align-items: flex-start;
+    }
+
+    .tree-title {
+        align-items: flex-start;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .tree-layout,
+    .tree-status,
+    .tree-actions {
+        justify-self: start;
+        padding-left: 0;
+    }
+
+    .tree-layout,
+    .tree-status {
+        white-space: normal;
+    }
+
+    .layout-button {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .tree-actions {
+        justify-self: start;
+        justify-content: flex-start;
+        width: auto;
+        flex-wrap: wrap;
+        margin-top: 0.25rem;
+    }
+
+    /*
+     * Nesting remains unlimited. Only the visual indentation is capped so
+     * deeply nested pages cannot consume most of a narrow container.
+     */
+    @supports (x: attr(x type(*))) {
+        .tree-page {
+            padding-left: min(
+                    calc(var(--tree-indent-step) * var(--tree-depth)),
+                    35%
+            );
+        }
+    }
+}
+
+
+/*
+ * Extra-small tree.
+ *
+ * Reduce decorative indentation further while preserving the normal control
+ * sizes and touch targets.
+ */
+
+@container (max-width: 22rem) {
+    .page-tree {
+        --tree-indent-step: 0.625rem;
+        --tree-row-padding-x: 0.375rem;
+    }
+
+    @supports (x: attr(x type(*))) {
+        .tree-page {
+            padding-left: min(
+                    calc(var(--tree-indent-step) * var(--tree-depth)),
+                    25%
+            );
+        }
+    }
+}

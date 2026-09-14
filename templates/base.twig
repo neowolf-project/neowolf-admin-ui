@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Neowolf{% endblock %}</title>
+
+    <script>
+        /* Apply the saved theme before CSS renders to prevent a theme flash. */
+        try {
+            const storedTheme = localStorage.getItem('neowolf-color-scheme');
+
+            if (storedTheme === 'light' || storedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', storedTheme);
+            }
+        } catch {
+            // Ignore unavailable or blocked localStorage.
+        }
+    </script>
+
+    <link rel="stylesheet" href="/assets/css/blades.min.css">
+    <link rel="stylesheet" href="/assets/css/neowolf.css">
+
+    {% block styles %}{% endblock %}
+</head>
+
+<body id="top">
+
+<a href="#main-content" class="visually-hidden skip-link">
+    Skip to main content
+</a>
+
+<div class="admin-layout">
+
+    <header class="admin-header">
+        <p class="admin-brand">
+            <a href="/">Neowolf</a>
+        </p>
+
+        <div class="admin-header-actions">
+
+            <p class="admin-user">
+                You are currently logged in as
+                <a href="#">Administrator</a>
+
+                <span aria-hidden="true">|</span>
+
+                <a href="#">Log Out</a>
+
+                <span aria-hidden="true">|</span>
+
+                <a href="#"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    View Site
+                    <span class="visually-hidden">(opens in new tab)</span>
+                </a>
+            </p>
+
+            <button
+                    type="button"
+                    id="theme-toggle"
+                    class="icon-button"
+                    aria-pressed="false"
+                    aria-label="Switch to dark mode"
+                    data-tooltip="Switch to dark mode"
+                    data-placement="left"
+            >
+                <svg
+                        class="theme-icon-light"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+
+                <span class="theme-icon-dark" hidden>
+                    <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                    >
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+                    </svg>
+                </span>
+            </button>
+
+            <div
+                    id="theme-status"
+                    class="visually-hidden"
+                    role="status"
+                    aria-live="polite"
+            ></div>
+
+        </div>
+    </header>
+
+    <aside class="admin-sidebar">
+        {% include 'navigation.twig' %}
+    </aside>
+
+    <main class="admin-main" id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="admin-footer">
+        Neowolf 0.9.0 &middot; PHP 8.5.8
+    </footer>
+
+</div>
+
+<a
+        href="#top"
+        class="scroll-top"
+        hidden
+        aria-label="Back to top"
+>
+    <svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+    >
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</a>
+
+<script src="/assets/js/neowolf.js"></script>
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/sidebar.js"></script>
+<script src="/assets/js/scroll-top.js"></script>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

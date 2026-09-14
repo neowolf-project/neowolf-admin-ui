@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "none",
+        "protected": true
+    },
+    {
+        "id": 2,
+        "name": "default",
+        "protected": false
+    }
+]

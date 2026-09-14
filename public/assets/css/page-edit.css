@@ -1,0 +1,307 @@
+:root {
+    --neowolf-fieldset-padding: 1rem 1.25rem 1.25rem;
+    --neowolf-grid-gap: 1rem;
+    --neowolf-grid-column-gap: 0.75rem;
+    --neowolf-settings-gap: 1.5rem;
+    --neowolf-inline-gap: 0.75rem;
+    --neowolf-inline-gap-compact: 0.5rem;
+}
+
+/*
+ * Neowolf Page Edit.
+ *
+ * Expected hook:
+ * <form id="page-edit-form" class="page-edit" method="post">
+ */
+
+/*
+ * Form grids.
+ */
+
+.page-edit :is(.two-column, .fields-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--neowolf-grid-gap) var(--neowolf-grid-column-gap);
+    align-items: start;
+    align-content: start;
+}
+
+.page-edit .field {
+    min-width: 0;
+}
+
+.page-edit .field :is(input, select, textarea) {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-bottom: 0;
+}
+
+/* Regular controls fill their field. Checkbox/radio controls keep native size. */
+.page-edit .field >
+:is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
+    width: 100%;
+}
+
+.page-edit .field-span-2 {
+    grid-column: 1 / -1;
+}
+
+.page-edit fieldset.two-column {
+    margin: 0 0 1.5rem;
+    padding: var(--neowolf-fieldset-padding);
+    border: var(--neowolf-border-width) solid var(--pico-muted-color);
+    border-radius: var(--pico-border-radius);
+}
+
+.page-edit fieldset.two-column > legend {
+    grid-column: 1 / -1;
+    margin-bottom: 0.75rem;
+    padding-inline: 0.5rem;
+    font-weight: 600;
+}
+
+/*
+ * Settings layout.
+ *
+ * Preserve the working layout: fieldsets keep their intrinsic width and
+ * wrap as complete groups. Their internal layout remains a two-column grid.
+ */
+
+.page-edit .settings-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--neowolf-settings-gap);
+}
+
+.page-edit .settings-grid > fieldset.two-column {
+    flex: 0 0 auto;
+    width: max-content;
+    margin: 0;
+    grid-template-columns: repeat(2, max-content);
+}
+
+/* Settings controls keep their intrinsic width instead of filling the track. */
+.page-edit .settings-grid .field >
+:is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
+    width: auto;
+    min-width: max-content;
+    max-width: none;
+}
+
+/* Readonly page IDs use a compact, stable width. */
+.page-edit .settings-grid .field >
+:is(input[name="id"], input[name="parent_id"])[readonly] {
+    width: 8ch;
+    min-width: 8ch;
+    max-width: 8ch;
+    text-align: center;
+}
+
+/*
+ * Inline form groups.
+ */
+
+.page-edit .inline-fields {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(min(100%, 11rem), 1fr)
+        );
+    gap: var(--neowolf-inline-gap);
+    align-items: center;
+}
+
+.page-edit .inline-fields > :not(.checkbox-label) {
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.page-edit .inline-fields
+:is(input, select):not([type="checkbox"]):not([type="radio"]) {
+    width: 100%;
+    min-width: 0;
+}
+
+/*
+ * Checkbox labels.
+ */
+
+.page-edit .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    max-width: 100%;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/*
+ * Readonly controls.
+ */
+
+.page-edit input[readonly] {
+    border-style: dashed;
+    background-color: color-mix(
+        in srgb,
+        var(--pico-muted-color) 12%,
+        var(--pico-background-color)
+    );
+    cursor: default;
+}
+
+/*
+ * Action groups.
+ */
+
+.page-edit .inline-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--neowolf-inline-gap);
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.page-edit .inline-actions button {
+    width: fit-content;
+    margin-bottom: 0;
+}
+
+.page-edit .inline-actions .icon-button {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
+
+.page-edit [role="group"].inline-actions:focus-within {
+    box-shadow: none;
+}
+
+/*
+ * Page Parts content.
+ *
+ * Page-part tab styling itself lives in partstabs.css.
+ */
+
+.page-edit .parts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-edit .parts-header h3 {
+    margin: 0;
+    color: var(--pico-muted-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+}
+
+.page-edit .parts-header .inline-actions {
+    margin-bottom: 0;
+}
+
+.page-edit .parts-header .inline-actions > button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: unset;
+    min-width: 0;
+    margin-bottom: 0;
+    padding: 0.5rem 0.875rem;
+}
+
+.page-edit .page-parts textarea[name^="part["][name$="[content]"] {
+    overflow-y: hidden;
+}
+
+/*
+ * Form actions and status controls.
+ */
+
+.page-edit .form-actions,
+.page-edit .form-actions-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.page-edit .form-actions {
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.page-edit .form-actions[data-actions-position="right"] {
+    flex-direction: row-reverse;
+}
+
+.page-edit .form-actions-buttons {
+    gap: var(--neowolf-inline-gap);
+}
+
+.page-edit .form-actions-buttons button {
+    width: fit-content;
+    margin-bottom: 0;
+}
+
+.page-edit .status-field {
+    display: flex;
+    align-items: center;
+    gap: var(--neowolf-inline-gap-compact);
+    white-space: nowrap;
+}
+
+.page-edit .status-field label {
+    margin-bottom: 0;
+}
+
+.page-edit .status-field select {
+    width: auto;
+    margin-bottom: 0;
+}
+
+.page-edit .page-parts .status-field {
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+/*
+ * Responsive form grids.
+ */
+
+@media (max-width: 68.6875rem) {
+    .page-edit :is(.two-column, .fields-grid) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-edit .settings-grid > fieldset.two-column {
+        grid-template-columns: repeat(2, max-content);
+    }
+
+    .page-edit .field-span-2 {
+        grid-column: auto;
+    }
+
+    .page-edit .settings-grid .field-span-2 {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 36rem) {
+    .page-edit .inline-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-edit .checkbox-label {
+        width: auto;
+    }
+
+    .page-edit .status-field {
+        flex-wrap: wrap;
+        white-space: normal;
+    }
+}

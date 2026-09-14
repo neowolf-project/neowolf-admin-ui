@@ -1,0 +1,7 @@
+/vendor/
+/.idea/
+.env
+
+*.log
+Thumbs.db
+.DS_Store

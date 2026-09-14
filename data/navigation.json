@@ -1,0 +1,53 @@
+[
+    {
+        "section": null,
+        "items": [
+            {
+                "id": "page",
+                "label": "Pages",
+                "href": "/",
+                "icon": "page.svg"
+            },
+            {
+                "id": "layout",
+                "label": "Layouts",
+                "href": "/layout",
+                "icon": "layout.svg"
+            },
+            {
+                "id": "snippet",
+                "label": "Snippets",
+                "href": "#",
+                "icon": "snippet.svg"
+            }
+        ]
+    },
+    {
+        "section": "Plugins",
+        "items": [
+            {
+                "id": "example",
+                "label": "Example Plugin",
+                "href": "#",
+                "icon": "puzzle.svg"
+            }
+        ]
+    },
+    {
+        "section": "Administration",
+        "items": [
+            {
+                "id": "user",
+                "label": "Users",
+                "href": "#",
+                "icon": "user.svg"
+            },
+            {
+                "id": "settings",
+                "label": "Settings",
+                "href": "#",
+                "icon": "setting.svg"
+            }
+        ]
+    }
+]

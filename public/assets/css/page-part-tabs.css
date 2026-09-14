@@ -1,0 +1,80 @@
+/*
+ * Page Parts tabs.
+ */
+
+.page-parts[data-tabs] {
+    display: none;
+}
+
+.page-parts[data-tabs].tabs-ready {
+    display: block;
+}
+
+.page-parts {
+    margin-top: 3rem;
+}
+
+.page-parts .parts-tablist {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+    margin-bottom: -1px;
+}
+
+.page-parts .parts-tablist button {
+    margin: 0;
+    padding: 0.35rem 0.65rem;
+    border: var(--neowolf-border-width) solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--pico-border-radius) var(--pico-border-radius) 0 0;
+    background: transparent;
+    color: var(--pico-muted-color);
+    font-size: 0.85rem;
+}
+
+.page-parts .parts-tablist button:hover {
+    background: var(--pico-secondary-background);
+    color: var(--pico-secondary-inverse);
+}
+
+.page-parts .parts-tablist button:focus-visible {
+    position: relative;
+    z-index: 1;
+}
+
+.page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+    border-color: var(--pico-primary-background);
+    border-bottom-color: transparent;
+    background: var(--pico-primary-background);
+    color: var(--pico-primary-inverse, #fff);
+    font-weight: 600;
+}
+
+.page-parts .parts-tablist [role="tab"][aria-selected="true"]:hover {
+    border-color: var(--pico-primary-hover-background);
+    border-bottom-color: transparent;
+    background: var(--pico-primary-hover-background);
+    color: var(--pico-primary-inverse, #fff);
+}
+
+[data-theme="dark"]
+.page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+    border-color: var(--scroll-top-color);
+    border-bottom-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"])
+    .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+        border-color: var(--scroll-top-color);
+        border-bottom-color: transparent;
+    }
+}
+
+.page-parts [role="tabpanel"] {
+    padding: 1rem;
+    border: var(--neowolf-border-width) solid var(--pico-muted-color);
+    border-radius: var(--pico-border-radius);
+    background: transparent;
+    box-shadow: none;
+}

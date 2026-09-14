@@ -1,0 +1,20 @@
+{% extends 'base.twig' %}
+
+{% block title %}Edit {{ layout.name }} · Neowolf Admin UI{% endblock %}
+
+{% block content %}
+    <h1>Edit layout</h1>
+
+    <dl>
+        <dt>ID</dt>
+        <dd>{{ layout.id }}</dd>
+
+        <dt>Name</dt>
+        <dd>{{ layout.name }}</dd>
+
+        <dt>Protected</dt>
+        <dd>{{ layout.protected ? 'Yes' : 'No' }}</dd>
+    </dl>
+
+    <p><a href="/layouts">Back to layouts</a></p>
+{% endblock %}

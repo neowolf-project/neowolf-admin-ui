@@ -1,0 +1,499 @@
+:root {
+    /* Layout */
+    --neowolf-sidebar-width: 15rem;
+    --neowolf-sidebar-width-compact: 4.5rem;
+    --neowolf-header-height: 4rem;
+
+    /* Spacing */
+    --neowolf-page-padding: 2.5rem;
+    --neowolf-page-padding-narrow: 1.25rem;
+
+    /* Controls */
+    --neowolf-icon-size: 1.1rem;
+    --neowolf-nav-icon-size: 1.25rem;
+    --neowolf-scroll-icon-size: 2.5rem;
+    --neowolf-icon-button-padding: 0.5rem;
+
+    /* Borders and focus */
+    --neowolf-layout-border-color: #515763;
+    --neowolf-border-width: 1px;
+    --neowolf-focus-width: 2px;
+    --neowolf-focus-offset: 2px;
+    --neowolf-mouse-focus-width: 1px;
+    --neowolf-mouse-focus-offset: 1px;
+    --focus-ring-color: #c1121f;
+
+    /* Theme accents */
+    --scroll-top-color: #015c8a;
+    --pico-primary-background: #015c8a !important;
+    --pico-primary-border: #015c8a !important;
+    --pico-secondary-background: #4b5770 !important;
+    --pico-secondary-hover-background: #38415a !important;
+    --pico-secondary-hover-border: #38415a !important;
+}
+
+[data-theme="dark"] {
+    --focus-ring-color: #ff6b6b;
+    --neowolf-layout-border-color: var(--pico-muted-color);
+    --scroll-top-color: #01aaff;
+    --pico-muted-color: #9aa5ba !important;
+}
+
+[data-theme="light"] {
+    --pico-muted-color: #515763 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --focus-ring-color: #ff6b6b;
+        --neowolf-layout-border-color: var(--pico-muted-color);
+        --scroll-top-color: #01aaff;
+        --pico-muted-color: #9aa5ba !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+        --pico-muted-color: #515763 !important;
+    }
+}
+
+
+/*
+ * Focus handling.
+ */
+
+:is(a, button, [tabindex]):focus-visible,
+html.using-keyboard :is(input, select, textarea):focus-visible {
+    outline: var(--neowolf-focus-width) solid var(--focus-ring-color) !important;
+    outline-offset: var(--neowolf-focus-offset);
+    box-shadow: none !important;
+}
+
+html.using-mouse :is(input, select, textarea):focus {
+    outline: var(--neowolf-mouse-focus-width) solid var(--pico-muted-border-color);
+    outline-offset: var(--neowolf-mouse-focus-offset);
+    box-shadow: none !important;
+}
+
+body,
+.page-header h1 {
+    margin: 0;
+}
+
+:where(input, textarea):focus::placeholder {
+    color: transparent;
+}
+
+
+/*
+ * Admin shell.
+ */
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: var(--neowolf-sidebar-width) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+.admin-header {
+    grid-column: 1 / -1;
+    display: flex;
+	gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--neowolf-header-height);
+    padding: 0 1.5rem;
+    border-bottom: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    background: var(--pico-card-background-color);
+}
+
+.admin-brand {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.admin-brand a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-header-actions button {
+    margin-bottom: 0;
+}
+
+.admin-user {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: var(--neowolf-icon-button-padding);
+    line-height: 1;
+}
+
+.icon-button svg:not([hidden]) {
+    display: block;
+    width: var(--neowolf-icon-size);
+    height: var(--neowolf-icon-size);
+}
+
+.skip-link:focus {
+    position: fixed;
+    z-index: 100;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    overflow: visible;
+    clip: auto;
+    border: var(--neowolf-border-width) solid var(--pico-muted-border-color);
+    border-radius: var(--pico-border-radius);
+    background: var(--pico-card-background-color);
+}
+
+
+/*
+ * Sidebar.
+ */
+
+.admin-sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    padding: 1.5rem 1rem;
+    border-right: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+}
+
+.admin-sidebar nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-sidebar nav li {
+    margin-bottom: 0.25rem;
+}
+
+.admin-sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--pico-border-radius);
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-sidebar nav a:focus-visible,
+.admin-sidebar nav a:hover,
+.admin-sidebar nav a[aria-current="page"] {
+    background: var(--pico-secondary-background);
+    color: #fff;
+}
+
+.admin-sidebar .nav-icon {
+    display: block;
+    flex: 0 0 auto;
+    width: var(--neowolf-nav-icon-size);
+    height: var(--neowolf-nav-icon-size);
+}
+
+.admin-sidebar .nav-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+[data-theme="dark"] .admin-sidebar .nav-icon img {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .admin-sidebar .nav-icon img {
+        filter: invert(1);
+    }
+}
+
+.admin-sidebar nav a:focus-visible .nav-icon img,
+.admin-sidebar nav a:hover .nav-icon img,
+.admin-sidebar nav a[aria-current="page"] .nav-icon img {
+    filter: invert(1);
+}
+
+.nav-section,
+.page-header p {
+    color: var(--pico-muted-color);
+}
+
+.nav-section {
+    margin: 1.5rem 0 0.5rem;
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/*
+ * Main content.
+ */
+
+.admin-main {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    padding: var(--neowolf-page-padding);
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.page-header p {
+    margin: 0.25rem 0 0;
+}
+
+
+/*
+ * Footer.
+ */
+
+.admin-footer {
+    grid-column: 1 / -1;
+    padding: 1rem 1.5rem;
+    border-top: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    color: var(--pico-muted-color);
+    font-size: 0.8rem;
+}
+
+
+/*
+ * Utility controls.
+ */
+
+.scroll-top {
+    opacity: 1 !important;
+    color: var(--scroll-top-color);
+}
+
+.scroll-top svg {
+    display: block;
+    width: var(--neowolf-scroll-icon-size);
+    height: var(--neowolf-scroll-icon-size);
+}
+
+
+/*
+ * Generic backend dialogs.
+ */
+
+dialog article header :is(a, button)[rel="prev"] {
+    position: relative;
+    z-index: 1;
+    opacity: 1 !important;
+    background-color: var(--scroll-top-color);
+    background-image: none !important;
+    -webkit-mask-image: var(--pico-icon-close);
+    mask-image: var(--pico-icon-close);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: auto 1rem;
+    mask-size: auto 1rem;
+    transition: transform var(--pico-transition);
+}
+
+dialog article header :is(a, button)[rel="prev"]:focus-visible,
+dialog article header :is(a, button)[rel="prev"]:hover {
+    transform: scale(1.2);
+}
+
+
+/*
+ * Accessibility utility.
+ */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+}
+
+
+/*
+ * Compact sidebar.
+ *
+ * Keep the admin navigation as a real sidebar on small and medium viewports.
+ * Only the icons are shown visually, which preserves valuable vertical space
+ * for the current admin view. Navigation labels remain available to assistive
+ * technology and can also be used by sidebar.js for tooltips.
+ */
+
+@media (max-width: 80rem) and (min-width: 30.001rem) {
+    :root {
+        --neowolf-sidebar-width: var(--neowolf-sidebar-width-compact);
+        --neowolf-page-padding: 2rem;
+    }
+
+    .admin-sidebar {
+        padding-inline: 0.5rem;
+    }
+
+    .admin-sidebar nav a {
+        justify-content: center;
+        gap: 0;
+        padding-inline: 0;
+    }
+
+    .admin-sidebar .nav-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        border: 0;
+        white-space: nowrap;
+    }
+	
+    .admin-sidebar nav a[data-tooltip]::before {
+        top: 50%;
+        right: auto;
+        bottom: auto;
+        left: 100%;
+        transform: translate(0.5rem, -50%);
+    }
+
+    .admin-sidebar nav a[data-tooltip]::after {
+        display: none;
+    }
+
+    /*
+     * Section headings become simple separators in icon-only mode.
+     * Their text stays in the accessibility tree.
+     */
+    .nav-section {
+        margin: 1rem 0 0.5rem;
+        padding: 0;
+        overflow: hidden;
+        font-size: 0;
+        text-align: center;
+    }
+
+    .nav-section::after {
+        content: "";
+        display: block;
+        width: 1.5rem;
+        margin-inline: auto;
+        border-top: var(--neowolf-border-width) solid var(--pico-muted-border-color);
+    }
+}
+
+/*
+ * Narrow compact sidebar.
+ *
+ * Reduce content padding without abandoning the sidebar. This is the range
+ * that previously switched the whole navigation to a large horizontal block.
+ */
+
+@media (max-width: 48rem) and (min-width: 30.001rem) {
+    :root {
+        --neowolf-page-padding: var(--neowolf-page-padding-narrow);
+    }
+}
+
+
+/*
+ * Smartphone shell.
+ *
+ * Only very narrow screens give up the sidebar. At this point the available
+ * content width matters more than preserving the desktop navigation shape.
+ */
+
+@media (max-width: 30rem) {
+    :root {
+        --neowolf-page-padding: var(--neowolf-page-padding-narrow);
+    }
+
+    .admin-layout {
+        display: block;
+    }
+
+    .admin-header {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        padding-inline: 1rem;
+		
+    }
+
+    .admin-header-actions {
+        gap: 0.5rem;
+    }
+
+    .admin-sidebar {
+        padding: 0.75rem 1rem;
+        border-right: 0;
+        border-bottom: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    }
+
+    .admin-sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .admin-sidebar nav li {
+        margin: 0;
+    }
+
+    .admin-sidebar nav a {
+        gap: 0.5rem;
+        padding: 0.5rem 0.65rem;
+    }
+
+    .nav-section {
+        width: 100%;
+        margin: 0.75rem 0 0.25rem;
+    }
+
+    .admin-main {
+        padding: var(--neowolf-page-padding-narrow);
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

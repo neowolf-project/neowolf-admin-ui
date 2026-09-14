@@ -1,0 +1,189 @@
+/*
+         * Generic flat admin index.
+         *
+         * Intended for Layouts, Snippets, Users and plugin indexes.
+         *
+         * Colors deliberately come from the shared Neowolf/Pico theme.
+         * The global theme is responsible for meeting the required contrast
+         * targets in both light and dark mode.
+         */
+
+        /*
+         * Reorder help.
+         */
+
+        .admin-index-reorder-help {
+            margin-top: 0;
+            color: var(--pico-muted-color);
+            font-size: 0.875rem;
+        }
+
+        /*
+         * Base index.
+         */
+
+        .admin-index {
+            --index-columns: minmax(0, 1fr) auto;
+
+            width: 100%;
+            min-width: 0;
+
+            color: var(--pico-color);
+            background: var(--pico-background-color);
+        }
+
+        .admin-index-header,
+        .admin-index-row {
+            display: grid;
+            grid-template-columns: var(--index-columns);
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-index-header {
+            padding: 0.625rem 0.75rem;
+
+            border-block:
+                    var(--pico-border-width)
+                    solid
+                    var(--pico-muted-border-color);
+
+            font-weight: 600;
+        }
+
+        .admin-index-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .admin-index-row {
+            margin: 0;
+            padding: 0.75rem;
+
+            border-bottom:
+                    var(--pico-border-width)
+                    solid
+                    var(--pico-muted-border-color);
+
+            list-style: none;
+        }
+
+        .admin-index-cell {
+            min-width: 0;
+        }
+
+        .admin-index-main {
+            min-width: 0;
+        }
+
+        .admin-index-main > a {
+            min-width: 0;
+            color: var(--pico-primary);
+            overflow-wrap: anywhere;
+        }
+
+        .admin-index-main > a:hover {
+            color: var(--pico-primary-hover);
+        }
+
+        /*
+         * Actions.
+         */
+
+        .admin-index-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 0.25rem;
+
+            white-space: nowrap;
+        }
+
+        .admin-index-actions .icon-button {
+            margin: 0;
+        }
+
+        .admin-index-actions .icon-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /*
+         * Reorder mode.
+         *
+         * Keep hover neutral so existing text and link contrast is preserved.
+         * Keyboard focus is indicated with a clear primary outline.
+         * The item being actively moved gets a stronger selected state.
+         */
+
+        .admin-index.is-reordering .admin-index-row {
+            cursor: grab;
+            user-select: none;
+        }
+
+        .admin-index.is-reordering .admin-index-row:active {
+            cursor: grabbing;
+        }
+
+        .admin-index.is-reordering .admin-index-row:focus-visible {
+            outline: 3px solid var(--pico-primary);
+            outline-offset: -3px;
+        }
+
+        .admin-index.is-reordering
+        .admin-index-row.is-keyboard-moving {
+            outline: 2px solid var(--pico-primary);
+            outline-offset: -2px;
+            cursor: grabbing;
+        }
+
+        /*
+         * SortableJS feedback.
+         */
+
+        .admin-index-row-ghost {
+            opacity: 0.35;
+        }
+
+        .admin-index-row-chosen {
+            outline: 2px solid var(--pico-primary);
+            outline-offset: -2px;
+        }
+
+        /*
+         * Wider index example.
+         *
+         * Username | Name | Email | Role | Actions
+         */
+
+        .admin-index-users {
+            --index-columns:
+                    minmax(8rem, 1fr)
+                    minmax(10rem, 1.25fr)
+                    minmax(12rem, 1.5fr)
+                    minmax(7rem, 0.75fr)
+                    auto;
+        }
+
+        /*
+         * Narrow screens.
+         *
+         * Flat two-column indexes remain compact. Views with more columns can
+         * opt into stacked rows with .admin-index-stackable.
+         */
+
+        @media (max-width: 48rem) {
+            .admin-index-stackable .admin-index-header {
+                display: none;
+            }
+
+            .admin-index-stackable .admin-index-row {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 0.5rem;
+            }
+
+            .admin-index-stackable .admin-index-actions {
+                justify-content: flex-start;
+            }
+        }
