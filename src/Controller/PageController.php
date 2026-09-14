@@ -12,4 +12,24 @@ final class PageController extends Controller
             'pages' => $this->fixture('pages'),
         ]);
     }
+
+    public function edit(array $vars = []): void
+    {
+        $pages = $this->fixture('page-edit');
+
+        $id = (int) ($vars['id'] ?? 0);
+        $page = $pages[(string) $id] ?? null;
+
+        if ($page === null) {
+            http_response_code(404);
+
+            $this->render('404.twig');
+
+            return;
+        }
+
+        $this->render('page/edit.twig', [
+            'page' => $page,
+        ]);
+    }
 }

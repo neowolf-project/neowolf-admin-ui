@@ -1,0 +1,956 @@
+{
+    "1": {
+        "id": 1,
+        "parent_id": 0,
+        "title": "Home",
+        "slug": "home",
+        "breadcrumb": "",
+        "keywords": "home, example",
+        "description": "Dummy metadata description for the Home page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-01-17",
+        "created_time": "09:07",
+        "last_update_date": "2026-09-02",
+        "last_update_time": "11:11",
+        "published_date": "2025-01-24",
+        "published_time": "10:05",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1010,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Home\n\nThis is dummy content for the **Home** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            },
+            {
+                "id": 1011,
+                "name": "tmp",
+                "filter_id": "markdown",
+                "content": ""
+            }
+        ]
+    },
+    "2": {
+        "id": 2,
+        "parent_id": 1,
+        "title": "About",
+        "slug": "about",
+        "breadcrumb": "About",
+        "keywords": "about, example",
+        "description": "Dummy metadata description for the About page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-01-24",
+        "created_time": "10:14",
+        "last_update_date": "2026-09-03",
+        "last_update_time": "12:22",
+        "published_date": "2025-01-31",
+        "published_time": "11:10",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1020,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# About\n\nThis is dummy content for the **About** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "3": {
+        "id": 3,
+        "parent_id": 2,
+        "title": "Team",
+        "slug": "team",
+        "breadcrumb": "Team",
+        "keywords": "team, example",
+        "description": "Dummy metadata description for the Team page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-01-31",
+        "created_time": "11:21",
+        "last_update_date": "2026-09-04",
+        "last_update_time": "13:33",
+        "published_date": "2025-02-07",
+        "published_time": "12:15",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 101,
+        "parts": [
+            {
+                "id": 1030,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Team\n\nThis is dummy content for the **Team** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "6": {
+        "id": 6,
+        "parent_id": 3,
+        "title": "Management",
+        "slug": "management",
+        "breadcrumb": "Management",
+        "keywords": "management, example",
+        "description": "Dummy metadata description for the Management page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-02-21",
+        "created_time": "14:42",
+        "last_update_date": "2026-09-07",
+        "last_update_time": "16:06",
+        "published_date": "2025-02-28",
+        "published_time": "15:30",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1060,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Management\n\nThis is dummy content for the **Management** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "7": {
+        "id": 7,
+        "parent_id": 6,
+        "title": "Board members",
+        "slug": "board-members",
+        "breadcrumb": "Board members",
+        "keywords": "board, members, example",
+        "description": "Dummy metadata description for the Board members page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-02-28",
+        "created_time": "15:49",
+        "last_update_date": "2026-09-08",
+        "last_update_time": "10:17",
+        "published_date": "2025-03-07",
+        "published_time": "16:35",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1070,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Board members\n\nThis is dummy content for the **Board members** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "8": {
+        "id": 8,
+        "parent_id": 6,
+        "title": "Advisory board",
+        "slug": "advisory-board",
+        "breadcrumb": "Advisory board",
+        "keywords": "advisory, board, example",
+        "description": "Dummy metadata description for the Advisory board page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-03-07",
+        "created_time": "16:56",
+        "last_update_date": "2026-09-09",
+        "last_update_time": "11:28",
+        "published_date": "2025-03-14",
+        "published_time": "09:40",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": true,
+        "status": 101,
+        "parts": [
+            {
+                "id": 1080,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Advisory board\n\nThis is dummy content for the **Advisory board** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "9": {
+        "id": 9,
+        "parent_id": 3,
+        "title": "Volunteers",
+        "slug": "volunteers",
+        "breadcrumb": "Volunteers",
+        "keywords": "volunteers, example",
+        "description": "Dummy metadata description for the Volunteers page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-03-14",
+        "created_time": "08:03",
+        "last_update_date": "2026-09-10",
+        "last_update_time": "12:39",
+        "published_date": "2025-03-21",
+        "published_time": "10:45",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1090,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Volunteers\n\nThis is dummy content for the **Volunteers** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "10": {
+        "id": 10,
+        "parent_id": 3,
+        "title": "Vacancies",
+        "slug": "vacancies",
+        "breadcrumb": "Vacancies",
+        "keywords": "vacancies, example",
+        "description": "Dummy metadata description for the Vacancies page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-03-21",
+        "created_time": "09:10",
+        "last_update_date": "2026-09-11",
+        "last_update_time": "13:50",
+        "published_date": "2025-03-28",
+        "published_time": "11:50",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1100,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Vacancies\n\nThis is dummy content for the **Vacancies** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "11": {
+        "id": 11,
+        "parent_id": 2,
+        "title": "History",
+        "slug": "history",
+        "breadcrumb": "History",
+        "keywords": "history, example",
+        "description": "Dummy metadata description for the History page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-03-28",
+        "created_time": "10:17",
+        "last_update_date": "2026-09-12",
+        "last_update_time": "14:01",
+        "published_date": "2025-04-04",
+        "published_time": "12:55",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1110,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# History\n\nThis is dummy content for the **History** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "12": {
+        "id": 12,
+        "parent_id": 11,
+        "title": "2020–2025",
+        "slug": "2020-2025",
+        "breadcrumb": "2020–2025",
+        "keywords": "2020, 2025, example",
+        "description": "Dummy metadata description for the 2020–2025 page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-04-04",
+        "created_time": "11:24",
+        "last_update_date": "2026-09-13",
+        "last_update_time": "15:12",
+        "published_date": "2025-04-11",
+        "published_time": "13:00",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1120,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# 2020–2025\n\nThis is dummy content for the **2020–2025** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "13": {
+        "id": 13,
+        "parent_id": 11,
+        "title": "2015–2019",
+        "slug": "2015-2019",
+        "breadcrumb": "2015–2019",
+        "keywords": "2015, 2019, example",
+        "description": "Dummy metadata description for the 2015–2019 page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-04-11",
+        "created_time": "12:31",
+        "last_update_date": "2026-09-14",
+        "last_update_time": "16:23",
+        "published_date": "2025-04-18",
+        "published_time": "14:05",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": true,
+        "status": 200,
+        "parts": [
+            {
+                "id": 1130,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# 2015–2019\n\nThis is dummy content for the **2015–2019** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "14": {
+        "id": 14,
+        "parent_id": 2,
+        "title": "Contact",
+        "slug": "contact-about",
+        "breadcrumb": "Contact",
+        "keywords": "contact, about, example",
+        "description": "Dummy metadata description for the Contact page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-04-18",
+        "created_time": "13:38",
+        "last_update_date": "2026-09-01",
+        "last_update_time": "10:34",
+        "published_date": "2025-04-25",
+        "published_time": "15:10",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1140,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Contact\n\nThis is dummy content for the **Contact** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "4": {
+        "id": 4,
+        "parent_id": 1,
+        "title": "News",
+        "slug": "news",
+        "breadcrumb": "News",
+        "keywords": "news, example",
+        "description": "Dummy metadata description for the News page.",
+        "labels": "",
+        "layout": "News",
+        "page_type": "page",
+        "created_date": "2025-02-07",
+        "created_time": "12:28",
+        "last_update_date": "2026-09-05",
+        "last_update_time": "14:44",
+        "published_date": "2025-02-14",
+        "published_time": "13:20",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1040,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# News\n\nThis is dummy content for the **News** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "5": {
+        "id": 5,
+        "parent_id": 4,
+        "title": "First article",
+        "slug": "first-article",
+        "breadcrumb": "First article",
+        "keywords": "news, article, example",
+        "description": "Dummy metadata description for the article “First article”.",
+        "labels": "news, example",
+        "layout": "Article",
+        "page_type": "post",
+        "created_date": "2025-02-14",
+        "created_time": "13:35",
+        "last_update_date": "2026-09-06",
+        "last_update_time": "15:55",
+        "published_date": "",
+        "published_time": "",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 1,
+        "parts": [
+            {
+                "id": 1050,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# First article\n\nThis is dummy article content for the Neowolf Admin UI.\n\nIt is long enough to make the editor feel like a real content form, while remaining clearly recognisable as fixture data."
+            },
+            {
+                "id": 1051,
+                "name": "tmp",
+                "filter_id": "markdown",
+                "content": "Temporary replacement content for testing the reserved `tmp` page part."
+            }
+        ]
+    },
+    "15": {
+        "id": 15,
+        "parent_id": 4,
+        "title": "Second article",
+        "slug": "second-article",
+        "breadcrumb": "Second article",
+        "keywords": "news, article, example",
+        "description": "Dummy metadata description for the article “Second article”.",
+        "labels": "news, example",
+        "layout": "Article",
+        "page_type": "post",
+        "created_date": "2025-04-25",
+        "created_time": "14:45",
+        "last_update_date": "2026-09-02",
+        "last_update_time": "11:45",
+        "published_date": "2025-05-02",
+        "published_time": "16:15",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1150,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Second article\n\nThis is dummy article content for the Neowolf Admin UI.\n\nIt is long enough to make the editor feel like a real content form, while remaining clearly recognisable as fixture data."
+            }
+        ]
+    },
+    "16": {
+        "id": 16,
+        "parent_id": 4,
+        "title": "Third article",
+        "slug": "third-article",
+        "breadcrumb": "Third article",
+        "keywords": "news, article, example",
+        "description": "Dummy metadata description for the article “Third article”.",
+        "labels": "news, example",
+        "layout": "Article",
+        "page_type": "post",
+        "created_date": "2025-05-02",
+        "created_time": "15:52",
+        "last_update_date": "2026-09-03",
+        "last_update_time": "12:56",
+        "published_date": "",
+        "published_time": "",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 10,
+        "parts": [
+            {
+                "id": 1160,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Third article\n\nThis is dummy article content for the Neowolf Admin UI.\n\nIt is long enough to make the editor feel like a real content form, while remaining clearly recognisable as fixture data."
+            },
+            {
+                "id": 1161,
+                "name": "tmp",
+                "filter_id": "markdown",
+                "content": "Temporary replacement content for testing the reserved `tmp` page part."
+            }
+        ]
+    },
+    "17": {
+        "id": 17,
+        "parent_id": 4,
+        "title": "Fourth article",
+        "slug": "fourth-article",
+        "breadcrumb": "Fourth article",
+        "keywords": "news, article, example",
+        "description": "Dummy metadata description for the article “Fourth article”.",
+        "labels": "news, example",
+        "layout": "Article",
+        "page_type": "post",
+        "created_date": "2025-05-09",
+        "created_time": "16:59",
+        "last_update_date": "2026-09-04",
+        "last_update_time": "13:07",
+        "published_date": "2025-05-16",
+        "published_time": "10:25",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1170,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Fourth article\n\nThis is dummy article content for the Neowolf Admin UI.\n\nIt is long enough to make the editor feel like a real content form, while remaining clearly recognisable as fixture data."
+            }
+        ]
+    },
+    "18": {
+        "id": 18,
+        "parent_id": 1,
+        "title": "Events",
+        "slug": "events",
+        "breadcrumb": "Events",
+        "keywords": "events, events, example",
+        "description": "Dummy metadata description for Events.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-05-16",
+        "created_time": "08:06",
+        "last_update_date": "2026-09-05",
+        "last_update_time": "14:18",
+        "published_date": "2025-05-23",
+        "published_time": "11:30",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1180,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Events\n\nThis is dummy content for the **Events** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "19": {
+        "id": 19,
+        "parent_id": 18,
+        "title": "Exhibitions",
+        "slug": "exhibitions",
+        "breadcrumb": "Exhibitions",
+        "keywords": "exhibitions, events, example",
+        "description": "Dummy metadata description for Exhibitions.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-05-23",
+        "created_time": "09:13",
+        "last_update_date": "2026-09-06",
+        "last_update_time": "15:29",
+        "published_date": "2025-05-30",
+        "published_time": "12:35",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1190,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Exhibitions\n\nThis is dummy content for the **Exhibitions** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "20": {
+        "id": 20,
+        "parent_id": 19,
+        "title": "Current exhibitions",
+        "slug": "current-exhibitions",
+        "breadcrumb": "Current exhibitions",
+        "keywords": "current exhibitions, events, example",
+        "description": "Dummy metadata description for Current exhibitions.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-05-30",
+        "created_time": "10:20",
+        "last_update_date": "2026-09-07",
+        "last_update_time": "16:40",
+        "published_date": "2025-06-06",
+        "published_time": "13:40",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1200,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Current exhibitions\n\nThis is dummy content for the **Current exhibitions** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            },
+            {
+                "id": 1201,
+                "name": "tmp",
+                "filter_id": "markdown",
+                "content": ""
+            }
+        ]
+    },
+    "21": {
+        "id": 21,
+        "parent_id": 19,
+        "title": "Previous exhibitions",
+        "slug": "previous-exhibitions",
+        "breadcrumb": "Previous exhibitions",
+        "keywords": "previous exhibitions, events, example",
+        "description": "Dummy metadata description for Previous exhibitions.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-06-06",
+        "created_time": "11:27",
+        "last_update_date": "2026-09-08",
+        "last_update_time": "10:51",
+        "published_date": "2025-06-13",
+        "published_time": "14:45",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 200,
+        "parts": [
+            {
+                "id": 1210,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Previous exhibitions\n\nThis is dummy content for the **Previous exhibitions** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "22": {
+        "id": 22,
+        "parent_id": 18,
+        "title": "Workshops",
+        "slug": "workshops",
+        "breadcrumb": "Workshops",
+        "keywords": "workshops, events, example",
+        "description": "Dummy metadata description for Workshops.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-06-13",
+        "created_time": "12:34",
+        "last_update_date": "2026-09-09",
+        "last_update_time": "11:02",
+        "published_date": "2025-06-20",
+        "published_time": "15:50",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1220,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Workshops\n\nThis is dummy content for the **Workshops** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "23": {
+        "id": 23,
+        "parent_id": 18,
+        "title": "Activities",
+        "slug": "activities",
+        "breadcrumb": "Activities",
+        "keywords": "activities, events, example",
+        "description": "Dummy metadata description for Activities.",
+        "labels": "events",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-06-20",
+        "created_time": "13:41",
+        "last_update_date": "2026-09-10",
+        "last_update_time": "12:13",
+        "published_date": "2025-06-27",
+        "published_time": "16:55",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1230,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Activities\n\nThis is dummy content for the **Activities** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "24": {
+        "id": 24,
+        "parent_id": 1,
+        "title": "Artists",
+        "slug": "artists",
+        "breadcrumb": "Artists",
+        "keywords": "artists, artists, example",
+        "description": "Dummy metadata description for the artists section.",
+        "labels": "artists",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-06-27",
+        "created_time": "14:48",
+        "last_update_date": "2026-09-11",
+        "last_update_time": "13:24",
+        "published_date": "2025-07-04",
+        "published_time": "09:00",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1240,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Artists\n\nThis is dummy content for the **Artists** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "25": {
+        "id": 25,
+        "parent_id": 24,
+        "title": "Painters",
+        "slug": "painters",
+        "breadcrumb": "Painters",
+        "keywords": "painters, artists, example",
+        "description": "Dummy metadata description for the painters section.",
+        "labels": "artists",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-07-04",
+        "created_time": "15:55",
+        "last_update_date": "2026-09-12",
+        "last_update_time": "14:35",
+        "published_date": "2025-07-11",
+        "published_time": "10:05",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1250,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Painters\n\nThis is dummy content for the **Painters** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "26": {
+        "id": 26,
+        "parent_id": 24,
+        "title": "Sculptors",
+        "slug": "sculptors",
+        "breadcrumb": "Sculptors",
+        "keywords": "sculptors, artists, example",
+        "description": "Dummy metadata description for the sculptors section.",
+        "labels": "artists",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-07-11",
+        "created_time": "16:02",
+        "last_update_date": "2026-09-13",
+        "last_update_time": "15:46",
+        "published_date": "2025-07-18",
+        "published_time": "11:10",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1260,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Sculptors\n\nThis is dummy content for the **Sculptors** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "27": {
+        "id": 27,
+        "parent_id": 24,
+        "title": "Photographers",
+        "slug": "photographers",
+        "breadcrumb": "Photographers",
+        "keywords": "photographers, artists, example",
+        "description": "Dummy metadata description for the photographers section.",
+        "labels": "artists",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-07-18",
+        "created_time": "08:09",
+        "last_update_date": "2026-09-14",
+        "last_update_time": "16:57",
+        "published_date": "2025-07-25",
+        "published_time": "12:15",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1270,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Photographers\n\nThis is dummy content for the **Photographers** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "28": {
+        "id": 28,
+        "parent_id": 1,
+        "title": "Publications",
+        "slug": "publications",
+        "breadcrumb": "Publications",
+        "keywords": "publications, example",
+        "description": "Dummy metadata description for the Publications page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-07-25",
+        "created_time": "09:16",
+        "last_update_date": "2026-09-01",
+        "last_update_time": "10:08",
+        "published_date": "2025-08-01",
+        "published_time": "13:20",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1280,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Publications\n\nThis is dummy content for the **Publications** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "29": {
+        "id": 29,
+        "parent_id": 1,
+        "title": "Vacancies",
+        "slug": "vacancies-main",
+        "breadcrumb": "Vacancies",
+        "keywords": "vacancies, main, example",
+        "description": "Dummy metadata description for the Vacancies page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-08-01",
+        "created_time": "10:23",
+        "last_update_date": "2026-09-02",
+        "last_update_time": "11:19",
+        "published_date": "2025-08-08",
+        "published_time": "14:25",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1290,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Vacancies\n\nThis is dummy content for the **Vacancies** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    },
+    "30": {
+        "id": 30,
+        "parent_id": 1,
+        "title": "Contact",
+        "slug": "contact",
+        "breadcrumb": "Contact",
+        "keywords": "contact, example",
+        "description": "Dummy metadata description for the Contact page.",
+        "labels": "",
+        "layout": "Default",
+        "page_type": "page",
+        "created_date": "2025-08-08",
+        "created_time": "11:30",
+        "last_update_date": "2026-09-03",
+        "last_update_time": "12:30",
+        "published_date": "2025-08-15",
+        "published_time": "15:30",
+        "valid_until_date": "",
+        "valid_until_time": "",
+        "login": 2,
+        "protected": false,
+        "status": 100,
+        "parts": [
+            {
+                "id": 1300,
+                "name": "body",
+                "filter_id": "markdown",
+                "content": "# Contact\n\nThis is dummy content for the **Contact** page.\n\nThe content exists only to test the Neowolf page editor, page parts, filters and form behaviour."
+            }
+        ]
+    }
+}
