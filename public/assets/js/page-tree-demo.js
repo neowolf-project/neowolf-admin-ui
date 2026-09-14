@@ -11,7 +11,10 @@ window.Neowolf = window.Neowolf || {};
         return;
     }
 
-    const demoFrontendOrigin = 'https://demo.neowolf.test';
+    const demoFrontendOrigin =
+        window.location.hostname === 'admin-ui.neowolf.site'
+            ? 'https://neowolf.site'
+            : 'https://demo.neowolf.test';
 
     pageTree.dataset.frontendOrigin = demoFrontendOrigin;
     api.refresh();
