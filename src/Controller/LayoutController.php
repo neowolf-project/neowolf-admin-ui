@@ -17,6 +17,11 @@ final class LayoutController extends Controller
 
     public function edit(array $vars): void
     {
+        if (!isset($vars['id'])) {
+            header('Location: /layout');
+            exit;
+        }
+
         $id = (int) ($vars['id'] ?? 0);
 
         $layout = array_find(
