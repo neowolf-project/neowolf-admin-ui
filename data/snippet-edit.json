@@ -1,0 +1,52 @@
+{
+    "1": {
+        "name": "header",
+        "filter_id": "",
+        "body": "<header>\n    <div class=\"container\">\n        <h1>Site header</h1>\n    </div>\n</header>"
+    },
+    "2": {
+        "name": "footer",
+        "filter_id": "",
+        "body": "<footer>\n    <div class=\"container\">\n        <p>Site footer</p>\n    </div>\n</footer>"
+    },
+    "5": {
+        "name": "site-search-form",
+        "filter_id": "",
+        "body": "<form method=\"post\" role=\"search\">\n    <label for=\"search\">Search</label>\n    <input id=\"search\" name=\"search\" type=\"search\">\n    <button type=\"submit\">Search</button>\n</form>"
+    },
+    "6": {
+        "name": "site-search-results",
+        "filter_id": "",
+        "body": "<div id=\"search-results\">\n    <?php echo $searchResults; ?>\n</div>"
+    },
+    "7": {
+        "name": "navigation",
+        "filter_id": "",
+        "body": "<nav aria-label=\"Main navigation\">\n    <ul>\n        <li><a href=\"/\">Home</a></li>\n    </ul>\n</nav>"
+    },
+    "8": {
+        "name": "toolbar",
+        "filter_id": "",
+        "body": "<div class=\"toolbar\">\n    <p>Toolbar controls</p>\n</div>"
+    },
+    "9": {
+        "name": "javascript",
+        "filter_id": "",
+        "body": "<script src=\"<?php echo URL_PUBLIC; ?>assets/js/script.js\"></script>"
+    },
+    "12": {
+        "name": "widget",
+        "filter_id": "",
+        "body": "<?php\nif (Plugin::isEnabled('widget')) {\n    echo $this->widget('News');\n}\n?>"
+    },
+    "14": {
+        "name": "head",
+        "filter_id": "",
+        "body": "<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Example site</title>\n</head>"
+    },
+    "15": {
+        "name": "anbi",
+        "filter_id": "",
+        "body": "<figure>\n    <svg viewBox=\"0 0 400 200\" role=\"img\" aria-label=\"ANBI\">\n        <text x=\"20\" y=\"100\">ANBI</text>\n    </svg>\n</figure>"
+    }
+}

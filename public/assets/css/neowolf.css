@@ -4,6 +4,10 @@
     --neowolf-sidebar-width-compact: 4.5rem;
     --neowolf-header-height: 4rem;
 
+    /* Forms */
+    --neowolf-inline-gap: 0.75rem;
+    --neowolf-inline-gap-compact: 0.5rem;
+
     /* Spacing */
     --neowolf-page-padding: 2.5rem;
     --neowolf-page-padding-narrow: 1.25rem;
@@ -288,6 +292,36 @@ body,
     font-size: 0.8rem;
 }
 
+/*
+ * Form actions.
+ */
+
+.form-actions,
+.form-actions-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-actions {
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.form-actions[data-actions-position="right"] {
+    flex-direction: row-reverse;
+}
+
+.form-actions-buttons {
+    align-items: center;
+    gap: var(--neowolf-inline-gap);
+}
+
+.form-actions-buttons button {
+    width: fit-content;
+    margin-bottom: 0;
+}
 
 /*
  * Utility controls.

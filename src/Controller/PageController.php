@@ -30,6 +30,8 @@ final class PageController extends Controller
 
         $this->render('page/edit.twig', [
             'page' => $page,
+            'filters' => $this->fixture('filters'),
+            'statuses' => $this->fixture('statuses'),
         ]);
     }
 }

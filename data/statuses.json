@@ -1,0 +1,22 @@
+[
+    {
+        "value": 1,
+        "label": "Draft"
+    },
+    {
+        "value": 10,
+        "label": "Preview"
+    },
+    {
+        "value": 100,
+        "label": "Published"
+    },
+    {
+        "value": 101,
+        "label": "Hidden"
+    },
+    {
+        "value": 200,
+        "label": "Archived"
+    }
+]

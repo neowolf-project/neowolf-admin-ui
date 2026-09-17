@@ -1,0 +1,12 @@
+{
+    "1": {
+        "name": "none",
+        "content_type": "text/html",
+        "body": "<?php echo $this->content(); ?>"
+    },
+    "2": {
+        "name": "default",
+        "content_type": "text/html",
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <title><?php echo $this->title(); ?></title>\n</head>\n<body>\n    <?php echo $this->content(); ?>\n</body>\n</html>"
+    }
+}

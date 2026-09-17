@@ -17,7 +17,7 @@
             {
                 "id": "snippet",
                 "label": "Snippets",
-                "href": "#",
+                "href": "/snippet",
                 "icon": "snippet.svg"
             }
         ]

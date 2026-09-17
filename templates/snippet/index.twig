@@ -1,0 +1,150 @@
+{% extends 'base.twig' %}
+
+{% set active_section = 'snippet' %}
+
+{% block title %}Snippets · Neowolf{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="/assets/css/flat-list.css">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <h1>Snippets</h1>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <button
+                        type="button"
+                        class="secondary"
+                        data-sortable-toggle="snippet-index"
+                        aria-pressed="false"
+                        aria-keyshortcuts="Alt+Shift+R"
+                        aria-describedby="snippet-reorder-help"
+                        data-tooltip="Toggle with Alt+Shift+R"
+                        data-placement="left"
+                    >
+                        Reorder
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        type="button"
+                        class="secondary admin-index-reset-order"
+                        data-admin-index-target="snippet-index"
+                    >
+                        Reset
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        type="button"
+                        id="add-snippet"
+                    >
+                        Add Snippet
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <p id="snippet-reorder-help" class="admin-index-reorder-help">
+        Reorder: drag an item, or press Alt+Shift+R and use the arrow keys.
+        Press Space to pick up and place an item; Escape cancels and exits reorder mode.
+    </p>
+
+    <div
+        id="snippet-index"
+        class="admin-index"
+        data-sortable-flat-tree
+    >
+        <div class="admin-index-header">
+            <div class="admin-index-cell">
+                Snippet
+            </div>
+
+            <div class="admin-index-cell admin-index-actions">
+                Actions
+            </div>
+        </div>
+
+        <ul id="snippets" class="admin-index-list" data-sortable-list>
+            {% for snippet in snippets %}
+                <li
+                    id="snippet_{{ snippet.id }}"
+                    class="admin-index-row"
+                    data-sortable-item
+                    data-id="{{ snippet.id }}"
+                    data-snippet-name="{{ snippet.name }}"
+                    data-is-protected="{{ snippet.protected ? '1' : '0' }}"
+                >
+                    <div class="admin-index-cell admin-index-main">
+                        <a
+                            href="/snippet/edit/{{ snippet.id }}"
+                            data-sortable-label
+                        >
+                            {{ snippet.name }}
+                        </a>
+                    </div>
+
+                    <div class="admin-index-cell admin-index-actions">
+                        <a
+                            href="#"
+                            class="icon-button delete"
+                            aria-label="Delete snippet {{ snippet.name }}"
+                            data-tooltip="Delete"
+                            data-placement="left"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M3 6h18"/>
+                                <path d="M8 6V4h8v2"/>
+                                <path d="M19 6l-1 14H6L5 6"/>
+                                <path d="M10 11v5"/>
+                                <path d="M14 11v5"/>
+                            </svg>
+                        </a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="admin-index-row">
+                    <div class="admin-index-cell admin-index-main">
+                        No snippets found.
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div
+            class="admin-index-reorder-status visually-hidden"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        ></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="/assets/js/sortable.min.js"></script>
+    <script src="/assets/js/tree-helpers.js"></script>
+    <script src="/assets/js/sortable-flat-tree.js"></script>
+    <script src="/assets/js/snippet-index.js"></script>
+{% endblock %}

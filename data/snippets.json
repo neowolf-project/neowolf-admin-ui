@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "header",
+        "protected": false
+    },
+    {
+        "id": 2,
+        "name": "footer",
+        "protected": false
+    },
+    {
+        "id": 5,
+        "name": "site-search-form",
+        "protected": false
+    },
+    {
+        "id": 6,
+        "name": "site-search-results",
+        "protected": false
+    },
+    {
+        "id": 7,
+        "name": "navigation",
+        "protected": false
+    },
+    {
+        "id": 8,
+        "name": "toolbar",
+        "protected": false
+    },
+    {
+        "id": 9,
+        "name": "javascript",
+        "protected": false
+    },
+    {
+        "id": 12,
+        "name": "widget",
+        "protected": false
+    },
+    {
+        "id": 14,
+        "name": "head",
+        "protected": false
+    },
+    {
+        "id": 15,
+        "name": "anbi",
+        "protected": false
+    }
+]

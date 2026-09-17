@@ -1,0 +1,66 @@
+{% extends 'base.twig' %}
+
+{% set active_section = 'snippet' %}
+
+{% block title %}Edit {{ snippet.name }} · Neowolf Admin UI{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Edit snippet</h1>
+    </header>
+
+    <form method="post">
+        <label for="snippet-name">
+            Name
+            <input
+                    id="snippet-name"
+                    name="name"
+                    type="text"
+                    value="{{ snippet.name }}"
+                    required
+            >
+        </label>
+
+        <label for="snippet-filter">
+            Filter
+
+            <select
+                    id="snippet-filter"
+                    name="filter_id"
+            >
+                {% for filter in filters %}
+                    <option
+                            value="{{ filter.value }}"
+                            {% if filter.value == snippet.filter_id %}selected{% endif %}
+                    >
+                        {{ filter.label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label for="snippet-body">
+            Body
+            <textarea
+                    id="snippet-body"
+                    name="body"
+                    rows="16"
+                    spellcheck="false"
+            >{{ snippet.body|default('') }}</textarea>
+        </label>
+
+        <footer class="form-actions" data-actions-position="left">
+            <div class="form-actions-buttons">
+                <button type="submit" name="commit">
+                    Save and Close
+                </button>
+
+                <button type="submit" name="continue" class="secondary">
+                    Save and Continue Editing
+                </button>
+
+                <span>or <a href="/snippet">Cancel</a></span>
+            </div>
+        </footer>
+    </form>
+{% endblock %}

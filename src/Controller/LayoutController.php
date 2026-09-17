@@ -22,12 +22,10 @@ final class LayoutController extends Controller
             exit;
         }
 
-        $id = (int) ($vars['id'] ?? 0);
+        $id = (int) $vars['id'];
 
-        $layout = array_find(
-            $this->fixture('layouts'),
-            static fn (array $layout): bool => (int) $layout['id'] === $id
-        );
+        $layouts = $this->fixture('layout-edit');
+        $layout = $layouts[$id] ?? null;
 
         if ($layout === null) {
             throw new RuntimeException(
@@ -37,6 +35,12 @@ final class LayoutController extends Controller
 
         $this->render('layout/edit.twig', [
             'layout' => $layout,
+            'content_types' => [
+                'text/html',
+                'text/plain',
+                'application/json',
+                'application/xml',
+            ],
         ]);
     }
 }

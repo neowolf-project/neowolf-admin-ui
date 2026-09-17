@@ -265,16 +265,21 @@
                                    type="hidden"
                                    value="{{ part.id }}">
 
-                            <div class="status-field">
+                            <div class="field">
                                 <label for="part_{{ loop.index0 }}_filter_id">Filter</label>
-                                <select id="part_{{ loop.index0 }}_filter_id"
+                                <select
+                                        id="part_{{ loop.index0 }}_filter_id"
                                         class="filter-selector"
-                                        name="part[{{ loop.index0 }}][filter_id]">
-                                    <option value="" {% if part.filter_id == '' %}selected{% endif %}>— none —</option>
-                                    <option value="markdown"
-                                            {% if part.filter_id == 'markdown' %}selected{% endif %}>
-                                        Markdown
-                                    </option>
+                                        name="part[{{ loop.index0 }}][filter_id]"
+                                >
+                                    {% for filter in filters %}
+                                        <option
+                                                value="{{ filter.value }}"
+                                                {% if part.filter_id == filter.value %}selected{% endif %}
+                                        >
+                                            {{ filter.label }}
+                                        </option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
@@ -303,11 +308,12 @@
                 <div class="status-field">
                     <label for="page-status">Status</label>
                     <select id="page-status" name="status">
-                        <option value="1" {% if page.status == 1 %}selected{% endif %}>Draft</option>
-                        <option value="10" {% if page.status == 10 %}selected{% endif %}>Preview</option>
-                        <option value="100" {% if page.status == 100 %}selected{% endif %}>Published</option>
-                        <option value="101" {% if page.status == 101 %}selected{% endif %}>Hidden</option>
-                        <option value="200" {% if page.status == 200 %}selected{% endif %}>Archived</option>
+                        {% for status in statuses %}
+                            <option value="{{ status.value }}"
+                                    {% if page.status == status.value %}selected{% endif %}>
+                                {{ status.label }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
             </footer>
