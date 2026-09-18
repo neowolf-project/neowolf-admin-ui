@@ -1,0 +1,170 @@
+{% extends 'base.twig' %}
+
+{% block title %}Edit User · Neowolf{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="/assets/css/user-edit.css">
+{% endblock %}
+
+{% block content %}
+    {% set userLanguage = user.language|default('') %}
+
+    <header class="page-header">
+        <div>
+            <h1>Edit User</h1>
+            <p>Edit the account and administrative access for {{ user.name }}.</p>
+        </div>
+    </header>
+
+    <form
+            id="user-edit-form"
+            class="user-edit"
+            action="/user/edit/{{ user.id }}"
+            method="post"
+    >
+        <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token }}"
+        >
+
+        <fieldset class="two-column">
+            <legend>User</legend>
+
+            <div class="field field-span-2">
+                <label for="user-name">Name</label>
+                <input
+                        id="user-name"
+                        name="user[name]"
+                        type="text"
+                        maxlength="100"
+                        value="{{ user.name }}"
+                        required
+                >
+                <small>Required.</small>
+            </div>
+
+            <div class="field field-span-2">
+                <label for="user-email">Email</label>
+                <input
+                        id="user-email"
+                        name="user[email]"
+                        type="email"
+                        maxlength="255"
+                        value="{{ user.email }}"
+                >
+                <small>Optional. Please use a valid email address.</small>
+            </div>
+
+            <div class="field">
+                <label for="user-username">Username</label>
+                <input
+                        id="user-username"
+                        name="user[username]"
+                        type="text"
+                        maxlength="40"
+                        value="{{ user.username }}"
+                        readonly
+                >
+                <small>Username cannot be changed.</small>
+            </div>
+
+            <div class="field">
+                <label for="user-language">Language</label>
+                <select
+                        id="user-language"
+                        name="user[language]"
+                >
+                    <option
+                            value=""
+                            {% if not userLanguage %}selected{% endif %}
+                    >
+                        Default language
+                    </option>
+
+                    {% for language in languages %}
+                        <option
+                                value="{{ language.value }}"
+                                {% if userLanguage == language.value %}selected{% endif %}
+                        >
+                            {{ language.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <small>Language used by the administration area.</small>
+            </div>
+
+            <div class="field">
+                <label for="user-password">Password</label>
+                <input
+                        id="user-password"
+                        name="user[password]"
+                        type="password"
+                        maxlength="255"
+                        autocomplete="new-password"
+                >
+                <small>Leave blank to keep the current password.</small>
+            </div>
+
+            <div class="field">
+                <label for="user-confirm">Confirm password</label>
+                <input
+                        id="user-confirm"
+                        name="user[confirm]"
+                        type="password"
+                        maxlength="255"
+                        autocomplete="new-password"
+                >
+                <small>Enter the new password again.</small>
+            </div>
+        </fieldset>
+
+        <fieldset class="roles-fieldset">
+            <legend>Roles</legend>
+
+            <div class="role-options">
+                {% for role in roles %}
+                    <label class="checkbox-label">
+                        <input
+                                type="checkbox"
+                                name="user_role[{{ role.name }}]"
+                                value="{{ role.id }}"
+                                {% if role.name in user.roles %}checked{% endif %}
+                        >
+                        {{ role.label }}
+                    </label>
+                {% endfor %}
+            </div>
+
+            <small>
+                Roles restrict user privileges and control access to
+                parts of the administration area.
+            </small>
+        </fieldset>
+
+        <footer class="form-actions" data-actions-position="left">
+            <div class="form-actions-buttons">
+                <button
+                        type="submit"
+                        name="commit"
+                >
+                    Save and Close
+                </button>
+
+                <button
+                        type="submit"
+                        name="continue"
+                        class="secondary"
+                >
+                    Save and Continue Editing
+                </button>
+
+                <span>
+                    or <a href="/user">Cancel</a>
+                </span>
+            </div>
+        </footer>
+    </form>
+{% endblock %}

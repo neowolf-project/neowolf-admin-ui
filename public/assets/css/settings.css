@@ -1,0 +1,269 @@
+/*
+ * Administration
+ *
+ * Page-specific styles for plugin management and settings.
+ */
+
+
+/*
+ * Plugins
+ */
+
+.plugins-grid {
+    --plugin-version-width: 6rem;
+    --plugin-enabled-width: 8rem;
+    --plugin-actions-width: 12rem;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.plugins-header,
+.plugin-row {
+    display: grid;
+    grid-template-columns:
+        minmax(16rem, 1fr)
+        var(--plugin-version-width)
+        var(--plugin-enabled-width)
+        var(--plugin-actions-width);
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.plugins-header {
+    padding: 0.5rem 0.75rem;
+    border-bottom: var(--pico-border-width) solid var(--pico-muted-border-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.plugins-header span:last-child {
+    text-align: center;
+}
+
+.plugin-row {
+    min-height: 5rem;
+    padding: 0.75rem;
+    border-bottom: var(--pico-border-width) solid var(--pico-muted-border-color);
+}
+
+
+/*
+ * Plugin information
+ */
+
+.plugin-info {
+    min-width: 0;
+}
+
+.plugin-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.plugin-heading h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.plugin-heading small {
+    color: var(--pico-muted-color);
+}
+
+.plugin-info p {
+    margin: 0.125rem 0 0;
+    color: var(--pico-muted-color);
+    font-size: 0.875rem;
+}
+
+
+/*
+ * Plugin version and enabled state
+ */
+
+.plugin-version,
+.plugin-enabled,
+.plugin-actions {
+    min-width: 0;
+}
+
+.plugin-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.plugin-toggle input {
+    margin: 0;
+}
+
+.plugin-label {
+    display: none;
+}
+
+
+/*
+ * Plugin actions
+ */
+
+.plugin-action-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.plugin-action {
+    display: inline-flex;
+    flex: 0 0 2rem;
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    border-radius: var(--pico-border-radius);
+    background: transparent;
+
+    color: var(--pico-primary);
+
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.plugin-action svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.plugin-action:hover {
+    border: 0;
+    background: var(--pico-primary-background);
+    color: var(--pico-primary-inverse);
+    text-decoration: none;
+}
+
+.plugin-action:focus-visible {
+    position: relative;
+    z-index: 1;
+}
+
+
+/*
+ * Unavailable plugin actions
+ */
+
+.plugin-action[aria-disabled="true"] {
+    border: 0;
+    border-bottom: 0;
+    background: transparent;
+    color: var(--pico-muted-color);
+    opacity: 0.4;
+    text-decoration: none;
+    box-shadow: none;
+    cursor: default;
+}
+
+.plugin-action[aria-disabled="true"]:hover {
+    border: 0;
+    background: transparent;
+    color: var(--pico-muted-color);
+    text-decoration: none;
+    box-shadow: none;
+}
+
+
+/*
+ * Empty plugin list
+ */
+
+.plugins-empty {
+    margin: 0;
+    padding: 1rem 0.75rem;
+    color: var(--pico-muted-color);
+}
+
+
+/*
+ * Settings
+ */
+
+#settings-form fieldset + fieldset {
+    margin-top: 2rem;
+}
+
+#settings-form .form-actions {
+    margin-top: 2rem;
+}
+
+
+/*
+ * Responsive plugin list
+ */
+
+@media (max-width: 55rem) {
+    .plugins-header {
+        display: none;
+    }
+
+    .plugin-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "info info"
+            "version enabled"
+            "actions actions";
+        gap: 0.75rem 1.5rem;
+    }
+
+    .plugin-info {
+        grid-area: info;
+    }
+
+    .plugin-version {
+        grid-area: version;
+    }
+
+    .plugin-enabled {
+        grid-area: enabled;
+    }
+
+    .plugin-actions {
+        grid-area: actions;
+    }
+
+    .plugin-action-list {
+        justify-content: flex-start;
+    }
+
+    .plugin-label {
+        display: block;
+        margin-bottom: 0.125rem;
+        color: var(--pico-muted-color);
+        font-size: 0.75rem;
+    }
+
+    .plugin-toggle .plugin-label {
+        display: none;
+    }
+}
+
+@media (max-width: 36rem) {
+    .plugin-row {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "info"
+            "version"
+            "enabled"
+            "actions";
+    }
+}

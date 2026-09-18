@@ -1,0 +1,57 @@
+[
+    {
+        "id": "agenda",
+        "name": "Agenda",
+        "description": "Agenda metadata",
+        "version": "1.0.0",
+        "author": null,
+        "enabled": true,
+        "website": null,
+        "documentation": "#",
+        "settings": null
+    },
+    {
+        "id": "archive",
+        "name": "Archive",
+        "description": "Provides an Archive pagetype behaving similar to a blog or news archive.",
+        "version": "1.1.0",
+        "author": null,
+        "enabled": false,
+        "website": "#",
+        "documentation": null,
+        "settings": null
+    },
+    {
+        "id": "backup_restore",
+        "name": "Backup Restore",
+        "description": "Provides administrators with the option of backing up their pages and settings to an XML file.",
+        "version": "0.8.0",
+        "author": "Martijn van der Kleijn",
+        "enabled": false,
+        "website": "#",
+        "documentation": null,
+        "settings": null
+    },
+    {
+        "id": "content_filter",
+        "name": "Content filter",
+        "description": "Provides content filtering for pages.",
+        "version": "0.1.0",
+        "author": null,
+        "enabled": true,
+        "website": null,
+        "documentation": "#",
+        "settings": "#"
+    },
+    {
+        "id": "widget",
+        "name": "Widgets",
+        "description": "Widgets plugin",
+        "version": "0.1.0",
+        "author": null,
+        "enabled": true,
+        "website": null,
+        "documentation": null,
+        "settings": null
+    }
+]

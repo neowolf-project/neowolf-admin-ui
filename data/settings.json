@@ -1,0 +1,11 @@
+{
+    "admin_title": "Stichting KUBES",
+    "admin_email": "webmeester@kubes.nl",
+    "language": "nl",
+    "default_section": "page",
+    "default_status_id": 1,
+    "default_filter_id": "kubes_markdown",
+    "allow_php_in_pages": true,
+    "allow_html_title": false,
+    "allow_theme_preference": false
+}

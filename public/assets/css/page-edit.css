@@ -1,7 +1,4 @@
 :root {
-    --neowolf-fieldset-padding: 1rem 1.25rem 1.25rem;
-    --neowolf-grid-gap: 1rem;
-    --neowolf-grid-column-gap: 0.75rem;
     --neowolf-settings-gap: 1.5rem;
 }
 
@@ -12,45 +9,12 @@
  * <form id="page-edit-form" class="page-edit" method="post">
  */
 
-/* Form grids. */
 
-.page-edit :is(.two-column, .fields-grid) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--neowolf-grid-gap) var(--neowolf-grid-column-gap);
-    align-items: start;
-    align-content: start;
-}
-
-.page-edit .field { min-width: 0; }
-
-.page-edit .field :is(input, select, textarea) {
-    box-sizing: border-box;
-    max-width: 100%;
-    margin-bottom: 0;
-}
-
-.page-edit .field > :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
-    width: 100%;
-}
-
-.page-edit .field-span-2 { grid-column: 1 / -1; }
-
-.page-edit fieldset.two-column {
-    margin: 0 0 1.5rem;
-    padding: var(--neowolf-fieldset-padding);
-    border: var(--neowolf-border-width) solid var(--pico-muted-color);
-    border-radius: var(--pico-border-radius);
-}
-
-.page-edit fieldset.two-column > legend {
-    grid-column: 1 / -1;
-    margin-bottom: 0.75rem;
-    padding-inline: 0.5rem;
-    font-weight: 600;
-}
-
-/* Settings layout. */
+/*
+ * Settings layout.
+ *
+ * Generic fieldset, field and two-column grid styling lives in neowolf.css.
+ */
 
 .page-edit .settings-grid {
     display: flex;
@@ -66,24 +30,32 @@
     grid-template-columns: repeat(2, max-content);
 }
 
-.page-edit .settings-grid .field > :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
+.page-edit .settings-grid .field >
+:is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
     width: auto;
     min-width: max-content;
     max-width: none;
 }
 
-.page-edit .settings-grid .field > :is(input[name="id"], input[name="parent_id"])[readonly] {
+.page-edit .settings-grid .field >
+:is(input[name="id"], input[name="parent_id"])[readonly] {
     width: 8ch;
     min-width: 8ch;
     max-width: 8ch;
     text-align: center;
 }
 
-/* Inline form groups. */
+
+/*
+ * Inline form groups.
+ */
 
 .page-edit .inline-fields {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 11rem), 1fr)
+    );
     gap: var(--neowolf-inline-gap);
     align-items: center;
 }
@@ -93,23 +65,16 @@
     margin-bottom: 0;
 }
 
-.page-edit .inline-fields :is(input, select):not([type="checkbox"]):not([type="radio"]) {
+.page-edit .inline-fields
+:is(input, select):not([type="checkbox"]):not([type="radio"]) {
     width: 100%;
     min-width: 0;
 }
 
-/* Checkbox labels. */
 
-.page-edit .checkbox-label {
-    display: inline-flex;
-    align-items: center;
-    width: max-content;
-    max-width: 100%;
-    margin: 0;
-    white-space: nowrap;
-}
-
-/* Readonly controls. */
+/*
+ * Readonly controls.
+ */
 
 .page-edit input[readonly] {
     border-style: dashed;
@@ -121,7 +86,10 @@
     cursor: default;
 }
 
-/* Action groups. */
+
+/*
+ * Action groups.
+ */
 
 .page-edit .inline-actions {
     display: flex;
@@ -147,7 +115,10 @@
     box-shadow: none;
 }
 
-/* Page Parts content. */
+
+/*
+ * Page Parts content.
+ */
 
 .page-edit .parts-header {
     display: flex;
@@ -165,7 +136,9 @@
     letter-spacing: 0.05em;
 }
 
-.page-edit .parts-header .inline-actions { margin-bottom: 0; }
+.page-edit .parts-header .inline-actions {
+    margin-bottom: 0;
+}
 
 .page-edit .parts-header .inline-actions > button {
     display: inline-flex;
@@ -180,6 +153,7 @@
     overflow-y: hidden;
 }
 
+
 /*
  * Status controls.
  *
@@ -193,7 +167,9 @@
     white-space: nowrap;
 }
 
-.page-edit .status-field label { margin-bottom: 0; }
+.page-edit .status-field label {
+    margin-bottom: 0;
+}
 
 .page-edit .status-field select {
     width: auto;
@@ -205,18 +181,18 @@
     margin-bottom: 1.25rem;
 }
 
-/* Responsive form grids. */
+
+/*
+ * Responsive Page Edit layouts.
+ *
+ * Generic two-column and field-span responsive behaviour lives in
+ * neowolf.css. These rules only preserve the special settings layout.
+ */
 
 @media (max-width: 68.6875rem) {
-    .page-edit :is(.two-column, .fields-grid) {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .page-edit .settings-grid > fieldset.two-column {
         grid-template-columns: repeat(2, max-content);
     }
-
-    .page-edit .field-span-2 { grid-column: auto; }
 
     .page-edit .settings-grid .field-span-2 {
         grid-column: 1 / -1;
@@ -227,8 +203,6 @@
     .page-edit .inline-fields {
         grid-template-columns: minmax(0, 1fr);
     }
-
-    .page-edit .checkbox-label { width: auto; }
 
     .page-edit .status-field {
         flex-wrap: wrap;

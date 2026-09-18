@@ -39,13 +39,13 @@
             {
                 "id": "user",
                 "label": "Users",
-                "href": "#",
+                "href": "/user",
                 "icon": "user.svg"
             },
             {
                 "id": "settings",
                 "label": "Settings",
-                "href": "#",
+                "href": "/setting",
                 "icon": "setting.svg"
             }
         ]

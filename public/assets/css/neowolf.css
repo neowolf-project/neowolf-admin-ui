@@ -7,6 +7,9 @@
     /* Forms */
     --neowolf-inline-gap: 0.75rem;
     --neowolf-inline-gap-compact: 0.5rem;
+    --neowolf-fieldset-padding: 1rem 1.25rem 1.25rem;
+    --neowolf-grid-gap: 1rem;
+    --neowolf-grid-column-gap: 0.75rem;
 
     /* Spacing */
     --neowolf-page-padding: 2.5rem;
@@ -104,7 +107,7 @@ body,
 .admin-header {
     grid-column: 1 / -1;
     display: flex;
-	gap: 2rem;
+    gap: 2rem;
     align-items: center;
     justify-content: space-between;
     min-height: var(--neowolf-header-height);
@@ -292,6 +295,86 @@ body,
     font-size: 0.8rem;
 }
 
+
+/*
+ * Form fields.
+ */
+
+.field {
+    min-width: 0;
+}
+
+.field :is(input, select, textarea) {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-bottom: 0;
+}
+
+.field > :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
+    width: 100%;
+}
+
+.field > small {
+    display: block;
+    margin-top: 0.375rem;
+}
+
+
+/*
+ * Fieldsets.
+ *
+ * Fieldset appearance is independent of its layout.
+ */
+
+fieldset {
+    margin: 0 0 1.5rem;
+    padding: var(--neowolf-fieldset-padding);
+    border: var(--neowolf-border-width) solid var(--pico-muted-color);
+    border-radius: var(--pico-border-radius);
+}
+
+fieldset > legend {
+    margin-bottom: 0.75rem;
+    padding-inline: 0.5rem;
+    font-weight: 600;
+}
+
+
+/*
+ * Form grids.
+ */
+
+:is(.two-column, .fields-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--neowolf-grid-gap) var(--neowolf-grid-column-gap);
+    align-items: start;
+    align-content: start;
+}
+
+fieldset.two-column > legend {
+    grid-column: 1 / -1;
+}
+
+.field-span-2 {
+    grid-column: 1 / -1;
+}
+
+
+/*
+ * Checkbox labels.
+ */
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    max-width: 100%;
+    margin: 0;
+    white-space: nowrap;
+}
+
+
 /*
  * Form actions.
  */
@@ -322,6 +405,7 @@ body,
     width: fit-content;
     margin-bottom: 0;
 }
+
 
 /*
  * Utility controls.
@@ -384,6 +468,21 @@ dialog article header :is(a, button)[rel="prev"]:hover {
 
 
 /*
+ * Responsive form grids.
+ */
+
+@media (max-width: 68.6875rem) {
+    :is(.two-column, .fields-grid) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .field-span-2 {
+        grid-column: auto;
+    }
+}
+
+
+/*
  * Compact sidebar.
  *
  * Keep the admin navigation as a real sidebar on small and medium viewports.
@@ -420,7 +519,7 @@ dialog article header :is(a, button)[rel="prev"]:hover {
         border: 0;
         white-space: nowrap;
     }
-	
+
     .admin-sidebar nav a[data-tooltip]::before {
         top: 50%;
         right: auto;
@@ -453,6 +552,7 @@ dialog article header :is(a, button)[rel="prev"]:hover {
         border-top: var(--neowolf-border-width) solid var(--pico-muted-border-color);
     }
 }
+
 
 /*
  * Narrow compact sidebar.
@@ -489,7 +589,6 @@ dialog article header :is(a, button)[rel="prev"]:hover {
         z-index: 10;
         top: 0;
         padding-inline: 1rem;
-		
     }
 
     .admin-header-actions {
@@ -529,5 +628,17 @@ dialog article header :is(a, button)[rel="prev"]:hover {
     .page-header {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+
+/*
+ * Very narrow form controls.
+ */
+
+@media (max-width: 36rem) {
+    .checkbox-label {
+        width: auto;
+        white-space: normal;
     }
 }

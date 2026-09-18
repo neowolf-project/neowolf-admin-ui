@@ -1,0 +1,119 @@
+{% extends 'base.twig' %}
+
+{% block title %}Users · Neowolf{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="/assets/css/user.css">
+{% endblock %}
+
+{% block content %}
+    <header class="page-header">
+        <div>
+            <h1>Users</h1>
+            <p>Manage users and their access to Neowolf.</p>
+        </div>
+
+        <a href="/user/add" role="button">
+            Add User
+        </a>
+    </header>
+
+    <div class="users-grid">
+        <div class="users-header" aria-hidden="true">
+            <span>User</span>
+            <span>Email</span>
+            <span>Roles</span>
+            <span>Actions</span>
+        </div>
+
+        {% for user in users %}
+            <div class="user-row">
+                <div class="user-info">
+                    <a
+                            href="/user/edit/{{ user.id }}"
+                            class="user-name"
+                    >
+                        {{ user.name }}
+                    </a>
+
+                    <small>{{ user.username }}</small>
+                </div>
+
+                <div class="user-email">
+                    <span class="user-label">Email</span>
+
+                    <a href="mailto:{{ user.email }}">
+                        {{ user.email }}
+                    </a>
+                </div>
+
+                <div class="user-roles">
+                    <span class="user-label">Roles</span>
+                    <span>{{ user.roles|join(', ') }}</span>
+                </div>
+
+                <div class="user-actions">
+                    <span class="user-label">Actions</span>
+
+                    <div class="user-action-list">
+                        {% if user.protected %}
+                            <span
+                                    class="user-action"
+                                    aria-disabled="true"
+                                    aria-label="Delete unavailable for {{ user.name }}"
+                            >
+                                <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                >
+                                    <path d="M3 6h18"/>
+                                    <path d="M8 6V4h8v2"/>
+                                    <path d="M19 6l-1 14H6L5 6"/>
+                                    <path d="M10 11v5"/>
+                                    <path d="M14 11v5"/>
+                                </svg>
+                            </span>
+                        {% else %}
+                            <button
+                                    type="button"
+                                    class="user-action"
+                                    aria-label="Delete {{ user.name }}"
+                                    data-tooltip="Delete"
+                                    data-placement="top"
+                                    data-delete-user="{{ user.id }}"
+                                    data-delete-name="{{ user.name }}"
+                            >
+                                <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                >
+                                    <path d="M3 6h18"/>
+                                    <path d="M8 6V4h8v2"/>
+                                    <path d="M19 6l-1 14H6L5 6"/>
+                                    <path d="M10 11v5"/>
+                                    <path d="M14 11v5"/>
+                                </svg>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="users-empty">
+                No users found.
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

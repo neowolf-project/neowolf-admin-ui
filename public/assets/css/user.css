@@ -1,0 +1,238 @@
+/*
+ * Users.
+ *
+ * Page-specific styles for the user index.
+ */
+
+
+/*
+ * User list.
+ */
+
+.users-grid {
+    --user-email-width: 18rem;
+    --user-roles-width: 12rem;
+    --user-actions-width: 4rem;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.users-header,
+.user-row {
+    display: grid;
+    grid-template-columns:
+        minmax(14rem, 1fr)
+        var(--user-email-width)
+        var(--user-roles-width)
+        var(--user-actions-width);
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.users-header {
+    padding: 0.5rem 0.75rem;
+    border-bottom: var(--neowolf-border-width) solid var(--pico-muted-border-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.users-header span:last-child {
+    text-align: center;
+}
+
+.user-row {
+    min-height: 4.5rem;
+    padding: 0.75rem;
+    border-bottom: var(--neowolf-border-width) solid var(--pico-muted-border-color);
+}
+
+
+/*
+ * User information.
+ */
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.user-info small {
+    margin-top: 0.125rem;
+    color: var(--pico-muted-color);
+}
+
+
+/*
+ * User details.
+ */
+
+.user-email,
+.user-roles,
+.user-actions {
+    min-width: 0;
+}
+
+.user-email {
+    overflow-wrap: anywhere;
+}
+
+.user-label {
+    display: none;
+}
+
+
+/*
+ * User actions.
+ *
+ * Delete is either an active button or an unavailable span.
+ */
+
+.user-action-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+:is(button, span).user-action {
+    display: inline-flex;
+    flex: 0 0 2rem;
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    border-radius: var(--pico-border-radius);
+    background: transparent;
+    box-shadow: none;
+
+    color: var(--pico-primary);
+
+    font: inherit;
+    line-height: 1;
+}
+
+button.user-action {
+    cursor: pointer;
+}
+
+:is(button, span).user-action svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+button.user-action:hover {
+    border: 0;
+    background: var(--pico-primary-background);
+    color: var(--pico-primary-inverse);
+    box-shadow: none;
+}
+
+button.user-action:focus-visible {
+    position: relative;
+    z-index: 1;
+}
+
+
+/*
+ * Unavailable delete action.
+ *
+ * Disabled actions do not receive tooltip attributes.
+ */
+
+span.user-action[aria-disabled="true"] {
+    border: 0;
+    background: transparent;
+    color: var(--pico-muted-color);
+    opacity: 0.4;
+    box-shadow: none;
+    cursor: default;
+}
+
+span.user-action[aria-disabled="true"]::before,
+span.user-action[aria-disabled="true"]::after {
+    display: none;
+}
+
+
+/*
+ * Empty user list.
+ */
+
+.users-empty {
+    margin: 0;
+    padding: 1rem 0.75rem;
+    color: var(--pico-muted-color);
+}
+
+
+/*
+ * Responsive user list.
+ */
+
+@media (max-width: 64rem) {
+    .users-header {
+        display: none;
+    }
+
+    .user-row {
+        grid-template-columns: minmax(0, 1fr) minmax(10rem, auto);
+        grid-template-areas:
+            "info info"
+            "email roles"
+            "actions actions";
+        gap: 0.75rem 1.5rem;
+    }
+
+    .user-info {
+        grid-area: info;
+    }
+
+    .user-email {
+        grid-area: email;
+    }
+
+    .user-roles {
+        grid-area: roles;
+    }
+
+    .user-actions {
+        grid-area: actions;
+    }
+
+    .user-action-list {
+        justify-content: flex-start;
+    }
+
+    .user-label {
+        display: block;
+        margin-bottom: 0.125rem;
+        color: var(--pico-muted-color);
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    .user-row {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "info"
+            "email"
+            "roles"
+            "actions";
+    }
+}

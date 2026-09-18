@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "Samuël van Laere",
+        "username": "vanlaere",
+        "email": "webmeester@kubes.nl",
+        "roles": [
+            "administrator"
+        ],
+        "language": "nl",
+        "protected": true
+    },
+    {
+        "id": 2,
+        "name": "Ben van der Pluijm",
+        "username": "vanderpluijm",
+        "email": "secretaris@kubes.nl",
+        "roles": [
+            "editor"
+        ],
+        "language": "",
+        "protected": false
+    }
+]

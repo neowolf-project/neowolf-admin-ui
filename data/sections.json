@@ -1,0 +1,26 @@
+[
+    {
+        "value": "page",
+        "label": "Pages"
+    },
+    {
+        "value": "snippet",
+        "label": "Snippets"
+    },
+    {
+        "value": "layout",
+        "label": "Layouts"
+    },
+    {
+        "value": "user",
+        "label": "Users"
+    },
+    {
+        "value": "setting",
+        "label": "Administration"
+    },
+    {
+        "value": "plugin/agenda",
+        "label": "Agenda"
+    }
+]
