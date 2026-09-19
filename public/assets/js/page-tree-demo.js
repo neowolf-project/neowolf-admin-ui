@@ -11,12 +11,11 @@ window.Neowolf = window.Neowolf || {};
         return;
     }
 
-    const demoFrontendOrigin =
+    pageTree.dataset.frontendOrigin =
         window.location.hostname === 'admin-ui.neowolf.site'
             ? 'https://neowolf.site'
             : 'https://demo.neowolf.test';
 
-    pageTree.dataset.frontendOrigin = demoFrontendOrigin;
     api.refresh();
 
     const resetButton = document.getElementById('reset-tree');

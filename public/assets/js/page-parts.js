@@ -46,7 +46,7 @@
             ? document.getElementById(tabId)
             : null;
 
-        return tab?.textContent.trim() || '';
+        return (tab?.textContent ?? '').trim();
     }
 
     function updateContentPlaceholder(
@@ -165,7 +165,7 @@
         }
 
         const partName =
-            activeTab.textContent.trim();
+            (activeTab.textContent ?? '').trim();
 
         const label = required
             ? `The required part "${partName}" cannot be deleted`
@@ -241,7 +241,7 @@
     function getExistingPartNames() {
         return getPartTabs().map(
             (tab) =>
-                tab.textContent
+                (tab.textContent ?? '')
                     .trim()
                     .toLowerCase()
         );
@@ -535,8 +535,7 @@
                 const sanitized =
                     sanitizePartNameInput(
                         value,
-                        selectionStart
-                            ?? value.length
+                        selectionStart ?? value.length
                     );
 
                 if (
@@ -708,7 +707,7 @@
 
                 if (deletePartMessage) {
                     deletePartMessage.textContent =
-                        `Are you sure you want to delete page part "${activeTab.textContent.trim()}"?`;
+                        `Are you sure you want to delete page part "${(activeTab.textContent ?? '').trim()}"?`;
                 }
 
                 deletePartDialog.showModal();
@@ -777,9 +776,7 @@
                         : null;
 
                     const partName =
-                        tabToDelete
-                            .textContent
-                            .trim();
+                        (tabToDelete.textContent ?? '').trim();
 
                     tabToDelete.remove();
                     panel?.remove();

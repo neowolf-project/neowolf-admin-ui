@@ -1270,12 +1270,20 @@ window.Neowolf = window.Neowolf || {};
         const title = getNodeTitle(node);
         const descendantCount = getDescendantCount(node);
         const parentNode = node.parentElement?.closest('.tree-node');
-        const nextNode = node.nextElementSibling?.classList.contains('tree-node')
-            ? node.nextElementSibling
-            : null;
-        const previousNode = node.previousElementSibling?.classList.contains('tree-node')
-            ? node.previousElementSibling
-            : null;
+        const nextSibling = node.nextElementSibling;
+        const previousSibling = node.previousElementSibling;
+
+        const nextNode =
+            nextSibling instanceof HTMLElement
+            && nextSibling.classList.contains('tree-node')
+                ? nextSibling
+                : null;
+
+        const previousNode =
+            previousSibling instanceof HTMLElement
+            && previousSibling.classList.contains('tree-node')
+                ? previousSibling
+                : null;
 
         node.remove();
         syncTreeStructure();

@@ -63,16 +63,36 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function applyOrder(state, order) {
-        const items = new Map(getItems(state).map((item) => [getId(item), item]));
+        /** @type {Map<string, HTMLElement>} */
+        const items = new Map();
 
-        order.forEach((id) => {
-            const item = items.get(String(id));
-            if (!item) return;
-            state.list.append(item);
-            items.delete(String(id));
+        getItems(state).forEach((item) => {
+            if (!(item instanceof HTMLElement)) {
+                return;
+            }
+
+            const id = getId(item);
+
+            if (id) {
+                items.set(id, item);
+            }
         });
 
-        items.forEach((item) => state.list.append(item));
+        order.forEach((id) => {
+            const key = String(id);
+            const item = items.get(key);
+
+            if (!item) {
+                return;
+            }
+
+            state.list.append(item);
+            items.delete(key);
+        });
+
+        items.forEach((item) => {
+            state.list.append(item);
+        });
     }
 
     function setActiveItem(state, item, {focus = true, speak = true} = {}) {
@@ -103,18 +123,35 @@ window.Neowolf = window.Neowolf || {};
         });
     }
 
-    function focusRelative(state, item, direction) {
-        const items = getItems(state);
+    function getTargetIndex(items, item, direction) {
         const index = items.indexOf(item);
-        if (index < 0) return;
+
+        if (index < 0) {
+            return null;
+        }
 
         let targetIndex = index;
-        if (direction === 'up') targetIndex = index - 1;
-        if (direction === 'down') targetIndex = index + 1;
+
+        if (direction === 'up') targetIndex--;
+        if (direction === 'down') targetIndex++;
         if (direction === 'first') targetIndex = 0;
         if (direction === 'last') targetIndex = items.length - 1;
 
-        setActiveItem(state, items[helper.clamp(targetIndex, items.length)]);
+        return {
+            index,
+            targetIndex: helper.clamp(targetIndex, items.length),
+        };
+    }
+
+    function focusRelative(state, item, direction) {
+        const items = getItems(state);
+        const target = getTargetIndex(items, item, direction);
+
+        if (!target) {
+            return;
+        }
+
+        setActiveItem(state, items[target.targetIndex]);
     }
 
     function startKeyboardMove(state, item) {
@@ -133,28 +170,34 @@ window.Neowolf = window.Neowolf || {};
 
     function moveKeyboardItem(state, direction) {
         const item = state.movingItem;
-        if (!item) return;
+
+        if (!item) {
+            return;
+        }
 
         const items = getItems(state);
-        const index = items.indexOf(item);
-        if (index < 0) return;
+        const target = getTargetIndex(items, item, direction);
 
-        let targetIndex = index;
-        if (direction === 'up') targetIndex = index - 1;
-        if (direction === 'down') targetIndex = index + 1;
-        if (direction === 'first') targetIndex = 0;
-        if (direction === 'last') targetIndex = items.length - 1;
-        targetIndex = helper.clamp(targetIndex, items.length);
+        if (!target || target.targetIndex === target.index) {
+            return;
+        }
 
-        if (targetIndex === index) return;
+        const targetItem = items[target.targetIndex];
 
-        const target = items[targetIndex];
-        if (targetIndex > index) target.after(item);
-        else target.before(item);
+        if (target.targetIndex > target.index) {
+            targetItem.after(item);
+        } else {
+            targetItem.before(item);
+        }
 
         setActiveItem(state, item, {speak: false});
+
         const {position, total} = getPosition(state, item);
-        announce(state, `${getLabel(state, item)} moved to position ${position} of ${total}.`);
+
+        announce(
+            state,
+            `${getLabel(state, item)} moved to position ${position} of ${total}.`
+        );
     }
 
     function finishKeyboardMove(state) {
@@ -242,61 +285,61 @@ window.Neowolf = window.Neowolf || {};
         state.sortable = null;
     }
 
-function setEnabled(state, enabled, {focusFirst = false} = {}) {
-    if (state.enabled === enabled) return;
+    function setEnabled(state, enabled, {focusFirst = false} = {}) {
+        if (state.enabled === enabled) return;
 
-    if (!enabled) {
-        cancelKeyboardMove(state, {
-            announceCancellation: false,
-        });
-    }
+        if (!enabled) {
+            cancelKeyboardMove(state, {
+                announceCancellation: false,
+            });
+        }
 
-    state.enabled = enabled;
+        state.enabled = enabled;
 
-    state.root.classList.toggle(
-        'is-reordering',
-        enabled
-    );
-
-    if (state.toggle) {
-        state.toggle.setAttribute(
-            'aria-pressed',
-            String(enabled)
+        state.root.classList.toggle(
+            'is-reordering',
+            enabled
         );
 
-        state.toggle.textContent = enabled
-            ? 'Finish reordering'
-            : 'Reorder';
-    }
+        if (state.toggle) {
+            state.toggle.setAttribute(
+                'aria-pressed',
+                String(enabled)
+            );
 
-    setItemsFocusable(state, enabled);
+            state.toggle.textContent = enabled
+                ? 'Finish reordering'
+                : 'Reorder';
+        }
 
-    if (enabled) {
-        enablePointerSorting(state);
+        setItemsFocusable(state, enabled);
+
+        if (enabled) {
+            enablePointerSorting(state);
+
+            announce(
+                state,
+                'Reorder mode enabled. Use arrow keys to navigate and Space to pick up an item.'
+            );
+
+            if (focusFirst) {
+                setActiveItem(
+                    state,
+                    getItems(state)[0],
+                    {speak: false}
+                );
+            }
+
+            return;
+        }
+
+        disablePointerSorting(state);
 
         announce(
             state,
-            'Reorder mode enabled. Use arrow keys to navigate and Space to pick up an item.'
+            'Reorder mode disabled.'
         );
-
-        if (focusFirst) {
-            setActiveItem(
-                state,
-                getItems(state)[0],
-                {speak: false}
-            );
-        }
-
-        return;
     }
-
-    disablePointerSorting(state);
-
-    announce(
-        state,
-        'Reorder mode disabled.'
-    );
-}
 
     function init(root, options = {}) {
         if (!(root instanceof HTMLElement)) return null;

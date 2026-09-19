@@ -29,7 +29,7 @@ final class SnippetController extends Controller
 
         if ($snippet === null) {
             throw new RuntimeException(
-                "Snippet {$id} was not found."
+                "Snippet $id was not found."
             );
         }
 

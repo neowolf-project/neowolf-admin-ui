@@ -29,7 +29,7 @@ final class LayoutController extends Controller
 
         if ($layout === null) {
             throw new RuntimeException(
-                "Layout {$id} was not found."
+                "Layout $id was not found."
             );
         }
 
