@@ -131,12 +131,12 @@
             outline-offset: -3px;
         }
 
-        .admin-index.is-reordering
-        .admin-index-row.is-keyboard-moving {
-            outline: 2px solid var(--pico-primary);
-            outline-offset: -2px;
-            cursor: grabbing;
-        }
+.admin-index.is-reordering,
+.admin-index-row.is-keyboard-moving {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: -2px;
+    cursor: grabbing;
+}
 
         /*
          * SortableJS feedback.

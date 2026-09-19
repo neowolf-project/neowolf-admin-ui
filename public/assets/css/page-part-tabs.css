@@ -63,9 +63,9 @@
 
     outline: none;
     box-shadow:
-            inset 3px 0 var(--neowolf-focus-color),
-            inset -3px 0 var(--neowolf-focus-color),
-            inset 0 3px var(--neowolf-focus-color);
+            inset 3px 0 var(--pico-primary-focus),
+            inset -3px 0 var(--pico-primary-focus),
+            inset 0 3px var(--pico-primary-focus);
 }
 
 
@@ -97,25 +97,21 @@
     color: var(--pico-primary-inverse, #fff);
 }
 
-
 /*
  * Active tab in dark mode.
  */
 
-[data-theme="dark"]
-.page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+[data-theme="dark"] .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
     border-color: var(--scroll-top-color);
     border-bottom-color: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"])
-    .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+    :root:not([data-theme="light"]) .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
         border-color: var(--scroll-top-color);
         border-bottom-color: transparent;
     }
 }
-
 
 /*
  * Tab panels.
