@@ -10,6 +10,8 @@
     --neowolf-fieldset-padding: 1rem 1.25rem 1.25rem;
     --neowolf-grid-gap: 1rem;
     --neowolf-grid-column-gap: 0.75rem;
+    --neowolf-disabled-icon-button-background: #e5e7eb;
+    --neowolf-disabled-icon-button-color: #374151;
 
     /* Spacing */
     --neowolf-page-padding: 2.5rem;
@@ -44,6 +46,8 @@
     --neowolf-layout-border-color: var(--pico-muted-color);
     --scroll-top-color: #01aaff;
     --pico-muted-color: #9aa5ba !important;
+    --neowolf-disabled-icon-button-background: #2e3647;
+    --neowolf-disabled-icon-button-color: #c5c7ca;
 }
 
 [data-theme="light"] {
@@ -149,6 +153,13 @@ body,
     width: fit-content;
     padding: var(--neowolf-icon-button-padding);
     line-height: 1;
+}
+
+.icon-button:disabled {
+    opacity: 1;
+    color: var(--neowolf-disabled-icon-button-color);
+    background-color: var(--neowolf-disabled-icon-button-background);
+    border-color: var(--neowolf-disabled-icon-button-background);
 }
 
 .icon-button svg:not([hidden]) {
