@@ -1,12 +1,12 @@
 /*
- * Administration
+ * Administration.
  *
  * Page-specific styles for plugin management and settings.
  */
 
 
 /*
- * Plugins
+ * Plugins.
  */
 
 .plugins-grid {
@@ -49,7 +49,7 @@
 
 
 /*
- * Plugin information
+ * Plugin information.
  */
 
 .plugin-info {
@@ -58,9 +58,9 @@
 
 .plugin-heading {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
 .plugin-heading h3 {
@@ -80,7 +80,7 @@
 
 
 /*
- * Plugin version and enabled state
+ * Plugin details.
  */
 
 .plugin-version,
@@ -107,7 +107,10 @@
 
 
 /*
- * Plugin actions
+ * Plugin actions.
+ *
+ * The visual appearance of the controls is provided by the shared
+ * .icon-button component.
  */
 
 .plugin-action-list {
@@ -118,73 +121,18 @@
     width: 100%;
 }
 
-.plugin-action {
-    display: inline-flex;
-    flex: 0 0 2rem;
-    align-items: center;
-    justify-content: center;
-
-    width: 2rem;
-    height: 2rem;
+.plugin-action-list .icon-button {
     margin: 0;
-    padding: 0;
-
-    border: 0;
-    border-radius: var(--pico-border-radius);
-    background: transparent;
-
-    color: var(--pico-primary);
-
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
 }
 
-.plugin-action svg {
-    display: block;
+.plugin-action-list .icon-button svg {
     width: 1.25rem;
     height: 1.25rem;
 }
 
-.plugin-action:hover {
-    border: 0;
-    background: var(--pico-primary-background);
-    color: var(--pico-primary-inverse);
-    text-decoration: none;
-}
-
-.plugin-action:focus-visible {
-    position: relative;
-    z-index: 1;
-}
-
 
 /*
- * Unavailable plugin actions
- */
-
-.plugin-action[aria-disabled="true"] {
-    border: 0;
-    border-bottom: 0;
-    background: transparent;
-    color: var(--pico-muted-color);
-    opacity: 0.4;
-    text-decoration: none;
-    box-shadow: none;
-    cursor: default;
-}
-
-.plugin-action[aria-disabled="true"]:hover {
-    border: 0;
-    background: transparent;
-    color: var(--pico-muted-color);
-    text-decoration: none;
-    box-shadow: none;
-}
-
-
-/*
- * Empty plugin list
+ * Empty plugin list.
  */
 
 .plugins-empty {
@@ -195,7 +143,7 @@
 
 
 /*
- * Settings
+ * Settings.
  */
 
 #settings-form fieldset + fieldset {
@@ -208,7 +156,7 @@
 
 
 /*
- * Responsive plugin list
+ * Responsive plugin list.
  */
 
 @media (max-width: 55rem) {

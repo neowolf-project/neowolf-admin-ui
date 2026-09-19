@@ -1,10 +1,16 @@
 :root {
     --neowolf-panel-padding: 1.5rem;
+    --neowolf-tab-list-inset: 0.75rem;
 }
 
+
 /*
- * Main Page Edit tabs.
+ * Tabs.
  */
+
+.tabs {
+    margin-top: 2rem;
+}
 
 .tabs[data-tabs] {
     display: none;
@@ -14,22 +20,34 @@
     display: block;
 }
 
-.tabs {
-    margin-top: 2rem;
-}
+
+/*
+ * Tab list.
+ */
 
 .tabs > .tab-list {
     display: flex;
     gap: 0.25rem;
-    margin-bottom: -1px;
+    margin-bottom: calc(var(--neowolf-border-width));
+    padding-inline-start: var(--neowolf-tab-list-inset);
 }
+
+
+/*
+ * Tab buttons.
+ */
 
 .tabs > .tab-list button {
     margin: 0;
     padding: 0.65rem 1rem;
+
     border: var(--neowolf-border-width) solid transparent;
-    border-bottom: 2px solid transparent;
-    border-radius: var(--pico-border-radius) var(--pico-border-radius) 0 0;
+    border-radius:
+            var(--pico-border-radius)
+            var(--pico-border-radius)
+            0
+            0;
+
     background: transparent;
     color: var(--pico-muted-color);
 }
@@ -41,25 +59,51 @@
 
 .tabs > .tab-list button:focus-visible {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+
+    outline: none;
+    box-shadow:
+            inset 3px 0 var(--neowolf-focus-color),
+            inset -3px 0 var(--neowolf-focus-color),
+            inset 0 3px var(--neowolf-focus-color);
 }
 
+
+/*
+ * Active tab.
+ *
+ * The transparent bottom border allows the active tab to visually merge
+ * with the panel below it.
+ */
+
 .tabs > .tab-list [role="tab"][aria-selected="true"] {
+    position: relative;
+    z-index: 1;
+
     border-color: var(--pico-primary-background);
     border-bottom-color: transparent;
+
     background: var(--pico-primary-background);
     color: var(--pico-primary-inverse, #fff);
+
     font-weight: 600;
 }
 
 .tabs > .tab-list [role="tab"][aria-selected="true"]:hover {
     border-color: var(--pico-primary-hover-background);
     border-bottom-color: transparent;
+
     background: var(--pico-primary-hover-background);
     color: var(--pico-primary-inverse, #fff);
 }
 
-[data-theme="dark"] .tabs > .tab-list [role="tab"][aria-selected="true"] {
+
+/*
+ * Active tab in dark mode.
+ */
+
+[data-theme="dark"]
+.tabs > .tab-list [role="tab"][aria-selected="true"] {
     border-color: var(--scroll-top-color);
     border-bottom-color: transparent;
 }
@@ -72,8 +116,14 @@
     }
 }
 
+
+/*
+ * Tab panels.
+ */
+
 .tabs > [role="tabpanel"] {
     padding: var(--neowolf-panel-padding);
+
     border: var(--neowolf-border-width) solid var(--pico-muted-color);
     border-radius: var(--pico-border-radius);
 }

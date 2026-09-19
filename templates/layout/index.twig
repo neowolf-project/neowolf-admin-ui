@@ -9,128 +9,140 @@
 {% endblock %}
 
 {% block content %}
-<header>
-            <nav>
-                <ul>
-                    <li>
-                        <h1>Layouts</h1>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <button
-                                type="button"
-                                class="secondary"
-                                data-sortable-toggle="layout-index"
-                                aria-pressed="false"
-                                aria-keyshortcuts="Alt+Shift+R"
-                                aria-describedby="layout-reorder-help"
-                                data-tooltip="Toggle with Alt+Shift+R"
-                                data-placement="left"
-                        >
-                            Reorder
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                                type="button"
-                                class="secondary admin-index-reset-order"
-                                data-admin-index-target="layout-index"
-                        >
-                            Reset
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                                type="button"
-                                id="add-layout"
-                        >
-                            Add Layout
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <p id="layout-reorder-help" class="admin-index-reorder-help">
-            Reorder: drag an item, or press Alt+Shift+R and use the arrow keys.
-            Press Space to pick up and place an item; Escape cancels and exits reorder mode.
-        </p>
-
-        <div
-                id="layout-index"
-                class="admin-index"
-                data-sortable-flat-tree
-        >
-
-            <div class="admin-index-header">
-                <div class="admin-index-cell">
-                    Layout
-                </div>
-
-                <div class="admin-index-cell admin-index-actions">
-                    Actions
-                </div>
-            </div>
-
-            <ul id="layouts" class="admin-index-list" data-sortable-list>
-
-                {% for layout in layouts %}
-                    <li
-                            id="layout_{{ layout.id }}"
-                            class="admin-index-row"
-                            data-sortable-item
-                            data-id="{{ layout.id }}"
-                            data-layout-name="{{ layout.name }}"
-                            data-is-protected="{{ layout.protected ? '1' : '0' }}"
-                    >
-                        <div class="admin-index-cell admin-index-main">
-                            <a href="/layout/edit/{{ layout.id }}" data-sortable-label>
-                                {{ layout.name }}
-                            </a>
-                        </div>
-
-                        <div class="admin-index-cell admin-index-actions">
-                            <a
-                                    href="#"
-                                    class="icon-button delete"
-                                    aria-label="Delete layout {{ layout.name }}"
-                                    data-tooltip="Delete"
-                                    data-placement="left"
-                            >
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M3 6h18"/>
-                                    <path d="M8 6V4h8v2"/>
-                                    <path d="M19 6l-1 14H6L5 6"/>
-                                    <path d="M10 11v5"/>
-                                    <path d="M14 11v5"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </li>
-                {% else %}
-                    <li class="admin-index-row">
-                        <div class="admin-index-cell admin-index-main">
-                            No layouts found.
-                        </div>
-                    </li>
-                {% endfor %}
-
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <h1>Layouts</h1>
+                </li>
             </ul>
 
-            <div
-                    class="admin-index-reorder-status visually-hidden"
-                    role="status"
-                    aria-live="polite"
-                    aria-atomic="true"
-            ></div>
+            <ul>
+                <li>
+                    <button
+                            type="button"
+                            class="secondary"
+                            data-sortable-toggle="layout-index"
+                            aria-pressed="false"
+                            aria-keyshortcuts="Alt+Shift+R"
+                            aria-describedby="layout-reorder-help"
+                            data-tooltip="Toggle with Alt+Shift+R"
+                            data-placement="left"
+                    >
+                        Reorder
+                    </button>
+                </li>
 
+                <li>
+                    <button
+                            type="button"
+                            class="secondary admin-index-reset-order"
+                            data-admin-index-target="layout-index"
+                    >
+                        Reset
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                            type="button"
+                            id="add-layout"
+                    >
+                        Add Layout
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <p
+            id="layout-reorder-help"
+            class="admin-index-reorder-help"
+    >
+        Reorder: drag an item, or press Alt+Shift+R and use the arrow keys.
+        Press Space to pick up and place an item; Escape cancels and exits reorder mode.
+    </p>
+
+    <div
+            id="layout-index"
+            class="admin-index"
+            data-sortable-flat-tree
+    >
+        <div class="admin-index-header">
+            <div class="admin-index-cell">
+                Layout
+            </div>
+
+            <div class="admin-index-cell admin-index-actions">
+                Actions
+            </div>
         </div>
+
+        <ul
+                id="layouts"
+                class="admin-index-list"
+                data-sortable-list
+        >
+            {% for layout in layouts %}
+                <li
+                        id="layout_{{ layout.id }}"
+                        class="admin-index-row"
+                        data-sortable-item
+                        data-id="{{ layout.id }}"
+                        data-layout-name="{{ layout.name }}"
+                        data-is-protected="{{ layout.protected ? '1' : '0' }}"
+                >
+                    <div class="admin-index-cell admin-index-main">
+                        <a
+                                href="/layout/edit/{{ layout.id }}"
+                                data-sortable-label
+                        >
+                            {{ layout.name }}
+                        </a>
+                    </div>
+
+                    <div class="admin-index-cell admin-index-actions">
+                        <button
+                                type="button"
+                                class="icon-button delete"
+                                aria-label="Delete layout {{ layout.name }}"
+                                data-tooltip="Delete"
+                                data-placement="left"
+                        >
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                            >
+                                <path d="M3 6h18"/>
+                                <path d="M8 6V4h8v2"/>
+                                <path d="M19 6l-1 14H6L5 6"/>
+                                <path d="M10 11v5"/>
+                                <path d="M14 11v5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+            {% else %}
+                <li class="admin-index-row">
+                    <div class="admin-index-cell admin-index-main">
+                        No layouts found.
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div
+                class="admin-index-reorder-status visually-hidden"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+        ></div>
+    </div>
 {% endblock %}
 
 {% block scripts %}

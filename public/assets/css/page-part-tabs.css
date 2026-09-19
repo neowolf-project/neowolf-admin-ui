@@ -2,6 +2,13 @@
  * Page Parts tabs.
  */
 
+.page-parts {
+    --page-parts-panel-padding: 1rem;
+    --page-parts-tab-list-inset: 0.75rem;
+
+    margin-top: 3rem;
+}
+
 .page-parts[data-tabs] {
     display: none;
 }
@@ -10,25 +17,38 @@
     display: block;
 }
 
-.page-parts {
-    margin-top: 3rem;
-}
+
+/*
+ * Tab list.
+ */
 
 .page-parts .parts-tablist {
     display: flex;
     gap: 0.25rem;
     margin-top: 0.75rem;
-    margin-bottom: -1px;
+    margin-bottom: calc(var(--neowolf-border-width));
+    padding-inline-start: var(--page-parts-tab-list-inset);
 }
+
+
+/*
+ * Tab buttons.
+ */
 
 .page-parts .parts-tablist button {
     margin: 0;
     padding: 0.35rem 0.65rem;
+
     border: var(--neowolf-border-width) solid transparent;
-    border-bottom: 2px solid transparent;
-    border-radius: var(--pico-border-radius) var(--pico-border-radius) 0 0;
+    border-radius:
+            var(--pico-border-radius)
+            var(--pico-border-radius)
+            0
+            0;
+
     background: transparent;
     color: var(--pico-muted-color);
+
     font-size: 0.85rem;
 }
 
@@ -39,23 +59,48 @@
 
 .page-parts .parts-tablist button:focus-visible {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+
+    outline: none;
+    box-shadow:
+            inset 3px 0 var(--neowolf-focus-color),
+            inset -3px 0 var(--neowolf-focus-color),
+            inset 0 3px var(--neowolf-focus-color);
 }
 
+
+/*
+ * Active tab.
+ *
+ * The transparent bottom border allows the active tab to visually merge
+ * with the panel below it.
+ */
+
 .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
+    position: relative;
+    z-index: 1;
+
     border-color: var(--pico-primary-background);
     border-bottom-color: transparent;
+
     background: var(--pico-primary-background);
     color: var(--pico-primary-inverse, #fff);
+
     font-weight: 600;
 }
 
 .page-parts .parts-tablist [role="tab"][aria-selected="true"]:hover {
     border-color: var(--pico-primary-hover-background);
     border-bottom-color: transparent;
+
     background: var(--pico-primary-hover-background);
     color: var(--pico-primary-inverse, #fff);
 }
+
+
+/*
+ * Active tab in dark mode.
+ */
 
 [data-theme="dark"]
 .page-parts .parts-tablist [role="tab"][aria-selected="true"] {
@@ -71,10 +116,17 @@
     }
 }
 
+
+/*
+ * Tab panels.
+ */
+
 .page-parts [role="tabpanel"] {
-    padding: 1rem;
+    padding: var(--page-parts-panel-padding);
+
     border: var(--neowolf-border-width) solid var(--pico-muted-color);
     border-radius: var(--pico-border-radius);
+
     background: transparent;
     box-shadow: none;
 }

@@ -7,38 +7,62 @@
 
     <link rel="stylesheet" href="/assets/css/page-tabs.css">
     <link rel="stylesheet" href="/assets/css/settings.css">
-
-{% endblock %}
-
-{% block scripts %}
-    <script src="/assets/js/tabs.js"></script>
 {% endblock %}
 
 {% block content %}
     <header>
         <nav>
             <ul>
-                <li><h1>Administration</h1></li>
+                <li>
+                    <h1>Administration</h1>
+                </li>
             </ul>
         </nav>
     </header>
 
     <div class="tabs" data-tabs>
-        <div class="tab-list" role="tablist" aria-label="Administration">
-            <button type="button" id="tab-plugins" role="tab" aria-controls="panel-plugins" aria-selected="false"
-                    tabindex="-1">Plugins
+        <div
+                class="tab-list"
+                role="tablist"
+                aria-label="Administration"
+        >
+            <button
+                    type="button"
+                    id="tab-plugins"
+                    role="tab"
+                    aria-controls="panel-plugins"
+                    aria-selected="false"
+                    tabindex="-1"
+            >
+                Plugins
             </button>
-            <button type="button" id="tab-settings" role="tab" aria-controls="panel-settings" aria-selected="false"
-                    tabindex="-1">Settings
+
+            <button
+                    type="button"
+                    id="tab-settings"
+                    role="tab"
+                    aria-controls="panel-settings"
+                    aria-selected="false"
+                    tabindex="-1"
+            >
+                Settings
             </button>
         </div>
 
-        <div id="panel-plugins" role="tabpanel" aria-labelledby="tab-plugins" hidden>
+        <div
+                id="panel-plugins"
+                role="tabpanel"
+                aria-labelledby="tab-plugins"
+                hidden
+        >
             <h2>Plugins</h2>
 
             <div class="plugins-grid">
                 <div class="plugins-header" aria-hidden="true">
-                    <span>Plugin</span><span>Version</span><span>Enabled</span><span>Actions</span>
+                    <span>Plugin</span>
+                    <span>Version</span>
+                    <span>Enabled</span>
+                    <span>Actions</span>
                 </div>
 
                 {% for plugin in plugins %}
@@ -46,8 +70,12 @@
                         <div class="plugin-info">
                             <div class="plugin-heading">
                                 <h3>{{ plugin.name }}</h3>
-                                {% if plugin.author %}<small>by {{ plugin.author }}</small>{% endif %}
+
+                                {% if plugin.author %}
+                                    <small>by {{ plugin.author }}</small>
+                                {% endif %}
                             </div>
+
                             <p>{{ plugin.description }}</p>
                         </div>
 
@@ -58,9 +86,14 @@
 
                         <div class="plugin-enabled">
                             <span class="plugin-label">Enabled</span>
+
                             <label class="plugin-toggle">
-                                <input type="checkbox" name="enabled_{{ plugin.id }}" value="{{ plugin.id }}"
-                                       {% if plugin.enabled %}checked{% endif %}>
+                                <input
+                                        type="checkbox"
+                                        name="enabled_{{ plugin.id }}"
+                                        value="{{ plugin.id }}"
+                                        {% if plugin.enabled %}checked{% endif %}
+                                >
                                 <span>Enabled</span>
                             </label>
                         </div>
@@ -71,126 +104,142 @@
                             <div class="plugin-action-list">
                                 {# Settings #}
                                 {% if plugin.settings %}
-                                <a
-                                        href="{{ plugin.settings }}"
-                                        class="plugin-action"
-                                        aria-label="Settings for {{ plugin.name }}"
-                                        data-tooltip="Settings"
-                                        data-placement="top"
-                                >
-                                    {% else %}
-                                    <span
-                                            class="plugin-action"
-                                            aria-disabled="true"
-                                            aria-label="Settings unavailable for {{ plugin.name }}"
-                                            data-tooltip="Settings unavailable"
+                                    <a
+                                            href="{{ plugin.settings }}"
+                                            class="icon-button"
+                                            aria-label="Settings for {{ plugin.name }}"
+                                            data-tooltip="Settings"
                                             data-placement="top"
                                     >
-        {% endif %}
-
-            <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-            >
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.37.36.7.66.96.3.26.68.4 1.08.4H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z"/>
-            </svg>
-
-        {% if plugin.settings %}
-                                </a>
-                            {% else %}
-                                </span>
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <circle cx="12" cy="12" r="3"/>
+                                            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.37.36.7.66.96.3.26.68.4 1.08.4H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z"/>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <button
+                                            type="button"
+                                            class="icon-button"
+                                            aria-label="Settings unavailable for {{ plugin.name }}"
+                                            disabled
+                                    >
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <circle cx="12" cy="12" r="3"/>
+                                            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.37.36.7.66.96.3.26.68.4 1.08.4H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z"/>
+                                        </svg>
+                                    </button>
                                 {% endif %}
-
 
                                 {# Documentation #}
                                 {% if plugin.documentation %}
-                                <a
-                                        href="{{ plugin.documentation }}"
-                                        class="plugin-action"
-                                        aria-label="Documentation for {{ plugin.name }}"
-                                        data-tooltip="Documentation"
-                                        data-placement="top"
-                                >
-                                    {% else %}
-                                    <span
-                                            class="plugin-action"
-                                            aria-disabled="true"
-                                            aria-label="Documentation unavailable for {{ plugin.name }}"
-                                            data-tooltip="Documentation unavailable"
+                                    <a
+                                            href="{{ plugin.documentation }}"
+                                            class="icon-button"
+                                            aria-label="Documentation for {{ plugin.name }}"
+                                            data-tooltip="Documentation"
                                             data-placement="top"
                                     >
-        {% endif %}
-
-            <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-            >
-                <path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v17a3 3 0 0 0-3-3H4.5A2.5 2.5 0 0 0 2 21.5Z"/>
-                <path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v17a3 3 0 0 1 3-3h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/>
-            </svg>
-
-        {% if plugin.documentation %}
-                                </a>
-                            {% else %}
-                                </span>
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v17a3 3 0 0 0-3-3H4.5A2.5 2.5 0 0 0 2 21.5Z"/>
+                                            <path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v17a3 3 0 0 1 3-3h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <button
+                                            type="button"
+                                            class="icon-button"
+                                            aria-label="Documentation unavailable for {{ plugin.name }}"
+                                            disabled
+                                    >
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v17a3 3 0 0 0-3-3H4.5A2.5 2.5 0 0 0 2 21.5Z"/>
+                                            <path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v17a3 3 0 0 1 3-3h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/>
+                                        </svg>
+                                    </button>
                                 {% endif %}
-
 
                                 {# Website #}
                                 {% if plugin.website %}
-                                <a
-                                        href="{{ plugin.website }}"
-                                        class="plugin-action"
-                                        aria-label="Website for {{ plugin.name }}"
-                                        data-tooltip="Website"
-                                        data-placement="top"
-                                >
-                                    {% else %}
-                                    <span
-                                            class="plugin-action"
-                                            aria-disabled="true"
-                                            aria-label="Website unavailable for {{ plugin.name }}"
-                                            data-tooltip="Website unavailable"
+                                    <a
+                                            href="{{ plugin.website }}"
+                                            class="icon-button"
+                                            aria-label="Website for {{ plugin.name }}"
+                                            data-tooltip="Website"
                                             data-placement="top"
                                     >
-        {% endif %}
-
-            <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-            >
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
-            </svg>
-
-        {% if plugin.website %}
-                                </a>
-                            {% else %}
-                                </span>
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M2 12h20"/>
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <button
+                                            type="button"
+                                            class="icon-button"
+                                            aria-label="Website unavailable for {{ plugin.name }}"
+                                            disabled
+                                    >
+                                        <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                        >
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M2 12h20"/>
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
+                                        </svg>
+                                    </button>
                                 {% endif %}
-
 
                                 {# Uninstall #}
                                 <button
                                         type="button"
-                                        class="plugin-action"
+                                        class="icon-button delete"
                                         aria-label="Uninstall {{ plugin.name }}"
                                         data-tooltip="Uninstall"
                                         data-placement="top"
@@ -215,96 +264,211 @@
                         </div>
                     </div>
                 {% else %}
-                    <p class="plugins-empty">No plugins found.</p>
+                    <p class="plugins-empty">
+                        No plugins found.
+                    </p>
                 {% endfor %}
             </div>
         </div>
 
-        <div id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+        <div
+                id="panel-settings"
+                role="tabpanel"
+                aria-labelledby="tab-settings"
+                hidden
+        >
             <h2>Settings</h2>
-            <form id="settings-form" method="post">
+
+            <form
+                    id="settings-form"
+                    method="post"
+            >
                 <fieldset class="two-column general">
                     <legend>General</legend>
-                    <div class="field"><label for="setting-admin-title">Site title</label><input
-                                id="setting-admin-title" name="setting[admin_title]" type="text" maxlength="255"
-                                value="{{ settings.admin_title }}"></div>
-                    <div class="field"><label for="setting-admin-email">Site email</label><input
-                                id="setting-admin-email" name="setting[admin_email]" type="email" maxlength="255"
-                                value="{{ settings.admin_email }}"></div>
+
+                    <div class="field">
+                        <label for="setting-admin-title">Site title</label>
+                        <input
+                                id="setting-admin-title"
+                                name="setting[admin_title]"
+                                type="text"
+                                maxlength="255"
+                                value="{{ settings.admin_title }}"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="setting-admin-email">Site email</label>
+                        <input
+                                id="setting-admin-email"
+                                name="setting[admin_email]"
+                                type="email"
+                                maxlength="255"
+                                value="{{ settings.admin_email }}"
+                        >
+                    </div>
+
                     <div class="field">
                         <label for="setting-language">Default language</label>
-                        <select id="setting-language" name="setting[language]">
+                        <select
+                                id="setting-language"
+                                name="setting[language]"
+                        >
                             {% for language in languages %}
-                                <option value="{{ language.value }}"
-                                        {% if language.value == settings.language %}selected{% endif %}>{{ language.label }}</option>{% endfor %}
+                                <option
+                                        value="{{ language.value }}"
+                                        {% if language.value == settings.language %}selected{% endif %}
+                                >
+                                    {{ language.label }}
+                                </option>
+                            {% endfor %}
                         </select>
-                        <small>Default language used by the administration area.</small>
+
+                        <small>
+                            Default language used by the administration area.
+                        </small>
                     </div>
+
                     <div class="field">
                         <label for="setting-default-section">Default section</label>
-                        <select id="setting-default-section" name="setting[default_tab]">
+                        <select
+                                id="setting-default-section"
+                                name="setting[default_tab]"
+                        >
                             {% for section in sections %}
-                                <option value="{{ section.value }}"
-                                        {% if section.value == settings.default_section %}selected{% endif %}>{{ section.label }}</option>{% endfor %}
+                                <option
+                                        value="{{ section.value }}"
+                                        {% if section.value == settings.default_section %}selected{% endif %}
+                                >
+                                    {{ section.label }}
+                                </option>
+                            {% endfor %}
                         </select>
-                        <small>Section shown after logging in.</small>
+
+                        <small>
+                            Section shown after logging in.
+                        </small>
                     </div>
                 </fieldset>
 
                 <fieldset class="two-column pages">
                     <legend>Pages</legend>
+
                     <div class="field">
                         <label for="setting-default-status">Default status</label>
-                        <select id="setting-default-status" name="setting[default_status_id]">
+                        <select
+                                id="setting-default-status"
+                                name="setting[default_status_id]"
+                        >
                             {% for status in statuses %}
-                                <option value="{{ status.value }}"
-                                        {% if status.value == settings.default_status_id %}selected{% endif %}>{{ status.label }}</option>{% endfor %}
+                                <option
+                                        value="{{ status.value }}"
+                                        {% if status.value == settings.default_status_id %}selected{% endif %}
+                                >
+                                    {{ status.label }}
+                                </option>
+                            {% endfor %}
                         </select>
                     </div>
+
                     <div class="field">
                         <label for="setting-default-filter">Default filter</label>
-                        <select id="setting-default-filter" name="setting[default_filter_id]">
-                            <option value="" {% if not settings.default_filter_id %}selected{% endif %}>None</option>
+                        <select
+                                id="setting-default-filter"
+                                name="setting[default_filter_id]"
+                        >
+                            <option
+                                    value=""
+                                    {% if not settings.default_filter_id %}selected{% endif %}
+                            >
+                                None
+                            </option>
+
                             {% for filter in filters %}
-                                <option value="{{ filter.value }}"
-                                        {% if filter.value == settings.default_filter_id %}selected{% endif %}>{{ filter.label }}</option>{% endfor %}
+                                <option
+                                        value="{{ filter.value }}"
+                                        {% if filter.value == settings.default_filter_id %}selected{% endif %}
+                                >
+                                    {{ filter.label }}
+                                </option>
+                            {% endfor %}
                         </select>
-                        <small>Default content filter for pages.</small>
+
+                        <small>
+                            Default content filter for pages.
+                        </small>
                     </div>
-                    <div class="field field-span-2"><label class="checkbox-label"><input type="checkbox"
-                                                                                         name="setting[allow_php_in_pages]"
-                                                                                         {% if settings.allow_php_in_pages %}checked{% endif %}>Allow
-                            PHP execution in pages by default</label></div>
-                    <div class="field field-span-2"><label class="checkbox-label"><input type="checkbox"
-                                                                                         name="setting[allow_html_title]"
-                                                                                         {% if settings.allow_html_title %}checked{% endif %}>Allow
-                            HTML in page titles</label></div>
+
+                    <div class="field field-span-2">
+                        <label class="checkbox-label">
+                            <input
+                                    type="checkbox"
+                                    name="setting[allow_php_in_pages]"
+                                    {% if settings.allow_php_in_pages %}checked{% endif %}
+                            >
+                            Allow PHP execution in pages by default
+                        </label>
+                    </div>
+
+                    <div class="field field-span-2">
+                        <label class="checkbox-label">
+                            <input
+                                    type="checkbox"
+                                    name="setting[allow_html_title]"
+                                    {% if settings.allow_html_title %}checked{% endif %}
+                            >
+                            Allow HTML in page titles
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset class="administration">
                     <legend>Administration</legend>
-                    <div class="field"><label class="checkbox-label"><input type="checkbox"
-                                                                            name="setting[allow_theme_preference]"
-                                                                            {% if settings.allow_theme_preference %}checked{% endif %}>Allow
-                            users to choose their preferred color scheme</label></div>
+
+                    <div class="field">
+                        <label class="checkbox-label">
+                            <input
+                                    type="checkbox"
+                                    name="setting[allow_theme_preference]"
+                                    {% if settings.allow_theme_preference %}checked{% endif %}
+                            >
+                            Allow users to choose their preferred color scheme
+                        </label>
+                    </div>
                 </fieldset>
 
-                <footer class="form-actions" data-actions-position="left">
+                <footer
+                        class="form-actions"
+                        data-actions-position="left"
+                >
                     <div class="form-actions-buttons">
-                        <button type="submit" name="commit">
+                        <button
+                                type="submit"
+                                name="commit"
+                        >
                             Save and Close
                         </button>
 
-                        <button type="submit" name="continue" class="secondary">
+                        <button
+                                type="submit"
+                                name="continue"
+                                class="secondary"
+                        >
                             Save and Continue Editing
                         </button>
 
                         <span>
-            or <a href="/">Cancel</a>
-        </span>
+                            or <a href="/">Cancel</a>
+                        </span>
                     </div>
                 </footer>
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="/assets/js/tabs.js"></script>
 {% endblock %}

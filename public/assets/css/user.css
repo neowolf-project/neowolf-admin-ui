@@ -90,8 +90,6 @@
 
 /*
  * User actions.
- *
- * Delete is either an active button or an unavailable span.
  */
 
 .user-action-list {
@@ -101,71 +99,13 @@
     width: 100%;
 }
 
-:is(button, span).user-action {
-    display: inline-flex;
-    flex: 0 0 2rem;
-    align-items: center;
-    justify-content: center;
-
-    width: 2rem;
-    height: 2rem;
-    min-width: 2rem;
-    min-height: 2rem;
+.user-action-list .icon-button {
     margin: 0;
-    padding: 0;
-
-    border: 0;
-    border-radius: var(--pico-border-radius);
-    background: transparent;
-    box-shadow: none;
-
-    color: var(--pico-primary);
-
-    font: inherit;
-    line-height: 1;
 }
 
-button.user-action {
-    cursor: pointer;
-}
-
-:is(button, span).user-action svg {
-    display: block;
+.user-action-list .icon-button svg {
     width: 1.25rem;
     height: 1.25rem;
-}
-
-button.user-action:hover {
-    border: 0;
-    background: var(--pico-primary-background);
-    color: var(--pico-primary-inverse);
-    box-shadow: none;
-}
-
-button.user-action:focus-visible {
-    position: relative;
-    z-index: 1;
-}
-
-
-/*
- * Unavailable delete action.
- *
- * Disabled actions do not receive tooltip attributes.
- */
-
-span.user-action[aria-disabled="true"] {
-    border: 0;
-    background: transparent;
-    color: var(--pico-muted-color);
-    opacity: 0.4;
-    box-shadow: none;
-    cursor: default;
-}
-
-span.user-action[aria-disabled="true"]::before,
-span.user-action[aria-disabled="true"]::after {
-    display: none;
 }
 
 
