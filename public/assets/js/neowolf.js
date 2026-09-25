@@ -86,6 +86,16 @@ window.Neowolf = window.Neowolf || {};
         });
     }
 
+    function slugify(value) {
+        return value
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
     document.querySelectorAll('dialog').forEach(trapDialogFocus);
 
     Neowolf.root = root;
@@ -95,4 +105,5 @@ window.Neowolf = window.Neowolf || {};
         trapFocus: trapDialogFocus,
         blurOpenerAfterPointerClose: blurDialogOpenerAfterPointerClose,
     };
+    Neowolf.string = {slugify};
 })();
