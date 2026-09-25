@@ -1,5 +1,7 @@
 {% extends 'base.twig' %}
 
+{% set active_section = 'layout' %}
+
 {% block title %}Layouts · Neowolf{% endblock %}
 
 {% block styles %}
@@ -10,7 +12,7 @@
 
 {% block content %}
     <header>
-        <nav>
+        <nav aria-label="Layout actions">
             <ul>
                 <li>
                     <h1>Layouts</h1>
@@ -44,12 +46,12 @@
                 </li>
 
                 <li>
-                    <button
-                            type="button"
-                            id="add-layout"
+                    <a
+                            href="/layout/add"
+                            class="admin-button"
                     >
                         Add Layout
-                    </button>
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -68,7 +70,10 @@
             class="admin-index"
             data-sortable-flat-tree
     >
-        <div class="admin-index-header">
+        <div
+                class="admin-index-header"
+                aria-hidden="true"
+        >
             <div class="admin-index-cell">
                 Layout
             </div>
@@ -82,6 +87,7 @@
                 id="layouts"
                 class="admin-index-list"
                 data-sortable-list
+                aria-label="Layouts"
         >
             {% for layout in layouts %}
                 <li

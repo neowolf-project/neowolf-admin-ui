@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace NeowolfAdmin\Controller;
 
-use RuntimeException;
-
 final class LayoutController extends Controller
 {
     private const array CONTENT_TYPES = [
@@ -22,6 +20,22 @@ final class LayoutController extends Controller
         ]);
     }
 
+    public function add(array $vars = []): void
+    {
+        $layout = [
+            'id' => null,
+            'name' => '',
+            'content_type' => 'text/html',
+            'body' => '',
+        ];
+
+        $this->renderForm(
+            layout: $layout,
+            mode: 'add',
+            formAction: '/layout/add',
+        );
+    }
+
     public function edit(array $vars = []): void
     {
         $id = (int) ($vars['id'] ?? 0);
@@ -35,13 +49,29 @@ final class LayoutController extends Controller
         $layout = $layouts[$id] ?? null;
 
         if ($layout === null) {
-            throw new RuntimeException(
-                "Layout $id was not found."
-            );
+            http_response_code(404);
+
+            $this->render('404.twig');
+
+            return;
         }
 
+        $this->renderForm(
+            layout: $layout,
+            mode: 'edit',
+            formAction: '/layout/edit/' . $id,
+        );
+    }
+
+    private function renderForm(
+        array $layout,
+        string $mode,
+        string $formAction
+    ): void {
         $this->render('layout/form.twig', [
             'layout' => $layout,
+            'mode' => $mode,
+            'form_action' => $formAction,
             'content_types' => self::CONTENT_TYPES,
         ]);
     }

@@ -1,15 +1,22 @@
 {% extends 'base.twig' %}
 
 {% set active_section = 'layout' %}
+{% set is_add = mode == 'add' %}
 
-{% block title %}Edit {{ layout.name }} · Neowolf Admin UI{% endblock %}
+{% block title %}
+    {{ is_add ? 'Add Layout' : 'Edit ' ~ layout.name }} · Neowolf
+{% endblock %}
 
 {% block content %}
     <header>
-        <h1>Edit layout</h1>
+        <h1>{{ is_add ? 'Add Layout' : 'Edit Layout' }}</h1>
     </header>
 
-    <form method="post">
+    <form
+            method="post"
+            action="{{ form_action }}"
+            data-mode="{{ mode }}"
+    >
         <label for="layout-name">
             Name
             <input
@@ -27,7 +34,7 @@
                     id="layout-content-type"
                     name="content_type"
                     type="text"
-                    value="{{ layout.content_type|default('text/html') }}"
+                    value="{{ layout.content_type }}"
                     list="layout-content-types"
             >
         </label>
@@ -45,7 +52,7 @@
                     name="body"
                     rows="16"
                     spellcheck="false"
-            >{{ layout.body|default('') }}</textarea>
+            >{{ layout.body }}</textarea>
         </label>
 
         <footer class="form-actions" data-actions-position="left">
