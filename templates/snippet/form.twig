@@ -1,15 +1,22 @@
 {% extends 'base.twig' %}
 
 {% set active_section = 'snippet' %}
+{% set is_add = mode == 'add' %}
 
-{% block title %}Edit {{ snippet.name }} · Neowolf Admin UI{% endblock %}
+{% block title %}
+    {{ is_add ? 'Add Snippet' : 'Edit ' ~ snippet.name }} · Neowolf
+{% endblock %}
 
 {% block content %}
     <header>
-        <h1>Edit snippet</h1>
+        <h1>{{ is_add ? 'Add Snippet' : 'Edit Snippet' }}</h1>
     </header>
 
-    <form method="post">
+    <form
+            method="post"
+            action="{{ form_action }}"
+            data-mode="{{ mode }}"
+    >
         <label for="snippet-name">
             Name
             <input
@@ -46,7 +53,7 @@
                     name="body"
                     rows="16"
                     spellcheck="false"
-            >{{ snippet.body|default('') }}</textarea>
+            >{{ snippet.body }}</textarea>
         </label>
 
         <footer class="form-actions" data-actions-position="left">

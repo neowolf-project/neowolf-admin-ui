@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace NeowolfAdmin\Controller;
 
-use RuntimeException;
-
 final class SnippetController extends Controller
 {
     public function index(array $vars = []): void
@@ -15,26 +13,56 @@ final class SnippetController extends Controller
         ]);
     }
 
-    public function edit(array $vars): void
+    public function add(array $vars = []): void
     {
-        if (!isset($vars['id'])) {
+        $snippet = [
+            'id' => null,
+            'name' => '',
+            'filter_id' => 'kubes_markdown',
+            'body' => '',
+        ];
+
+        $this->renderForm(
+            snippet: $snippet,
+            mode: 'add',
+            formAction: '/snippet/add',
+        );
+    }
+
+    public function edit(array $vars = []): void
+    {
+        $id = (int) ($vars['id'] ?? 0);
+
+        if ($id < 1) {
             header('Location: /snippet');
             exit;
         }
-
-        $id = (int) $vars['id'];
 
         $snippets = $this->fixture('snippet-edit');
         $snippet = $snippets[$id] ?? null;
 
         if ($snippet === null) {
-            throw new RuntimeException(
-                "Snippet $id was not found."
-            );
+            http_response_code(404);
+            $this->render('404.twig');
+            return;
         }
 
+        $this->renderForm(
+            snippet: $snippet,
+            mode: 'edit',
+            formAction: '/snippet/edit/' . $id,
+        );
+    }
+
+    private function renderForm(
+        array $snippet,
+        string $mode,
+        string $formAction
+    ): void {
         $this->render('snippet/form.twig', [
             'snippet' => $snippet,
+            'mode' => $mode,
+            'form_action' => $formAction,
             'filters' => $this->fixture('filters'),
         ]);
     }
