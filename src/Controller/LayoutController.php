@@ -8,6 +8,13 @@ use RuntimeException;
 
 final class LayoutController extends Controller
 {
+    private const array CONTENT_TYPES = [
+        'text/html',
+        'text/plain',
+        'application/json',
+        'application/xml',
+    ];
+
     public function index(array $vars = []): void
     {
         $this->render('layout/index.twig', [
@@ -15,14 +22,14 @@ final class LayoutController extends Controller
         ]);
     }
 
-    public function edit(array $vars): void
+    public function edit(array $vars = []): void
     {
-        if (!isset($vars['id'])) {
+        $id = (int) ($vars['id'] ?? 0);
+
+        if ($id < 1) {
             header('Location: /layout');
             exit;
         }
-
-        $id = (int) $vars['id'];
 
         $layouts = $this->fixture('layout-edit');
         $layout = $layouts[$id] ?? null;
@@ -33,14 +40,9 @@ final class LayoutController extends Controller
             );
         }
 
-        $this->render('layout/edit.twig', [
+        $this->render('layout/form.twig', [
             'layout' => $layout,
-            'content_types' => [
-                'text/html',
-                'text/plain',
-                'application/json',
-                'application/xml',
-            ],
+            'content_types' => self::CONTENT_TYPES,
         ]);
     }
 }

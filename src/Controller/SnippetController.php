@@ -33,7 +33,7 @@ final class SnippetController extends Controller
             );
         }
 
-        $this->render('snippet/edit.twig', [
+        $this->render('snippet/form.twig', [
             'snippet' => $snippet,
             'filters' => $this->fixture('filters'),
         ]);

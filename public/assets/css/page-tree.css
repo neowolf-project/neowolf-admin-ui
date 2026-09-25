@@ -347,6 +347,14 @@
     padding: 0.375rem;
 }
 
+a.tree-action {
+    border: var(--pico-border-width) solid var(--pico-primary-border);
+    border-radius: var(--pico-border-radius);
+    background: var(--pico-primary-background);
+    color: var(--pico-primary-inverse);
+    text-decoration: none;
+}
+
 .tree-toggle {
     border: 0;
     background: transparent;
