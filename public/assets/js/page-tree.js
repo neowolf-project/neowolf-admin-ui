@@ -112,7 +112,6 @@ window.Neowolf = window.Neowolf || {};
 
         toggle.setAttribute('aria-expanded', String(expanded));
         toggle.setAttribute('aria-label', `${action} ${title}`);
-        toggle.dataset.tooltip = `${action} ${title}`;
     }
 
     function setNodeCollapsed(node, collapsed, {notify = true} = {}) {

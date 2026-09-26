@@ -503,6 +503,21 @@ fieldset.two-column > legend {
     height: var(--neowolf-scroll-icon-size);
 }
 
+/*
+ * Tooltip interaction.
+ *
+ * A hovered tooltip takes precedence over a tooltip belonging to another
+ * control that still has focus.
+ */
+
+body:has([data-tooltip]:hover)
+[data-tooltip]:focus:not(:hover)::before,
+body:has([data-tooltip]:hover)
+[data-tooltip]:focus:not(:hover)::after {
+    visibility: hidden;
+    animation: none;
+    opacity: 0;
+}
 
 /*
  * Generic backend dialogs.
