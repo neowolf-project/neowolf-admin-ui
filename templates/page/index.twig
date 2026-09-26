@@ -73,18 +73,6 @@
                 </div>
 
                 <div class="tree-actions">
-                    <button
-                            type="button"
-                            class="tree-action normal-action view-page-button"
-                            aria-label="View {{ page.title }}"
-                            data-tooltip="View page"
-                            {% if not page.viewable %}disabled{% endif %}
-                    >
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12"></path>
-                            <circle cx="12" cy="12" r="2.5"></circle>
-                        </svg>
-                    </button>
 
                     <a
                             href="/page/add/{{ page.id }}"
@@ -96,6 +84,19 @@
                             <path d="M12 5v14M5 12h14"></path>
                         </svg>
                     </a>
+
+                    <button
+                            type="button"
+                            class="tree-action normal-action secondary view-page-button"
+                            aria-label="View {{ page.title }}"
+                            data-tooltip="View page"
+                            {% if not page.viewable %}disabled{% endif %}
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12"></path>
+                            <circle cx="12" cy="12" r="2.5"></circle>
+                        </svg>
+                    </button>
 
                     <button
                             type="button"
