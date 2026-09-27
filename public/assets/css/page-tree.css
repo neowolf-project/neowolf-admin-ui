@@ -12,6 +12,8 @@
     --tree-indent-step: 1.5rem;
     --tree-row-padding-x: 0.75rem;
     --tree-row-padding-y: 0.5rem;
+
+    --tree-disabled-color: #6b7280;
 }
 
 
@@ -82,13 +84,13 @@
     top: 0.25rem;
 
     clip-path: polygon(
-        50% 0,
-        100% 65%,
-        68% 65%,
-        68% 100%,
-        32% 100%,
-        32% 65%,
-        0 65%
+            50% 0,
+            100% 65%,
+            68% 65%,
+            68% 100%,
+            32% 100%,
+            32% 65%,
+            0 65%
     );
 }
 
@@ -97,13 +99,13 @@
     transform: translateY(-50%);
 
     clip-path: polygon(
-        0 30%,
-        55% 30%,
-        55% 0,
-        100% 50%,
-        55% 100%,
-        55% 70%,
-        0 70%
+            0 30%,
+            55% 30%,
+            55% 0,
+            100% 50%,
+            55% 100%,
+            55% 70%,
+            0 70%
     );
 }
 
@@ -111,13 +113,13 @@
     bottom: 0.25rem;
 
     clip-path: polygon(
-        32% 0,
-        68% 0,
-        68% 35%,
-        100% 35%,
-        50% 100%,
-        0 35%,
-        32% 35%
+            32% 0,
+            68% 0,
+            68% 35%,
+            100% 35%,
+            50% 100%,
+            0 35%,
+            32% 35%
     );
 }
 
@@ -271,8 +273,8 @@
 
     .tree-page {
         padding-left: calc(
-            0.25rem +
-            var(--tree-indent-step) * var(--tree-depth)
+                0.25rem +
+                var(--tree-indent-step) * var(--tree-depth)
         );
     }
 }
@@ -399,19 +401,44 @@ a.tree-action {
     white-space: nowrap;
 
     border: var(--pico-border-width) solid var(--pico-muted-border-color);
-
     border-radius: 999px;
     background: transparent;
     color: inherit;
     box-shadow: none;
 
-    font-size: 0.8rem;
+    font: inherit;
     line-height: 1.4;
 }
 
 .status-badge:hover {
     border-color: var(--pico-primary);
     background: var(--pico-primary-focus);
+}
+
+
+/*
+ * Protected pages.
+ *
+ * Protection affects editing controls, not tree navigation. Keep the
+ * expand/collapse control and Actions column visually unchanged.
+ */
+
+.tree-node[data-protected="true"] > .tree-row .tree-title,
+.tree-node[data-protected="true"] > .tree-row .layout-button,
+.tree-node[data-protected="true"] > .tree-row .status-badge {
+    color: var(--tree-disabled-color);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.tree-node[data-protected="true"] > .tree-row .layout-button:hover {
+    color: var(--pico-muted-color);
+    text-decoration: none;
+}
+
+.tree-node[data-protected="true"] > .tree-row .status-badge:hover {
+    border-color: var(--pico-muted-border-color);
+    background: transparent;
 }
 
 

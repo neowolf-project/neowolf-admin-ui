@@ -68,7 +68,8 @@
                                         "movable": true,
                                         "viewable": true,
                                         "deletable": true,
-                                        "children": []
+                                        "children": [],
+                                        "protected": false
                                     },
                                     {
                                         "id": 8,
@@ -83,9 +84,11 @@
                                         "movable": true,
                                         "viewable": true,
                                         "deletable": true,
-                                        "children": []
+                                        "children": [],
+                                        "protected": false
                                     }
-                                ]
+                                ],
+                                "protected": false
                             },
                             {
                                 "id": 9,
@@ -100,7 +103,8 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": false
                             },
                             {
                                 "id": 10,
@@ -115,9 +119,11 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": false
                             }
-                        ]
+                        ],
+                        "protected": false
                     },
                     {
                         "id": 11,
@@ -146,7 +152,8 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": false
                             },
                             {
                                 "id": 13,
@@ -161,9 +168,11 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": false
                             }
-                        ]
+                        ],
+                        "protected": false
                     },
                     {
                         "id": 14,
@@ -178,9 +187,11 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     }
-                ]
+                ],
+                "protected": true
             },
             {
                 "id": 4,
@@ -209,7 +220,8 @@
                         "movable": true,
                         "viewable": false,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": true
                     },
                     {
                         "id": 15,
@@ -224,7 +236,8 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     },
                     {
                         "id": 16,
@@ -239,7 +252,8 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     },
                     {
                         "id": 17,
@@ -254,9 +268,11 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     }
-                ]
+                ],
+                "protected": false
             },
             {
                 "id": 18,
@@ -299,7 +315,8 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": true
                             },
                             {
                                 "id": 21,
@@ -314,9 +331,11 @@
                                 "movable": true,
                                 "viewable": true,
                                 "deletable": true,
-                                "children": []
+                                "children": [],
+                                "protected": false
                             }
-                        ]
+                        ],
+                        "protected": false
                     },
                     {
                         "id": 22,
@@ -331,7 +350,8 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     },
                     {
                         "id": 23,
@@ -346,9 +366,11 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     }
-                ]
+                ],
+                "protected": false
             },
             {
                 "id": 24,
@@ -377,7 +399,8 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     },
                     {
                         "id": 26,
@@ -392,7 +415,8 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     },
                     {
                         "id": 27,
@@ -407,9 +431,11 @@
                         "movable": true,
                         "viewable": true,
                         "deletable": true,
-                        "children": []
+                        "children": [],
+                        "protected": false
                     }
-                ]
+                ],
+                "protected": false
             },
             {
                 "id": 28,
@@ -424,7 +450,8 @@
                 "movable": true,
                 "viewable": true,
                 "deletable": true,
-                "children": []
+                "children": [],
+                "protected": false
             },
             {
                 "id": 29,
@@ -439,7 +466,8 @@
                 "movable": true,
                 "viewable": true,
                 "deletable": true,
-                "children": []
+                "children": [],
+                "protected": false
             },
             {
                 "id": 30,
@@ -454,8 +482,10 @@
                 "movable": true,
                 "viewable": true,
                 "deletable": true,
-                "children": []
+                "children": [],
+                "protected": false
             }
-        ]
+        ],
+        "protected": true
     }
 ]
