@@ -236,6 +236,20 @@
     text-decoration: none;
 }
 
+/*
+ * Tree-title tooltips.
+ *
+ * A tooltip can explain exceptional page states such as protection or a
+ * locked position. Allow its generated content to extend beyond the title
+ * and suppress the generic dotted underline: the page icon already provides
+ * the visual state indicator.
+ */
+
+.tree-title[data-tooltip] {
+    overflow: visible;
+    border-bottom: 0;
+}
+
 .page-icon {
     width: 1rem;
     height: 1rem;
@@ -427,8 +441,17 @@ a.tree-action {
 .tree-node[data-protected="true"] > .tree-row .layout-button,
 .tree-node[data-protected="true"] > .tree-row .status-badge {
     color: var(--tree-disabled-color);
-    pointer-events: none;
     cursor: not-allowed;
+}
+
+/*
+ * Keep pointer events on the protected title so its explanatory tooltip can
+ * be shown on hover. Layout and status remain genuinely non-interactive.
+ */
+
+.tree-node[data-protected="true"] > .tree-row .layout-button,
+.tree-node[data-protected="true"] > .tree-row .status-badge {
+    pointer-events: none;
 }
 
 .tree-node[data-protected="true"] > .tree-row .layout-button:hover {
