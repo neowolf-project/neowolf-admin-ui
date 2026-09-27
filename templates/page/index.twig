@@ -4,6 +4,8 @@
 
 {% macro nodes(pages) %}
     {% for page in pages %}
+        {% set protected_label = page.protected ? ', protected page' : '' %}
+
         <li
                 class="tree-node"
                 data-page-id="{{ page.id }}"
@@ -20,7 +22,7 @@
                                 class="tree-toggle"
                                 aria-expanded="{{ page.expanded ? 'true' : 'false' }}"
                                 aria-controls="children-{{ page.id }}"
-                                aria-label="{{ page.expanded ? 'Collapse' : 'Expand' }} {{ page.title }}"
+                                aria-label="{{ page.expanded ? 'Collapse' : 'Expand' }} {{ page.title }}{{ protected_label }}"
                         >
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="m9 18 6-6-6-6"></path>
@@ -38,7 +40,6 @@
                                 data-placement="right"
                         >
                             {{ page.title }}
-                            <span class="visually-hidden"> — Protected page</span>
                         </span>
                     {% else %}
                         <a
@@ -90,7 +91,7 @@
                     <a
                             href="/page/add/{{ page.id }}"
                             class="tree-action normal-action add-page-button"
-                            aria-label="Add page to {{ page.title }}"
+                            aria-label="Add page to {{ page.title }}{{ protected_label }}"
                             data-tooltip="Add page"
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -101,7 +102,7 @@
                     <button
                             type="button"
                             class="tree-action normal-action secondary view-page-button"
-                            aria-label="View {{ page.title }}"
+                            aria-label="View {{ page.title }}{{ protected_label }}"
                             data-tooltip="View page"
                             {% if not page.viewable %}disabled{% endif %}
                     >
@@ -151,7 +152,7 @@
     {% endfor %}
 {% endmacro %}
 
-{% block title %}Pages · Neowolf{% endblock %}
+{% block title %}TEST Pages · Neowolf{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="/assets/css/page-tree.css">
