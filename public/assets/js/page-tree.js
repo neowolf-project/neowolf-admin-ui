@@ -180,7 +180,7 @@ window.Neowolf = window.Neowolf || {};
         applyCollapsedState();
     }
 
-    function getPageIconName(link) {
+    function getConfiguredPageIconName(link) {
         const requestedIcon =
             link.dataset.pageIcon?.trim() || 'page';
 
@@ -189,6 +189,16 @@ window.Neowolf = window.Neowolf || {};
         )
             ? requestedIcon
             : 'page';
+    }
+
+    function getPageIconName(link) {
+        const node = link.closest('.tree-node');
+
+        if (node?.dataset.protected === 'true') {
+            return 'lock';
+        }
+
+        return getConfiguredPageIconName(link);
     }
 
     function syncPageIcon(link) {
@@ -764,7 +774,7 @@ window.Neowolf = window.Neowolf || {};
                     page_id: Number(node.dataset.pageId),
                     slug: node.dataset.slug,
                     title: getNodeTitle(node),
-                    icon: getPageIconName(
+                    icon: getConfiguredPageIconName(
                         node.querySelector(':scope > .tree-row .tree-title')
                     ),
                     layout: node.querySelector(
@@ -871,7 +881,7 @@ window.Neowolf = window.Neowolf || {};
                 page_id: pageId,
                 slug: uniqueSlug,
                 title: `${sourceTitle} copy ${copyNumber}`,
-                icon: getPageIconName(
+                icon: getConfiguredPageIconName(
                     source.querySelector(
                         ':scope > .tree-row .tree-title'
                     )
@@ -1302,4 +1312,3 @@ window.Neowolf = window.Neowolf || {};
     Neowolf.pageTree = api;
     emit('neowolf:page-tree-ready', {api});
 })();
-
