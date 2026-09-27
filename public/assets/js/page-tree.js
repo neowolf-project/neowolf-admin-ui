@@ -180,7 +180,7 @@ window.Neowolf = window.Neowolf || {};
         applyCollapsedState();
     }
 
-    function getConfiguredPageIconName(link) {
+    function getPageIconName(link) {
         const requestedIcon =
             link.dataset.pageIcon?.trim() || 'page';
 
@@ -189,16 +189,6 @@ window.Neowolf = window.Neowolf || {};
         )
             ? requestedIcon
             : 'page';
-    }
-
-    function getPageIconName(link) {
-        const node = link.closest('.tree-node');
-
-        if (node?.dataset.protected === 'true') {
-            return 'lock';
-        }
-
-        return getConfiguredPageIconName(link);
     }
 
     function syncPageIcon(link) {
@@ -616,7 +606,7 @@ window.Neowolf = window.Neowolf || {};
             nestedSorter?.refresh();
         }
     }
-    function updateNodePresentation(node, data) {
+    function updateNodePresentation(node, data, {updateIcon = false} = {}) {
         node.dataset.pageId = String(data.page_id);
         node.dataset.slug = data.slug;
 
@@ -626,13 +616,15 @@ window.Neowolf = window.Neowolf || {};
 
         title.textContent = data.title;
 
-        if (data.icon && data.icon !== 'page') {
-            title.dataset.pageIcon = data.icon;
-        } else {
-            delete title.dataset.pageIcon;
-        }
+        if (updateIcon) {
+            if (data.icon && data.icon !== 'page') {
+                title.dataset.pageIcon = data.icon;
+            } else {
+                delete title.dataset.pageIcon;
+            }
 
-        syncPageIcon(title);
+            syncPageIcon(title);
+        }
 
         const layoutButton = node.querySelector(
             ':scope > .tree-row .layout-button'
@@ -728,7 +720,7 @@ window.Neowolf = window.Neowolf || {};
             childList.replaceChildren();
         }
 
-        updateNodePresentation(node, data);
+        updateNodePresentation(node, data, {updateIcon: true});
 
         return node;
     }
@@ -774,7 +766,7 @@ window.Neowolf = window.Neowolf || {};
                     page_id: Number(node.dataset.pageId),
                     slug: node.dataset.slug,
                     title: getNodeTitle(node),
-                    icon: getConfiguredPageIconName(
+                    icon: getPageIconName(
                         node.querySelector(':scope > .tree-row .tree-title')
                     ),
                     layout: node.querySelector(
@@ -881,7 +873,7 @@ window.Neowolf = window.Neowolf || {};
                 page_id: pageId,
                 slug: uniqueSlug,
                 title: `${sourceTitle} copy ${copyNumber}`,
-                icon: getConfiguredPageIconName(
+                icon: getPageIconName(
                     source.querySelector(
                         ':scope > .tree-row .tree-title'
                     )
