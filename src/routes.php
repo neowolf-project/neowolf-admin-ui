@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use FastRoute\RouteCollector;
+use NeowolfAdmin\Controller\AuthController;
 use NeowolfAdmin\Controller\LayoutController;
 use NeowolfAdmin\Controller\PageController;
 use NeowolfAdmin\Controller\SettingController;
@@ -11,6 +12,13 @@ use NeowolfAdmin\Controller\UserController;
 
 return static function (RouteCollector $routes): void {
     $routes->get('/', [PageController::class, 'index']);
+
+    $routes->get('/auth', [AuthController::class, 'index']);
+    $routes->get('/auth/', [AuthController::class, 'index']);
+    $routes->get('/auth/login', [AuthController::class, 'login']);
+    $routes->get('/auth/forgot', [AuthController::class, 'forgot']);
+    $routes->get('/auth/register', [AuthController::class, 'register']);
+
     $routes->get('/page/add/{parent_id:\d+}', [PageController::class, 'add']);
     $routes->get('/page/edit/{id:\d+}', [PageController::class, 'edit']);
 

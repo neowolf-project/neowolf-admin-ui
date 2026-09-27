@@ -1,0 +1,42 @@
+.auth-main {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 2rem 2rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 26rem;
+}
+
+.auth-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.auth-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.auth-actions a {
+    text-underline-offset: 0.4em;
+}
+
+.auth-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 30rem) {
+    .auth-main {
+        padding: 1rem;
+    }
+
+    .auth-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

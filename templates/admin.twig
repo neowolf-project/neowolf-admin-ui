@@ -1,0 +1,75 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    <a href="#main-content" class="visually-hidden skip-link">
+        Skip to main content
+    </a>
+
+    <div class="admin-layout">
+        <header class="admin-header">
+            <p class="admin-brand">
+                <a href="/">Neowolf</a>
+            </p>
+
+            <div class="admin-header-actions">
+                <p class="admin-user">
+                    You are currently logged in as
+                    <a href="#">Administrator</a>
+
+                    <span aria-hidden="true">|</span>
+
+                    <a href="#">Log Out</a>
+
+                    <span aria-hidden="true">|</span>
+
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        View Site
+                        <span class="visually-hidden">(opens in new tab)</span>
+                    </a>
+                </p>
+
+                {% include 'partials/theme-toggle.twig' %}
+            </div>
+        </header>
+
+        <aside class="admin-sidebar">
+            {% include 'navigation.twig' %}
+        </aside>
+
+        <main class="admin-main" id="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="admin-footer">
+            Neowolf 0.9.0 &middot; PHP 8.5.8
+        </footer>
+    </div>
+
+    <a
+            href="#top"
+            class="scroll-top"
+            hidden
+            aria-label="Back to top"
+    >
+        <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+        >
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </a>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="/assets/js/sidebar.js"></script>
+    <script src="/assets/js/scroll-top.js"></script>
+{% endblock %}

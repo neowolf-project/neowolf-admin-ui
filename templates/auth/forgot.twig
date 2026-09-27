@@ -1,0 +1,51 @@
+{% extends 'base.twig' %}
+
+{% block title %}Forgot Password · Neowolf{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="/assets/css/auth.css">
+{% endblock %}
+
+{% block body %}
+    <header class="admin-header">
+        <p class="admin-brand">
+            <a href="/">Neowolf</a>
+        </p>
+
+        <div class="admin-header-actions">
+            {% include 'partials/theme-toggle.twig' %}
+        </div>
+    </header>
+
+    <main class="auth-main" id="main-content">
+        <div class="auth-container">
+            <header class="auth-header">
+                <h1>Forgot password?</h1>
+                <p>Enter your email address to reset your password.</p>
+            </header>
+
+            <form>
+                <input
+                        type="email"
+                        name="email"
+                        placeholder="Email address"
+                        aria-label="Email address"
+                        autocomplete="email"
+                        required
+                >
+
+                <button type="submit">
+                    Reset password
+                </button>
+
+                <div class="auth-actions">
+                    <a href="/auth/login">
+                        Back to login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
