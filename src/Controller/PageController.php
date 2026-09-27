@@ -42,6 +42,7 @@ final class PageController extends Controller
             'valid_until_time' => '',
             'login' => 2,
             'protected' => false,
+            'movable' => true,
             'status' => 1,
             'parts' => [
                 [

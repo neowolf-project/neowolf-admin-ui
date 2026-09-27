@@ -385,6 +385,16 @@
                                         >
                                         Lock for editors
                                     </label>
+
+                                    <label class="checkbox-label">
+                                        <input
+                                                id="page-lock-position"
+                                                name="lock_position"
+                                                type="checkbox"
+                                                {% if not page.movable %}checked{% endif %}
+                                        >
+                                        Lock page position
+                                    </label>
                                 </div>
                             </div>
                         </fieldset>
