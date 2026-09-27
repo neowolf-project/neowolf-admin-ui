@@ -10,6 +10,7 @@
                 data-slug="{{ page.slug }}"
                 data-depth="{{ page.depth }}"
                 data-protected="{{ page.protected ? 'true' : 'false' }}"
+                data-movable="{{ page.movable ? 'true' : 'false' }}"
         >
             <div class="tree-row">
                 <div class="tree-page">
@@ -29,13 +30,22 @@
                         <span class="tree-spacer" aria-hidden="true"></span>
                     {% endif %}
 
-                    <a
-                            class="tree-title"
-                            href="{{ page.href }}"
-                            data-page-icon="{{ page.protected ? 'lock' : (page.icon ?: 'page') }}"
-                    >
-                        {{ page.title }}
-                    </a>
+                    {% if page.protected %}
+                        <span
+                                class="tree-title"
+                                data-page-icon="lock"
+                        >
+                            {{ page.title }}
+                        </span>
+                    {% else %}
+                        <a
+                                class="tree-title"
+                                href="{{ page.href }}"
+                                data-page-icon="{{ page.icon ?: 'page' }}"
+                        >
+                            {{ page.title }}
+                        </a>
+                    {% endif %}
 
                     {% if page.movable %}
                         <button
@@ -55,7 +65,8 @@
                     <button
                             type="button"
                             class="layout-button"
-                            data-tooltip="Change layout"
+                            data-tooltip="{{ page.protected ? 'Layout cannot be changed' : 'Change layout' }}"
+                            {% if page.protected %}disabled{% endif %}
                     >
                         {{ page.layout }}
                     </button>
@@ -65,7 +76,8 @@
                     <button
                             type="button"
                             class="status-badge"
-                            data-tooltip="Change status"
+                            data-tooltip="{{ page.protected ? 'Status cannot be changed' : 'Change status' }}"
+                            {% if page.protected %}disabled{% endif %}
                     >
                         {{ page.status }}
                     </button>
@@ -99,8 +111,9 @@
                     <button
                             type="button"
                             class="tree-action normal-action secondary copy-button"
-                            aria-label="Copy {{ page.title }}"
-                            data-tooltip="Copy page"
+                            aria-label="{{ page.protected ? page.title ~ ' cannot be copied' : 'Copy ' ~ page.title }}"
+                            data-tooltip="{{ page.protected ? page.title ~ ' cannot be copied' : 'Copy page' }}"
+                            {% if page.protected %}disabled{% endif %}
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <rect x="9" y="9" width="11" height="11" rx="2"></rect>
@@ -111,9 +124,9 @@
                     <button
                             type="button"
                             class="tree-action normal-action secondary delete-button"
-                            aria-label="{{ page.deletable ? 'Delete ' ~ page.title : page.title ~ ' cannot be deleted' }}"
-                            data-tooltip="{{ page.deletable ? 'Delete page' : page.title ~ ' cannot be deleted' }}"
-                            {% if not page.deletable %}disabled{% endif %}
+                            aria-label="{{ page.protected or not page.deletable ? page.title ~ ' cannot be deleted' : 'Delete ' ~ page.title }}"
+                            data-tooltip="{{ page.protected or not page.deletable ? page.title ~ ' cannot be deleted' : 'Delete page' }}"
+                            {% if page.protected or not page.deletable %}disabled{% endif %}
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"></path>

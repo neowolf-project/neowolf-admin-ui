@@ -313,11 +313,19 @@ window.Neowolf = window.Neowolf || {};
         const title = getNodeTitle(node);
         const layout = layoutButton.textContent.trim();
 
+        const protectedPage =
+            node.dataset.protected === 'true';
+
+        layoutButton.disabled = protectedPage;
         layoutButton.setAttribute(
             'aria-label',
-            `Change layout for ${title}. Current layout: ${layout}`
+            protectedPage
+                ? `Layout cannot be changed for ${title}. Current layout: ${layout}`
+                : `Change layout for ${title}. Current layout: ${layout}`
         );
-        layoutButton.dataset.tooltip = 'Change layout';
+        layoutButton.dataset.tooltip = protectedPage
+            ? 'Layout cannot be changed'
+            : 'Change layout';
     }
 
     function syncAllLayoutButtons() {
@@ -338,11 +346,19 @@ window.Neowolf = window.Neowolf || {};
         const title = getNodeTitle(node);
         const status = statusButton.textContent.trim();
 
+        const protectedPage =
+            node.dataset.protected === 'true';
+
+        statusButton.disabled = protectedPage;
         statusButton.setAttribute(
             'aria-label',
-            `Change status for ${title}. Current status: ${status}`
+            protectedPage
+                ? `Status cannot be changed for ${title}. Current status: ${status}`
+                : `Change status for ${title}. Current status: ${status}`
         );
-        statusButton.dataset.tooltip = 'Change status';
+        statusButton.dataset.tooltip = protectedPage
+            ? 'Status cannot be changed'
+            : 'Change status';
     }
 
     function syncAllStatusButtons() {
@@ -569,12 +585,32 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function syncMoveHandle(node) {
-        const handle = node.querySelector(
-            ':scope > .tree-row .drag-handle'
+        const page = node.querySelector(
+            ':scope > .tree-row > .tree-page'
         );
 
-        if (!handle) {
+        if (!page) {
             return;
+        }
+
+        const movable = node.dataset.movable !== 'false';
+        let handle = page.querySelector(':scope > .drag-handle');
+
+        if (!movable) {
+            handle?.remove();
+            return;
+        }
+
+        if (!handle) {
+            handle = document.createElement('button');
+            handle.type = 'button';
+            handle.className = 'drag-handle';
+            handle.innerHTML = `
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01"></path>
+                </svg>
+            `;
+            page.append(handle);
         }
 
         const title = getNodeTitle(node);
@@ -609,6 +645,10 @@ window.Neowolf = window.Neowolf || {};
     function updateNodePresentation(node, data, {updateIcon = false} = {}) {
         node.dataset.pageId = String(data.page_id);
         node.dataset.slug = data.slug;
+
+        if (typeof data.movable === 'boolean') {
+            node.dataset.movable = String(data.movable);
+        }
 
         const title = node.querySelector(
             ':scope > .tree-row .tree-title'
@@ -676,10 +716,19 @@ window.Neowolf = window.Neowolf || {};
         );
 
         if (copyButton) {
+            const protectedPage =
+                node.dataset.protected === 'true';
+
+            copyButton.disabled = protectedPage;
             copyButton.setAttribute(
                 'aria-label',
-                `Copy ${data.title}`
+                protectedPage
+                    ? `${data.title} cannot be copied`
+                    : `Copy ${data.title}`
             );
+            copyButton.dataset.tooltip = protectedPage
+                ? `${data.title} cannot be copied`
+                : 'Copy page';
         }
 
         syncMoveHandle(node);
@@ -689,12 +738,19 @@ window.Neowolf = window.Neowolf || {};
         );
 
         if (deleteButton) {
-            deleteButton.disabled = false;
+            const protectedPage =
+                node.dataset.protected === 'true';
+
+            deleteButton.disabled = protectedPage;
             deleteButton.setAttribute(
                 'aria-label',
-                `Delete ${data.title}`
+                protectedPage
+                    ? `${data.title} cannot be deleted`
+                    : `Delete ${data.title}`
             );
-            deleteButton.dataset.tooltip = 'Delete page';
+            deleteButton.dataset.tooltip = protectedPage
+                ? `${data.title} cannot be deleted`
+                : 'Delete page';
         }
 
         const childList = ensureChildList(node);
@@ -775,6 +831,7 @@ window.Neowolf = window.Neowolf || {};
                     status: node.querySelector(
                         ':scope > .tree-row .status-badge'
                     )?.textContent.trim() ?? '',
+                    movable: node.dataset.movable !== 'false',
                     position: index + 1,
                     children: childList
                         ? serializeTree(childList)
@@ -801,6 +858,7 @@ window.Neowolf = window.Neowolf || {};
                     node.icon === undefined
                     || typeof node.icon === 'string'
                 )
+                && typeof node.movable === 'boolean'
                 && Number.isInteger(node.position)
                 && Array.isArray(node.children)
                 && isValidStoredTree(node.children)
@@ -884,6 +942,7 @@ window.Neowolf = window.Neowolf || {};
                 status: source.querySelector(
                     ':scope > .tree-row .status-badge'
                 )?.textContent.trim() ?? '',
+                movable: true,
                 children: []
             };
 
@@ -1196,6 +1255,87 @@ window.Neowolf = window.Neowolf || {};
         );
     });
 
+    function getParentNode(node) {
+        return node.parentElement?.closest('.tree-node') ?? null;
+    }
+
+    function getLockedLocations() {
+        return [...pageTree.querySelectorAll(
+            '.tree-node[data-movable="false"]'
+        )].map((node) => ({
+            node,
+            parent: getParentNode(node),
+            position: getDirectNodes(node.parentElement).indexOf(node),
+        }));
+    }
+
+    function getProposedListOrder(list, item, destinationList, position) {
+        const nodes = getDirectNodes(list).filter((node) => node !== item);
+
+        if (list === destinationList) {
+            nodes.splice(position, 0, item);
+        }
+
+        return nodes;
+    }
+
+    function preservesLockedPositions(item, destinationList, position) {
+        if (item.dataset.movable === 'false') {
+            return false;
+        }
+
+        /*
+         * A locked page must keep both its current parent and its sibling
+         * position. Validate the proposed move without changing the DOM so the
+         * same rule can safely be used while pointer and keyboard destinations
+         * are merely being inspected.
+         */
+        const sourceList = item.parentElement;
+        const lockedLocations = getLockedLocations();
+
+        for (const locked of lockedLocations) {
+            if (item.contains(locked.node)) {
+                return false;
+            }
+
+            const currentList = locked.node.parentElement;
+
+            if (currentList !== sourceList && currentList !== destinationList) {
+                continue;
+            }
+
+            let proposedList;
+
+            if (sourceList === destinationList) {
+                proposedList = getProposedListOrder(
+                    sourceList,
+                    item,
+                    destinationList,
+                    position
+                );
+            } else if (currentList === sourceList) {
+                proposedList = getDirectNodes(sourceList)
+                    .filter((node) => node !== item);
+            } else {
+                proposedList = getDirectNodes(destinationList)
+                    .filter((node) => node !== item);
+                proposedList.splice(position, 0, item);
+            }
+
+            const proposedPosition = proposedList.indexOf(locked.node);
+            const proposedParent = getParentNode(locked.node);
+
+            if (
+                proposedParent !== locked.parent
+                || proposedPosition !== locked.position
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     function initialiseSorter() {
         if (!Neowolf.sortableNestedTree) {
             return null;
@@ -1217,13 +1357,17 @@ window.Neowolf = window.Neowolf || {};
                 return getNodeTitle(node);
             },
 
-            canMove({item, list, parent}) {
+            canMove({item, list, parent, position}) {
                 /*
                  * Home is the fixed root of the Page Tree. Pages may be moved
                  * anywhere below Home, but never into the structural root list
                  * beside or above Home.
                  */
                 if (!parent) {
+                    return false;
+                }
+
+                if (!preservesLockedPositions(item, list, position)) {
                     return false;
                 }
 
