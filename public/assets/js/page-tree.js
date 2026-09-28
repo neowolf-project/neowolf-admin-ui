@@ -11,6 +11,7 @@ window.Neowolf = window.Neowolf || {};
     }
 
     const treeRoot = pageTree.querySelector('.tree-root');
+    const toggleAllButton = document.getElementById('toggle-all-nodes');
 
     if (!(treeRoot instanceof HTMLElement)) {
         return;
@@ -114,6 +115,42 @@ window.Neowolf = window.Neowolf || {};
         toggle.setAttribute('aria-label', `${action} ${title}`);
     }
 
+    function getCollapsibleNodes() {
+        return [...pageTree.querySelectorAll('.tree-node')]
+            .filter((node) => {
+                const childList = getDirectChildList(node);
+
+                return childList
+                    && childList.querySelector(':scope > .tree-node');
+            });
+    }
+
+    function areAllNodesExpanded() {
+        const nodes = getCollapsibleNodes();
+
+        return nodes.length > 0
+            && nodes.every((node) => {
+                const pageId = Number(node.dataset.pageId);
+
+                return Number.isInteger(pageId)
+                    && !collapsedPageIds.has(pageId);
+            });
+    }
+
+    function syncToggleAllButton() {
+        if (!(toggleAllButton instanceof HTMLButtonElement)) {
+            return;
+        }
+
+        const nodes = getCollapsibleNodes();
+        const hasCollapsibleNodes = nodes.length > 0;
+
+        toggleAllButton.disabled = !hasCollapsibleNodes;
+        toggleAllButton.textContent = hasCollapsibleNodes && areAllNodesExpanded()
+            ? 'Collapse all'
+            : 'Expand all';
+    }
+
     function setNodeCollapsed(node, collapsed, {notify = true} = {}) {
         if (!(node instanceof HTMLElement)) {
             return;
@@ -133,8 +170,9 @@ window.Neowolf = window.Neowolf || {};
             collapsedPageIds.delete(pageId);
         }
 
-        childList.hidden = collapsed;
+        Neowolf.disclosure.setExpanded(toggle, !collapsed);
         setToggleState(toggle, !collapsed, getNodeTitle(node));
+        syncToggleAllButton();
 
         if (notify) {
             emit('neowolf:page-tree-collapse', {
@@ -143,6 +181,20 @@ window.Neowolf = window.Neowolf || {};
                 collapsedPageIds: [...collapsedPageIds],
             });
         }
+    }
+
+    function setAllNodesCollapsed(collapsed) {
+        getCollapsibleNodes().forEach((node) => {
+            setNodeCollapsed(node, collapsed, {notify: false});
+        });
+
+        syncToggleAllButton();
+
+        emit('neowolf:page-tree-collapse', {
+            pageId: null,
+            collapsed,
+            collapsedPageIds: [...collapsedPageIds],
+        });
     }
 
     function applyCollapsedState() {
@@ -156,10 +208,12 @@ window.Neowolf = window.Neowolf || {};
             }
 
             const collapsed = collapsedPageIds.has(pageId);
-            childList.hidden = collapsed;
+
+            Neowolf.disclosure.setExpanded(toggle, !collapsed);
             setToggleState(toggle, !collapsed, getNodeTitle(node));
         });
 
+        syncToggleAllButton();
         document.getElementById('tree-collapse-bootstrap')?.remove();
     }
 
@@ -983,6 +1037,13 @@ window.Neowolf = window.Neowolf || {};
         button?.addEventListener('click', callback);
     }
 
+    toggleAllButton?.addEventListener('click', () => {
+        const shouldCollapse = areAllNodesExpanded();
+
+        setAllNodesCollapsed(shouldCollapse);
+        Neowolf.interaction.blurAfterPointerInteraction(toggleAllButton);
+    });
+
     pageTree.addEventListener('click', (event) => {
         const moveHandle = event.target.closest('.drag-handle');
 
@@ -1441,6 +1502,7 @@ window.Neowolf = window.Neowolf || {};
         getCollapsedPageIds,
         setCollapsedPageIds,
         setNodeCollapsed,
+        setAllNodesCollapsed,
         notifyChange: notifyTreeChange,
         sorter: nestedSorter,
     };

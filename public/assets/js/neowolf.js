@@ -86,6 +86,39 @@ window.Neowolf = window.Neowolf || {};
         });
     }
 
+    function setExpanded(control, expanded) {
+        if (!control) {
+            return;
+        }
+
+        const targetId = control.getAttribute('aria-controls');
+
+        if (!targetId) {
+            return;
+        }
+
+        const target = document.getElementById(targetId);
+
+        if (!target) {
+            return;
+        }
+
+        control.setAttribute('aria-expanded', String(expanded));
+        setHidden(target, !expanded);
+    }
+
+    function setAllExpanded(container, expanded) {
+        if (!container) {
+            return;
+        }
+
+        container
+            .querySelectorAll('[aria-expanded][aria-controls]')
+            .forEach((control) => {
+                setExpanded(control, expanded);
+            });
+    }
+
     function slugify(value) {
         return value
             .normalize('NFD')
@@ -104,6 +137,10 @@ window.Neowolf = window.Neowolf || {};
     Neowolf.dialog = {
         trapFocus: trapDialogFocus,
         blurOpenerAfterPointerClose: blurDialogOpenerAfterPointerClose,
+    };
+    Neowolf.disclosure = {
+        setExpanded,
+        setAllExpanded,
     };
     Neowolf.string = {slugify};
 })();
