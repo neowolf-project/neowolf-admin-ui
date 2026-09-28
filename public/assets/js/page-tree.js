@@ -182,9 +182,12 @@ window.Neowolf = window.Neowolf || {};
             });
         }
     }
-
     function setAllNodesCollapsed(collapsed) {
         getCollapsibleNodes().forEach((node) => {
+            if (collapsed && node === homeNode) {
+                return;
+            }
+
             setNodeCollapsed(node, collapsed, {notify: false});
         });
 
@@ -196,7 +199,6 @@ window.Neowolf = window.Neowolf || {};
             collapsedPageIds: [...collapsedPageIds],
         });
     }
-
     function applyCollapsedState() {
         pageTree.querySelectorAll('.tree-node').forEach((node) => {
             const pageId = Number(node.dataset.pageId);
