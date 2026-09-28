@@ -7,7 +7,7 @@
 {% block styles %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="/assets/css/flat-list.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/flat-list.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -154,8 +154,8 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="/assets/js/sortable.min.js"></script>
-    <script src="/assets/js/tree-helpers.js"></script>
-    <script src="/assets/js/sortable-flat-tree.js"></script>
-    <script src="/assets/js/layout-index.js"></script>
+    <script src="{{ asset('assets/js/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tree-helpers.js') }}"></script>
+    <script src="{{ asset('assets/js/sortable-flat-tree.js') }}"></script>
+    <script src="{{ asset('assets/js/layout-index.js') }}"></script>
 {% endblock %}

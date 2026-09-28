@@ -155,7 +155,7 @@
 {% block title %}Pages · Neowolf{% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="/assets/css/page-tree.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/page-tree.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -407,9 +407,9 @@
 {% endblock %}
 
 {% block admin_scripts %}
-    <script src="/assets/js/sortable.min.js"></script>
-    <script src="/assets/js/tree-helpers.js"></script>
-    <script src="/assets/js/sortable-nested-tree.js"></script>
-    <script src="/assets/js/page-tree.js"></script>
-    <script src="/assets/js/page-tree-demo.js"></script>
+    <script src="{{ asset('assets/js/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tree-helpers.js') }}"></script>
+    <script src="{{ asset('assets/js/sortable-nested-tree.js') }}"></script>
+    <script src="{{ asset('assets/js/page-tree.js') }}"></script>
+    <script src="{{ asset('assets/js/page-tree-demo.js') }}"></script>
 {% endblock %}

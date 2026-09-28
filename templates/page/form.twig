@@ -10,17 +10,17 @@
 {% block styles %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="/assets/css/page-tabs.css">
-    <link rel="stylesheet" href="/assets/css/page-edit.css">
-    <link rel="stylesheet" href="/assets/css/page-part-tabs.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/page-tabs.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/page-edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/page-part-tabs.css') }}">
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="/assets/js/tabs.js"></script>
-    <script src="/assets/js/page-parts.js"></script>
-    <script src="/assets/js/page-form.js"></script>
+    <script src="{{ asset('assets/js/tabs.js') }}"></script>
+    <script src="{{ asset('assets/js/page-parts.js') }}"></script>
+    <script src="{{ asset('assets/js/page-form.js') }}"></script>
 {% endblock %}
 
 {% block content %}

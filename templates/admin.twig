@@ -68,8 +68,8 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="/assets/js/sidebar.js"></script>
-    <script src="/assets/js/scroll-top.js"></script>
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/js/scroll-top.js') }}"></script>
 
     {% block admin_scripts %}{% endblock %}
 {% endblock %}

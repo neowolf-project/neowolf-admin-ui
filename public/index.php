@@ -6,6 +6,7 @@ use FastRoute\Dispatcher;
 use NeowolfAdmin\Controller\Controller;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -17,6 +18,22 @@ $twig = new Environment(
         'cache' => false,
         'strict_variables' => true,
     ]
+);
+
+$twig->addFunction(
+    new TwigFunction(
+        'asset',
+        static function (string $path) use ($projectRoot): string {
+            $path = ltrim($path, '/');
+            $file = $projectRoot . '/public/' . $path;
+
+            if (!is_file($file)) {
+                return '/' . $path;
+            }
+
+            return '/' . $path . '?v=' . filemtime($file);
+        }
+    )
 );
 
 $navigationFile = $projectRoot . '/data/navigation.json';

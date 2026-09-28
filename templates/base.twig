@@ -20,8 +20,8 @@
         }
     </script>
 
-    <link rel="stylesheet" href="/assets/css/blades.min.css">
-    <link rel="stylesheet" href="/assets/css/neowolf.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/blades.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/neowolf.css') }}">
 
     {% block styles %}{% endblock %}
 </head>
@@ -30,8 +30,8 @@
 
 {% block body %}{% endblock %}
 
-<script src="/assets/js/neowolf.js"></script>
-<script src="/assets/js/theme.js"></script>
+<script src="{{ asset('assets/js/neowolf.js') }}"></script>
+<script src="{{ asset('assets/js/theme.js') }}"></script>
 
 {% block scripts %}{% endblock %}
 

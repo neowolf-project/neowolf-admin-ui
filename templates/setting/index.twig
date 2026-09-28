@@ -5,8 +5,8 @@
 {% block styles %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="/assets/css/page-tabs.css">
-    <link rel="stylesheet" href="/assets/css/settings.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/page-tabs.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/settings.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -470,5 +470,5 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="/assets/js/tabs.js"></script>
+    <script src="{{ asset('assets/js/tabs.js') }}"></script>
 {% endblock %}
