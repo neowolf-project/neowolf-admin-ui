@@ -554,11 +554,9 @@ a.tree-action {
 }
 
 /*
- * Keep a moving subtree visually compact. The descendants stay in the DOM
- * and move with their parent, but only the selected page row is shown
- * until the move is dropped or cancelled.
+ * Keep a moving subtree visually compact. Descendants stay attached to their
+ * parent in the DOM, but only the selected page row is shown while moving.
  */
-/* Keep the complete subtree attached while showing only its parent row during a move. */
 .tree-node.sortable-chosen > .tree-children,
 .tree-node.sortable-drag > .tree-children,
 .tree-node.sortable-fallback > .tree-children {
@@ -588,16 +586,17 @@ a.tree-action {
 /*
  * Child drop targets.
  *
- * Every page owns a child <ul>, including leaf pages. During a drag the
- * list becomes a generous target, so dropping *inside* a page does not
- * require pixel-perfect positioning. The list itself stays full width;
- * only its visual feedback changes, so the shared grid columns remain
- * perfectly aligned.
+ * Every page owns a child <ul>, including leaf pages. During a drag, the
+ * child list overlaps the lower part of its page row to provide a real
+ * "inside" destination. Empty child lists receive their own drop area.
+ *
+ * The lists remain full width so the shared grid columns stay aligned.
  */
 
 .tree-children {
     position: relative;
 }
+
 
 .reorder-mode.is-dragging .tree-children {
     /*
@@ -621,6 +620,11 @@ a.tree-action {
     background: var(--pico-primary-focus);
 }
 
+/*
+ * Leaf pages have an empty child list. Give that list real geometry while
+ * dragging so SortableJS does not have to rely on a large invisible
+ * empty-list tolerance.
+ */
 .reorder-mode.is-dragging .tree-children:empty {
     min-height: 2.75rem;
     margin-top: -1.75rem;

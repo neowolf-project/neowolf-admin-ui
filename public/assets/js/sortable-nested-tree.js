@@ -18,7 +18,7 @@ window.Neowolf = window.Neowolf || {};
         handleSelector: '[data-sortable-handle]',
         labelSelector: '[data-sortable-label]',
         animation: 150,
-        emptyInsertThreshold: 48,
+        emptyInsertThreshold: 5,
         groupName: null,
         statusRegion: null,
         getId: (item) => item.dataset.id ?? item.dataset.sortableId ?? '',
@@ -125,13 +125,33 @@ window.Neowolf = window.Neowolf || {};
             },
 
             onMove(event) {
-                const position = event.newIndex ?? 0;
+                const siblings = getDirectItems(state, event.to)
+                    .filter((candidate) => candidate !== event.dragged);
+
+                const related = event.related?.closest?.(
+                    state.options.itemSelector
+                ) ?? null;
+
+                let position = siblings.length;
+
+                if (related && related.parentElement === event.to) {
+                    const relatedIndex = siblings.indexOf(related);
+
+                    if (relatedIndex >= 0) {
+                        position = relatedIndex
+                            + (event.willInsertAfter ? 1 : 0);
+                    }
+                }
+
                 if (!validTarget(state, event.dragged, event.to, position)) {
                     return false;
                 }
 
                 const destinationParent = parentItem(state, event.to);
-                const parentLabel = destinationParent ? getLabel(state, destinationParent) : 'root';
+                const parentLabel = destinationParent
+                    ? getLabel(state, destinationParent)
+                    : 'root';
+
                 announce(state, `Move target: inside ${parentLabel}.`);
                 return true;
             },
