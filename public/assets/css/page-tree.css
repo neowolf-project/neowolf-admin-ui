@@ -350,6 +350,15 @@
  * Tree controls.
  */
 
+.tree-toolbar-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.tree-toolbar-button svg[hidden] {
+    display: none;
+}
+
 .tree-toggle,
 .tree-action {
     display: inline-grid;

@@ -144,11 +144,20 @@ window.Neowolf = window.Neowolf || {};
 
         const nodes = getCollapsibleNodes();
         const hasCollapsibleNodes = nodes.length > 0;
+        const collapse = hasCollapsibleNodes && areAllNodesExpanded();
+        const label = collapse ? 'Collapse all' : 'Expand all';
 
         toggleAllButton.disabled = !hasCollapsibleNodes;
-        toggleAllButton.textContent = hasCollapsibleNodes && areAllNodesExpanded()
-            ? 'Collapse all'
-            : 'Expand all';
+        toggleAllButton.setAttribute('aria-label', label);
+        toggleAllButton.dataset.tooltip = label;
+
+        toggleAllButton
+            .querySelector('.icon-expand-all')
+            ?.toggleAttribute('hidden', collapse);
+
+        toggleAllButton
+            .querySelector('.icon-collapse-all')
+            ?.toggleAttribute('hidden', !collapse);
     }
 
     function setNodeCollapsed(node, collapsed, {notify = true} = {}) {
@@ -1442,9 +1451,23 @@ window.Neowolf = window.Neowolf || {};
                 const toggle = Neowolf.tree?.getToggle(pageTree);
 
                 if (toggle) {
-                    toggle.textContent = enabled
+                    const label = enabled
                         ? 'Finish reordering'
-                        : 'Reorder';
+                        : 'Enable reorder';
+
+                    toggle.setAttribute('aria-label', label);
+                    toggle.setAttribute('aria-pressed', String(enabled));
+                    toggle.dataset.tooltip = enabled
+                        ? 'Finish reordering (Alt+Shift+R)'
+                        : 'Enable reorder (Alt+Shift+R)';
+
+                    toggle
+                        .querySelector('.icon-reorder')
+                        ?.toggleAttribute('hidden', enabled);
+
+                    toggle
+                        .querySelector('.icon-reorder-active')
+                        ?.toggleAttribute('hidden', !enabled);
                 }
 
                 pageTree
