@@ -262,6 +262,9 @@ window.Neowolf = window.Neowolf || {};
             isReorderMode()
             && node?.dataset.movable === 'false';
 
+        const protectedPage =
+            node?.dataset.protected === 'true';
+
         const iconName = fixedPosition
             ? 'fixed'
             : getPageIconName(link);
@@ -294,6 +297,12 @@ window.Neowolf = window.Neowolf || {};
                 'href',
                 `#icon-${iconName}`
             );
+
+        link.dataset.tooltip = fixedPosition
+            ? 'This page cannot be moved'
+            : protectedPage
+                ? 'This page is protected'
+                : getNodeTitle(node);
     }
 
     function syncAllPageIcons() {
