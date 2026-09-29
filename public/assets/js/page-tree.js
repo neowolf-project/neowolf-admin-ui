@@ -257,7 +257,14 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function syncPageIcon(link) {
-        const iconName = getPageIconName(link);
+        const node = link.closest('.tree-node');
+        const fixedPosition =
+            isReorderMode()
+            && node?.dataset.movable === 'false';
+
+        const iconName = fixedPosition
+            ? 'fixed'
+            : getPageIconName(link);
 
         let icon = link.querySelector(
             ':scope > .page-icon'
@@ -293,6 +300,21 @@ window.Neowolf = window.Neowolf || {};
         pageTree
             .querySelectorAll('.tree-title')
             .forEach(syncPageIcon);
+    }
+
+    function syncPageEditLinks() {
+        const disabled = isReorderMode();
+
+        pageTree.querySelectorAll('a.tree-title').forEach((link) => {
+            if (disabled) {
+                link.setAttribute('aria-disabled', 'true');
+                link.setAttribute('tabindex', '-1');
+                return;
+            }
+
+            link.removeAttribute('aria-disabled');
+            link.removeAttribute('tabindex');
+        });
     }
 
     function getNodeTitle(node) {
@@ -576,7 +598,6 @@ window.Neowolf = window.Neowolf || {};
 
         if (toggle) {
             toggle.setAttribute('aria-controls', list.id);
-            toggle.disabled = isReorderMode();
             return;
         }
 
@@ -586,7 +607,6 @@ window.Neowolf = window.Neowolf || {};
         toggle.type = 'button';
         toggle.className = 'tree-toggle';
         toggle.setAttribute('aria-controls', list.id);
-        toggle.disabled = isReorderMode();
 
         const title = getNodeTitle(node);
 
@@ -698,6 +718,7 @@ window.Neowolf = window.Neowolf || {};
         syncTreeDepths();
         syncAllToggles();
         syncAllPageIcons();
+        syncPageEditLinks();
         syncAllLayoutButtons();
         syncAllStatusButtons();
         syncAllMoveHandles();
@@ -1056,6 +1077,13 @@ window.Neowolf = window.Neowolf || {};
     });
 
     pageTree.addEventListener('click', (event) => {
+        const pageEditLink = event.target.closest('a.tree-title');
+
+        if (pageEditLink && isReorderMode()) {
+            event.preventDefault();
+            return;
+        }
+
         const moveHandle = event.target.closest('.drag-handle');
 
         if (moveHandle) {
@@ -1155,16 +1183,6 @@ window.Neowolf = window.Neowolf || {};
         const toggle = event.target.closest('.tree-toggle');
 
         if (!toggle) {
-            return;
-        }
-
-        /*
-         * Branches do not expand or collapse while reorder mode is active.
-         * Keep this behavioral guard even though tree-toggle buttons are also
-         * disabled, because the tree structure can be refreshed after a move.
-         */
-        if (nestedSorter?.isEnabled()) {
-            event.preventDefault();
             return;
         }
 
@@ -1470,11 +1488,8 @@ window.Neowolf = window.Neowolf || {};
                         ?.toggleAttribute('hidden', !enabled);
                 }
 
-                pageTree
-                    .querySelectorAll('.tree-toggle')
-                    .forEach((treeToggle) => {
-                        treeToggle.disabled = enabled;
-                    });
+                syncAllPageIcons();
+                syncPageEditLinks();
 
                 if (!enabled) {
                     applyCollapsedState();

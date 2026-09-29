@@ -524,6 +524,18 @@ a.tree-action {
     pointer-events: auto;
 }
 
+
+/*
+ * Fixed-position pages.
+ *
+ * A page that cannot be moved has no move handle. While Reorder mode is
+ * enabled, also mute its title so the fixed position is visually apparent.
+ */
+.reorder-mode .tree-node[data-movable="false"] > .tree-row .tree-title {
+    color: var(--tree-disabled-color);
+}
+
+
 .reorder-mode .drag-handle:active {
     cursor: grabbing;
 }
@@ -637,7 +649,6 @@ a.tree-action {
     color: var(--pico-primary);
     font-weight: 600;
 }
-
 
 /*
  * Demo message.
