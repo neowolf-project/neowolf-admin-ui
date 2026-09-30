@@ -12,6 +12,7 @@
     --neowolf-plugin-navigation-padding-y: 0.75rem;
     --neowolf-plugin-sidebar-navigation-padding-y: 0.625rem;
     --neowolf-plugin-active-border-width: 2px;
+    --neowolf-plugin-content-padding: 1.5rem;
 
     /* Forms */
     --neowolf-inline-gap: 0.75rem;
@@ -43,6 +44,8 @@
 
     /* Theme accents */
     --scroll-top-color: #015c8a;
+    --neowolf-link-color: #015c8a;
+    --neowolf-sidebar-hover-background: #e5e7eb;
 
     --pico-primary-background: #015c8a !important;
     --pico-primary-border: #015c8a !important;
@@ -52,12 +55,24 @@
     --pico-secondary-background: #4b5770 !important;
     --pico-secondary-hover-background: #38415a !important;
     --pico-secondary-hover-border: #38415a !important;
+
+    /* Tabs */
+    --neowolf-tab-list-inset: 0.75rem;
+    --neowolf-tab-color: var(--pico-muted-color);
+    --neowolf-tab-hover-background: var(--pico-secondary-background);
+    --neowolf-tab-hover-color: var(--pico-secondary-inverse);
+    --neowolf-tab-active-background: var(--pico-primary-background);
+    --neowolf-tab-active-color: var(--pico-primary-inverse, #fff);
+    --neowolf-tab-active-hover-background: var(--pico-primary-hover-background);
+
 }
 
 [data-theme="dark"] {
     --focus-ring-color: #ff6b6b;
     --neowolf-layout-border-color: var(--pico-muted-color);
     --scroll-top-color: #01aaff;
+    --neowolf-link-color: #01aaff;
+    --neowolf-sidebar-hover-background: #2e3647;
     --pico-muted-color: #9aa5ba !important;
     --neowolf-disabled-icon-button-background: #2e3647;
     --neowolf-disabled-icon-button-color: #c5c7ca;
@@ -72,6 +87,8 @@
         --focus-ring-color: #ff6b6b;
         --neowolf-layout-border-color: var(--pico-muted-color);
         --scroll-top-color: #01aaff;
+        --neowolf-link-color: #01aaff;
+        --neowolf-sidebar-hover-background: #2e3647;
         --pico-muted-color: #9aa5ba !important;
     }
 }
@@ -579,73 +596,119 @@ dialog article header :is(a, button)[rel="prev"]:hover {
  */
 
 body[data-core="false"] .plugin-navigation a {
-    color: var(--pico-muted-color);
-    text-decoration: none;
-}
-
-body[data-core="false"] .plugin-navigation a:hover {
-    color: var(--pico-primary-hover);
+    color: var(--neowolf-tab-color);
     text-decoration: none;
 }
 
 
 /*
  * Tabs presentation.
+ *
+ * Plugin tabs are navigation links rather than ARIA tabs, but visually form
+ * one component with the plugin content.
  */
 
-body[data-core="false"][data-plugin-presentation="tabs"] .plugin-navigation {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    gap: var(--neowolf-plugin-navigation-gap);
-    margin: 0 0 var(--neowolf-plugin-presentation-gap);
-    padding: 0;
-    border-bottom:
-            var(--neowolf-border-width)
-            solid
-            var(--pico-muted-border-color);
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-presentation {
+    margin-bottom: var(--neowolf-plugin-presentation-gap);
 }
 
-body[data-core="false"][data-plugin-presentation="tabs"] .plugin-navigation a {
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-presentation.plugin-navigation-bordered {
+    min-height: calc(
+            100vh
+            - var(--neowolf-header-height)
+            - (2 * var(--neowolf-page-padding))
+            - 8rem
+    );
+
+    border: var(--neowolf-border-width)
+    solid var(--neowolf-layout-border-color);
+    border-radius: var(--pico-border-radius);
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+
+    border-bottom: var(--neowolf-border-width)
+    solid var(--neowolf-layout-border-color);
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation > a {
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
     width: auto;
     margin: 0 0 calc(-1 * var(--neowolf-border-width));
-    padding:
-            var(--neowolf-plugin-navigation-padding-y)
-            var(--neowolf-plugin-navigation-padding-x);
-    background: transparent;
+    padding: 0.65rem 1rem;
+
     border: var(--neowolf-border-width) solid transparent;
-    border-bottom-color: var(--pico-muted-border-color);
-    border-radius:
-            var(--pico-border-radius)
-            var(--pico-border-radius)
-            0
-            0;
+    border-radius: 0;
+
+    background: transparent;
+    color: var(--neowolf-tab-color);
+    text-decoration: none;
 }
 
 body[data-core="false"][data-plugin-presentation="tabs"]
-.plugin-navigation a[aria-current="page"] {
-    color: var(--pico-primary);
-    background: var(--pico-background-color);
-    border-color: var(--pico-muted-border-color);
-    border-bottom-color: var(--pico-background-color);
+.plugin-navigation > a:hover {
+    border-color: transparent;
+    background: var(--neowolf-tab-hover-background);
+    color: var(--neowolf-tab-hover-color);
+    text-decoration: none;
 }
 
 body[data-core="false"][data-plugin-presentation="tabs"]
-.plugin-navigation a:focus-visible {
+.plugin-navigation > a[aria-current="page"] {
     position: relative;
     z-index: 1;
+
+    border-color: var(--neowolf-tab-active-background);
+    border-bottom-color: var(--neowolf-tab-active-background);
+
+    background: var(--neowolf-tab-active-background);
+    color: var(--neowolf-tab-active-color);
+    font-weight: 600;
 }
 
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation > a[aria-current="page"]:hover {
+    border-color: var(--neowolf-tab-active-hover-background);
+    border-bottom-color: var(--neowolf-tab-active-hover-background);
+
+    background: var(--neowolf-tab-active-hover-background);
+    color: var(--neowolf-tab-active-color);
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation > a:focus-visible {
+    position: relative;
+    z-index: 2;
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-content {
+    min-width: 0;
+    padding: var(--neowolf-plugin-content-padding);
+}
 
 /*
  * Sidebar presentation.
+ *
+ * Content and navigation are separate columns. When the bordered modifier is
+ * present, only the navigation becomes a rounded panel.
  */
 
-body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-presentation {
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-presentation {
     display: grid;
     grid-template-columns:
         minmax(0, 1fr)
@@ -655,39 +718,75 @@ body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-presentation
     align-items: start;
 }
 
-body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-navigation {
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-navigation {
     grid-area: navigation;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    border-left:
-            var(--neowolf-border-width)
-            solid
-            var(--pico-muted-border-color);
+
+    border-left: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
 }
 
-body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-content {
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-presentation.plugin-navigation-bordered
+.plugin-navigation {
+    border: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border-radius: var(--pico-border-radius);
+    overflow: hidden;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-content {
     grid-area: content;
     min-width: 0;
 }
 
-body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-navigation a {
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-navigation a {
     display: block;
     width: 100%;
     padding:
             var(--neowolf-plugin-sidebar-navigation-padding-y)
             var(--neowolf-plugin-navigation-padding-x);
-    border-left:
-            var(--neowolf-plugin-active-border-width)
-            solid
-            transparent;
+
+    border-left: var(--neowolf-plugin-active-border-width) solid transparent;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-navigation a:hover {
+    background: var(--neowolf-sidebar-hover-background);
+    color: var(--neowolf-link-color);
+    text-decoration: underline;
 }
 
 body[data-core="false"][data-plugin-presentation="sidebar"]
 .plugin-navigation a[aria-current="page"] {
-    color: var(--pico-primary);
-    border-left-color: var(--pico-primary);
+    color: var(--neowolf-link-color);
+    border-left-color: var(--neowolf-link-color);
+    font-weight: 600;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-navigation a[aria-current="page"]:hover {
+    background: var(--neowolf-sidebar-hover-background);
+    color: var(--neowolf-link-color);
+}
+
+
+/*
+ * Responsive plugin presentation.
+ */
+
+@media (max-width: 50rem) {
+    body[data-core="false"][data-plugin-presentation="sidebar"]
+    .plugin-presentation {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "navigation"
+            "content";
+    }
 }
 
 
@@ -880,3 +979,4 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
         white-space: normal;
     }
 }
+

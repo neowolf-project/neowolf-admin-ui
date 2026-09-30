@@ -28,7 +28,7 @@
 .tabs > .tab-list {
     display: flex;
     gap: 0.25rem;
-    margin-bottom: calc(var(--neowolf-border-width));
+    margin-bottom: var(--neowolf-border-width);
     padding-inline-start: var(--neowolf-tab-list-inset);
 }
 
@@ -43,18 +43,18 @@
 
     border: var(--neowolf-border-width) solid transparent;
     border-radius:
-            var(--pico-border-radius)
-            var(--pico-border-radius)
-            0
-            0;
+        var(--pico-border-radius)
+        var(--pico-border-radius)
+        0
+        0;
 
     background: transparent;
-    color: var(--pico-muted-color);
+    color: var(--neowolf-tab-color);
 }
 
 .tabs > .tab-list button:hover {
-    background: var(--pico-secondary-background);
-    color: var(--pico-secondary-inverse);
+    background: var(--neowolf-tab-hover-background);
+    color: var(--neowolf-tab-hover-color);
 }
 
 .tabs > .tab-list button:focus-visible {
@@ -62,9 +62,10 @@
     z-index: 2;
 
     outline: none;
-    box-shadow: inset 3px 0 var(--pico-primary-focus),
-    inset -3px 0 var(--pico-primary-focus),
-    inset 0 3px var(--pico-primary-focus);
+    box-shadow:
+        inset 3px 0 var(--pico-primary-focus),
+        inset -3px 0 var(--pico-primary-focus),
+        inset 0 3px var(--pico-primary-focus);
 }
 
 
@@ -79,21 +80,21 @@
     position: relative;
     z-index: 1;
 
-    border-color: var(--pico-primary-background);
+    border-color: var(--neowolf-tab-active-background);
     border-bottom-color: transparent;
 
-    background: var(--pico-primary-background);
-    color: var(--pico-primary-inverse, #fff);
+    background: var(--neowolf-tab-active-background);
+    color: var(--neowolf-tab-active-color);
 
     font-weight: 600;
 }
 
 .tabs > .tab-list [role="tab"][aria-selected="true"]:hover {
-    border-color: var(--pico-primary-hover-background);
+    border-color: var(--neowolf-tab-active-hover-background);
     border-bottom-color: transparent;
 
-    background: var(--pico-primary-hover-background);
-    color: var(--pico-primary-inverse, #fff);
+    background: var(--neowolf-tab-active-hover-background);
+    color: var(--neowolf-tab-active-color);
 }
 
 
@@ -107,11 +108,13 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .tabs > .tab-list [role="tab"][aria-selected="true"] {
+    :root:not([data-theme="light"])
+    .tabs > .tab-list [role="tab"][aria-selected="true"] {
         border-color: var(--scroll-top-color);
         border-bottom-color: transparent;
     }
 }
+
 
 /*
  * Tab panels.
@@ -120,7 +123,11 @@
 .tabs > [role="tabpanel"] {
     padding: var(--neowolf-panel-padding);
 
-    border: var(--neowolf-border-width) solid var(--pico-muted-color);
+    border:
+        var(--neowolf-border-width)
+        solid
+        var(--pico-muted-color);
+
     border-radius: var(--pico-border-radius);
 }
 
