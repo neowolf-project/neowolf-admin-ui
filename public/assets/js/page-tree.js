@@ -299,7 +299,7 @@ window.Neowolf = window.Neowolf || {};
             );
 
         link.dataset.tooltip = fixedPosition
-            ? 'This page cannot be moved'
+            ? 'Page position is fixed'
             : protectedPage
                 ? 'This page is protected'
                 : getNodeTitle(node);
