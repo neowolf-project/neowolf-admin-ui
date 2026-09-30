@@ -24,14 +24,7 @@
     },
     {
         "section": "Plugins",
-        "items": [
-            {
-                "id": "example",
-                "label": "Example Plugin",
-                "href": "/plugin",
-                "icon": "puzzle.svg"
-            }
-        ]
+        "items": []
     },
     {
         "section": "Administration",

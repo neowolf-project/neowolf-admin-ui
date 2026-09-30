@@ -10,15 +10,15 @@
             {% for item in group.items %}
                 <li>
                     <a
-                        href="{{ item.href|default('#', true) }}"
-                        {% if active_section|default('') == item.id %}
-                            aria-current="page"
-                        {% endif %}
+                            href="{{ item.href|default('#', true) }}"
+                            {% if active_section|default('') == item.id %}
+                                aria-current="page"
+                            {% endif %}
                     >
                         <span class="nav-icon" aria-hidden="true">
                             <img
-                                src="/assets/icons/plugins/{{ item.icon }}"
-                                alt=""
+                                    src="{{ item.icon }}"
+                                    alt=""
                             >
                         </span>
 

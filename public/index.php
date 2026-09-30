@@ -45,22 +45,97 @@ if ($navigationJson === false) {
     );
 }
 
-$twig->addGlobal(
-    'navigation',
-    json_decode(
-        $navigationJson,
-        true,
-        512,
-        JSON_THROW_ON_ERROR
-    )
+$navigation = json_decode(
+    $navigationJson,
+    true,
+    512,
+    JSON_THROW_ON_ERROR
 );
+
+/*
+ * Resolve the standard navigation icons.
+ */
+foreach ($navigation as &$group) {
+    foreach ($group['items'] as &$item) {
+        $item['icon'] = '/assets/icons/plugins/' . $item['icon'];
+    }
+
+    unset($item);
+}
+
+unset($group);
+
+$pluginsFile = $projectRoot . '/data/plugins.json';
+$pluginsJson = file_get_contents($pluginsFile);
+
+if ($pluginsJson === false) {
+    throw new RuntimeException(
+        'Could not read fixture: plugins'
+    );
+}
+
+$plugins = json_decode(
+    $pluginsJson,
+    true,
+    512,
+    JSON_THROW_ON_ERROR
+);
+
+/*
+ * Add the Example Plugin to the main navigation when enabled and configured
+ * to be shown there.
+ */
+foreach ($plugins as $plugin) {
+    if (
+        $plugin['id'] !== 'example'
+        || !$plugin['enabled']
+        || !$plugin['show_in_navigation']
+    ) {
+        continue;
+    }
+
+    $icon = '/assets/icons/plugins/puzzle.svg';
+    $iconFile = $projectRoot . '/templates/plugin/icon.svg';
+
+    if (is_file($iconFile)) {
+        $svg = file_get_contents($iconFile);
+
+        if ($svg !== false) {
+            $icon = 'data:image/svg+xml;base64,' . base64_encode($svg);
+        }
+    }
+
+    foreach ($navigation as &$group) {
+        if ($group['section'] !== 'Plugins') {
+            continue;
+        }
+
+        $group['items'][] = [
+            'id' => $plugin['id'],
+            'label' => $plugin['name'],
+            'href' => '/plugin',
+            'icon' => $icon,
+        ];
+
+        break;
+    }
+
+    unset($group);
+
+    break;
+}
+
+$twig->addGlobal('navigation', $navigation);
 
 $dispatcher = FastRoute\simpleDispatcher(
     require $projectRoot . '/src/routes.php'
 );
 
 $uri = rawurldecode(
-    (string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH)
+    (string) parse_url(
+        $_SERVER['REQUEST_URI'] ?? '/',
+        PHP_URL_PATH
+    )
 );
 
 $route = $dispatcher->dispatch(
@@ -84,7 +159,11 @@ switch ($route[0]) {
         [$controllerClass, $method] = $route[1];
 
         /** @var Controller $controller */
-        $controller = new $controllerClass($twig, $projectRoot);
+        $controller = new $controllerClass(
+            $twig,
+            $projectRoot
+        );
+
         $controller->{$method}($route[2]);
         break;
 }
