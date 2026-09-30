@@ -4,6 +4,15 @@
     --neowolf-sidebar-width-compact: 4.5rem;
     --neowolf-header-height: 4rem;
 
+    /* Plugin presentation */
+    --neowolf-plugin-sidebar-width: 14rem;
+    --neowolf-plugin-presentation-gap: 2rem;
+    --neowolf-plugin-navigation-gap: 0.25rem;
+    --neowolf-plugin-navigation-padding-x: 1rem;
+    --neowolf-plugin-navigation-padding-y: 0.75rem;
+    --neowolf-plugin-sidebar-navigation-padding-y: 0.625rem;
+    --neowolf-plugin-active-border-width: 2px;
+
     /* Forms */
     --neowolf-inline-gap: 0.75rem;
     --neowolf-inline-gap-compact: 0.5rem;
@@ -560,6 +569,139 @@ dialog article header :is(a, button)[rel="prev"]:hover {
     clip: rect(0, 0, 0, 0);
     border: 0;
     white-space: nowrap;
+}
+
+/*
+ * Plugin presentation.
+ *
+ * Non-core plugin destinations are regular navigation links. Their visual
+ * presentation may be changed without changing the underlying navigation.
+ */
+
+body[data-core="false"] .plugin-navigation a {
+    color: var(--pico-muted-color);
+    text-decoration: none;
+}
+
+body[data-core="false"] .plugin-navigation a:hover {
+    color: var(--pico-primary-hover);
+    text-decoration: none;
+}
+
+
+/*
+ * Tabs presentation.
+ */
+
+body[data-core="false"][data-plugin-presentation="tabs"] .plugin-navigation {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--neowolf-plugin-navigation-gap);
+    margin: 0 0 var(--neowolf-plugin-presentation-gap);
+    padding: 0;
+    border-bottom:
+            var(--neowolf-border-width)
+            solid
+            var(--pico-muted-border-color);
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"] .plugin-navigation a {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 0 0 calc(-1 * var(--neowolf-border-width));
+    padding:
+            var(--neowolf-plugin-navigation-padding-y)
+            var(--neowolf-plugin-navigation-padding-x);
+    background: transparent;
+    border: var(--neowolf-border-width) solid transparent;
+    border-bottom-color: var(--pico-muted-border-color);
+    border-radius:
+            var(--pico-border-radius)
+            var(--pico-border-radius)
+            0
+            0;
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation a[aria-current="page"] {
+    color: var(--pico-primary);
+    background: var(--pico-background-color);
+    border-color: var(--pico-muted-border-color);
+    border-bottom-color: var(--pico-background-color);
+}
+
+body[data-core="false"][data-plugin-presentation="tabs"]
+.plugin-navigation a:focus-visible {
+    position: relative;
+    z-index: 1;
+}
+
+
+/*
+ * Sidebar presentation.
+ */
+
+body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-presentation {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        var(--neowolf-plugin-sidebar-width);
+    grid-template-areas: "content navigation";
+    gap: var(--neowolf-plugin-presentation-gap);
+    align-items: start;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-navigation {
+    grid-area: navigation;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    border-left:
+            var(--neowolf-border-width)
+            solid
+            var(--pico-muted-border-color);
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-content {
+    grid-area: content;
+    min-width: 0;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-navigation a {
+    display: block;
+    width: 100%;
+    padding:
+            var(--neowolf-plugin-sidebar-navigation-padding-y)
+            var(--neowolf-plugin-navigation-padding-x);
+    border-left:
+            var(--neowolf-plugin-active-border-width)
+            solid
+            transparent;
+}
+
+body[data-core="false"][data-plugin-presentation="sidebar"]
+.plugin-navigation a[aria-current="page"] {
+    color: var(--pico-primary);
+    border-left-color: var(--pico-primary);
+}
+
+
+/*
+ * Responsive plugin presentation.
+ */
+
+@media (max-width: 50rem) {
+    body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-presentation {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "navigation"
+            "content";
+    }
 }
 
 

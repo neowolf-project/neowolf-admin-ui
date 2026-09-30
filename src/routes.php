@@ -6,6 +6,7 @@ use FastRoute\RouteCollector;
 use NeowolfAdmin\Controller\AuthController;
 use NeowolfAdmin\Controller\LayoutController;
 use NeowolfAdmin\Controller\PageController;
+use NeowolfAdmin\Controller\PluginController;
 use NeowolfAdmin\Controller\SettingController;
 use NeowolfAdmin\Controller\SnippetController;
 use NeowolfAdmin\Controller\UserController;
@@ -35,4 +36,8 @@ return static function (RouteCollector $routes): void {
     $routes->get('/user/edit/{id:\d+}', [UserController::class, 'edit']);
 
     $routes->get('/setting', [SettingController::class, 'index']);
+
+    $routes->get('/plugin', [PluginController::class, 'index']);
+    $routes->get('/plugin/documentation', [PluginController::class, 'documentation']);
+    $routes->get('/plugin/settings', [PluginController::class, 'settings']);
 };

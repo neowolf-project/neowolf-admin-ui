@@ -28,7 +28,7 @@
             {
                 "id": "example",
                 "label": "Example Plugin",
-                "href": "#",
+                "href": "/plugin",
                 "icon": "puzzle.svg"
             }
         ]

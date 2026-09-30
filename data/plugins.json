@@ -6,6 +6,7 @@
         "version": "1.0.0",
         "author": null,
         "enabled": true,
+        "core": true,
         "website": null,
         "documentation": "#",
         "settings": null
@@ -17,6 +18,7 @@
         "version": "1.1.0",
         "author": null,
         "enabled": false,
+        "core": true,
         "website": "#",
         "documentation": null,
         "settings": null
@@ -28,6 +30,7 @@
         "version": "0.8.0",
         "author": "Martijn van der Kleijn",
         "enabled": false,
+        "core": true,
         "website": "#",
         "documentation": null,
         "settings": null
@@ -39,6 +42,7 @@
         "version": "0.1.0",
         "author": null,
         "enabled": true,
+        "core": true,
         "website": null,
         "documentation": "#",
         "settings": "#"
@@ -50,8 +54,21 @@
         "version": "0.1.0",
         "author": null,
         "enabled": true,
+        "core": true,
         "website": null,
         "documentation": null,
         "settings": null
+    },
+    {
+        "id": "example",
+        "name": "Example",
+        "description": "Provides an example Neowolf plugin implementation.",
+        "version": "1.0.0",
+        "author": "Neowolf",
+        "enabled": true,
+        "core": false,
+        "website": "https://neowolf.site/",
+        "documentation": "/plugin/documentation",
+        "settings": "/plugin/settings"
     }
 ]

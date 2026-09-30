@@ -5,6 +5,7 @@ window.Neowolf = window.Neowolf || {};
 (() => {
     const Neowolf = window.Neowolf;
     const root = document.documentElement;
+    const body = document.body;
 
     root.classList.add('using-pointer');
 
@@ -129,11 +130,85 @@ window.Neowolf = window.Neowolf || {};
             .replace(/^-+|-+$/g, '');
     }
 
+    function initPluginPresentation() {
+        const toggle = document.querySelector(
+            '[data-plugin-presentation-toggle]'
+        );
+
+        if (
+            !toggle
+            || !body.hasAttribute('data-plugin-presentation')
+        ) {
+            return;
+        }
+
+        const storageKey = 'neowolf-plugin-presentation';
+        const presentations = ['tabs', 'sidebar'];
+
+        function setPresentation(presentation) {
+            if (!presentations.includes(presentation)) {
+                return;
+            }
+
+            body.dataset.pluginPresentation = presentation;
+
+            const nextPresentation = presentation === 'tabs'
+                ? 'sidebar'
+                : 'tabs';
+
+            const nextLabel = nextPresentation === 'tabs'
+                ? 'Tabs'
+                : 'Sidebar';
+
+            toggle.textContent = nextLabel;
+            toggle.setAttribute(
+                'aria-label',
+                `Switch plugin navigation to ${nextPresentation}`
+            );
+        }
+
+        let presentation = body.dataset.pluginPresentation;
+
+        try {
+            const storedPresentation = localStorage.getItem(storageKey);
+
+            if (presentations.includes(storedPresentation)) {
+                presentation = storedPresentation;
+            }
+        } catch {
+            // Ignore unavailable or blocked localStorage.
+        }
+
+        setPresentation(presentation);
+
+        toggle.addEventListener('click', () => {
+            const presentation =
+                body.dataset.pluginPresentation === 'tabs'
+                    ? 'sidebar'
+                    : 'tabs';
+
+            setPresentation(presentation);
+
+            try {
+                localStorage.setItem(storageKey, presentation);
+            } catch {
+                // Ignore unavailable or blocked localStorage.
+            }
+
+            blurAfterPointerInteraction(toggle);
+        });
+    }
+
     document.querySelectorAll('dialog').forEach(trapDialogFocus);
+
+    initPluginPresentation();
 
     Neowolf.root = root;
     Neowolf.dom = {setHidden, isVisible};
-    Neowolf.interaction = {isUsingPointer, blurAfterPointerInteraction};
+    Neowolf.interaction = {
+        isUsingPointer,
+        blurAfterPointerInteraction,
+    };
     Neowolf.dialog = {
         trapFocus: trapDialogFocus,
         blurOpenerAfterPointerClose: blurDialogOpenerAfterPointerClose,

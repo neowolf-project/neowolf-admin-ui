@@ -26,7 +26,14 @@
     {% block styles %}{% endblock %}
 </head>
 
-<body id="top">
+<body
+        id="top"
+        data-section="{{ active_section|default('') }}"
+        data-core="{% if plugin is defined %}{{ plugin.core ? 'true' : 'false' }}{% else %}true{% endif %}"
+        {% if plugin is defined and not plugin.core %}
+            data-plugin-presentation="tabs"
+        {% endif %}
+>
 
 {% block body %}{% endblock %}
 

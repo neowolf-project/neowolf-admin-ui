@@ -1,0 +1,55 @@
+{% extends 'admin.twig' %}
+
+{% set active_section = plugin.id %}
+
+{% block content %}
+    <header class="page-header">
+        <div>
+            <h1>{{ plugin.name }}</h1>
+            <p>{{ plugin.description }}</p>
+        </div>
+
+        {% if not plugin.core %}
+            <button
+                    type="button"
+                    class="plugin-presentation-toggle secondary outline"
+                    data-plugin-presentation-toggle
+                    aria-label="Switch plugin navigation to sidebar"
+            >
+                Sidebar
+            </button>
+        {% endif %}
+    </header>
+
+    <div class="plugin-presentation">
+        <nav
+            class="plugin-navigation"
+            aria-label="{{ plugin.name }} navigation"
+        >
+            <a
+                href="/plugin"
+                {% if plugin_page == 'index' %}aria-current="page"{% endif %}
+            >
+                Example
+            </a>
+
+            <a
+                href="/plugin/documentation"
+                {% if plugin_page == 'documentation' %}aria-current="page"{% endif %}
+            >
+                Documentation
+            </a>
+
+            <a
+                href="/plugin/settings"
+                {% if plugin_page == 'settings' %}aria-current="page"{% endif %}
+            >
+                Settings
+            </a>
+        </nav>
+
+        <div class="plugin-content">
+            {% block plugin_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
