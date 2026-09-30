@@ -600,6 +600,17 @@ body[data-core="false"] .plugin-navigation a {
     text-decoration: none;
 }
 
+.plugin-presentation-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.plugin-presentation-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
 
 /*
  * Tabs presentation.

@@ -142,6 +142,12 @@ window.Neowolf = window.Neowolf || {};
             return;
         }
 
+        const sidebarIcon = toggle.querySelector(
+            '.plugin-icon-sidebar'
+        );
+        const tabsIcon = toggle.querySelector(
+            '.plugin-icon-tabs'
+        );
         const storageKey = 'neowolf-plugin-presentation';
         const presentations = ['tabs', 'sidebar'];
 
@@ -156,15 +162,21 @@ window.Neowolf = window.Neowolf || {};
                 ? 'sidebar'
                 : 'tabs';
 
-            const nextLabel = nextPresentation === 'tabs'
-                ? 'Tabs'
-                : 'Sidebar';
+            const label =
+                `Switch plugin navigation to ${nextPresentation}`;
 
-            toggle.textContent = nextLabel;
-            toggle.setAttribute(
-                'aria-label',
-                `Switch plugin navigation to ${nextPresentation}`
+            setHidden(
+                sidebarIcon,
+                nextPresentation !== 'sidebar'
             );
+
+            setHidden(
+                tabsIcon,
+                nextPresentation !== 'tabs'
+            );
+
+            toggle.setAttribute('aria-label', label);
+            toggle.dataset.tooltip = label;
         }
 
         let presentation = body.dataset.pluginPresentation;
@@ -204,7 +216,10 @@ window.Neowolf = window.Neowolf || {};
     initPluginPresentation();
 
     Neowolf.root = root;
-    Neowolf.dom = {setHidden, isVisible};
+    Neowolf.dom = {
+        setHidden,
+        isVisible,
+    };
     Neowolf.interaction = {
         isUsingPointer,
         blurAfterPointerInteraction,
@@ -217,5 +232,7 @@ window.Neowolf = window.Neowolf || {};
         setExpanded,
         setAllExpanded,
     };
-    Neowolf.string = {slugify};
+    Neowolf.string = {
+        slugify,
+    };
 })();
