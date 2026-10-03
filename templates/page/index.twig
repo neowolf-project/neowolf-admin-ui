@@ -199,110 +199,108 @@
         </symbol>
     </svg>
 
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <h1>Pages</h1>
-                </li>
-            </ul>
+    <section class="page">
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <h1>Pages</h1>
+                    </li>
+                </ul>
 
-            <ul>
-                <li>
-                    <button
-                            type="button"
-                            class="secondary tree-toolbar-button"
-                            data-sortable-toggle="page-tree"
-                            aria-pressed="false"
-                            aria-label="Enable reorder"
-                            aria-keyshortcuts="Alt+Shift+R"
-                            data-tooltip="Enable reorder (Alt+Shift+R)"
-                            data-placement="top"
-                    >
-                        <svg
-                                class="icon-reorder"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                                focusable="false"
+                <ul>
+                    <li>
+                        <button
+                                type="button"
+                                class="secondary tree-toolbar-button"
+                                data-sortable-toggle="page-tree"
+                                aria-pressed="false"
+                                aria-label="Enable reorder"
+                                aria-keyshortcuts="Alt+Shift+R"
+                                data-tooltip="Enable reorder (Alt+Shift+R)"
+                                data-placement="top"
                         >
-                            <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
-                        </svg>
+                            <svg
+                                    class="icon-reorder"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                            >
+                                <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
+                            </svg>
 
-                        <svg
-                                class="icon-reorder-active"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                                focusable="false"
-                                hidden
+                            <svg
+                                    class="icon-reorder-active"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    hidden
+                            >
+                                <path d="M12 2v20M2 12h20"/>
+                                <path d="m8 6 4-4 4 4"/>
+                                <path d="m8 18 4 4 4-4"/>
+                                <path d="m6 8-4 4 4 4"/>
+                                <path d="m18 8 4 4-4 4"/>
+                            </svg>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button
+                                type="button"
+                                id="toggle-all-nodes"
+                                class="secondary tree-toolbar-button"
+                                aria-label="Expand all"
+                                data-tooltip="Expand all"
+                                data-placement="top"
                         >
-                            <path d="M12 2v20M2 12h20"/>
-                            <path d="m8 6 4-4 4 4"/>
-                            <path d="m8 18 4 4 4-4"/>
-                            <path d="m6 8-4 4 4 4"/>
-                            <path d="m18 8 4 4-4 4"/>
-                        </svg>
-                    </button>
-                </li>
+                            <svg
+                                    class="icon-expand-all"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                            >
+                                <path d="m6 7 6 6 6-6M6 13l6 6 6-6"/>
+                            </svg>
 
-                <li>
-                    <button
-                            type="button"
-                            id="toggle-all-nodes"
-                            class="secondary tree-toolbar-button"
-                            aria-label="Expand all"
-                            data-tooltip="Expand all"
-                            data-placement="top"
-                    >
-                        <svg
-                                class="icon-expand-all"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                                focusable="false"
+                            <svg
+                                    class="icon-collapse-all"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    hidden
+                            >
+                                <path d="m6 17 6-6 6 6M6 11l6-6 6 6"/>
+                            </svg>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button
+                                type="button"
+                                id="reset-tree"
+                                class="secondary tree-toolbar-button"
+                                aria-label="Reset"
+                                data-tooltip="Reset"
+                                data-placement="top"
                         >
-                            <path d="m6 7 6 6 6-6M6 13l6 6 6-6"/>
-                        </svg>
-
-                        <svg
-                                class="icon-collapse-all"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                                focusable="false"
-                                hidden
-                        >
-                            <path d="m6 17 6-6 6 6M6 11l6-6 6 6"/>
-                        </svg>
-                    </button>
-                </li>
-
-                <li>
-                    <button
-                            type="button"
-                            id="reset-tree"
-                            class="secondary tree-toolbar-button"
-                            aria-label="Reset"
-                            data-tooltip="Reset"
-                            data-placement="top"
-                    >
-                        <svg
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                                focusable="false"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                        >
-                            <path d="M5 5v5h5 M5.5 10A7 7 0 1 1 5 15"/>
-                        </svg>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <section aria-labelledby="page-tree-title">
-        <h2 id="page-tree-title" class="visually-hidden">Page tree</h2>
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                            >
+                                <path d="M5 5v5h5 M5.5 10A7 7 0 1 1 5 15"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
         <div id="page-tree" class="page-tree">
             <div class="page-tree-columns" aria-hidden="true">
@@ -324,6 +322,8 @@
             aria-live="polite"
             aria-atomic="true"
     ></p>
+
+    {# dialogs continue here #}
 
     <dialog aria-labelledby="layout-page-dialog-title" id="layout-page-dialog">
         <article>

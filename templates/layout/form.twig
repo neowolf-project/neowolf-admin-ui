@@ -8,65 +8,67 @@
 {% endblock %}
 
 {% block content %}
-    <header>
-        <h1>{{ is_add ? 'Add Layout' : 'Edit Layout' }}</h1>
-    </header>
+    <section class="layout">
+        <header>
+            <h1>{{ is_add ? 'Add Layout' : 'Edit Layout' }}</h1>
+        </header>
 
-    <form
-            method="post"
-            action="{{ form_action }}"
-            data-mode="{{ mode }}"
-    >
-        <label for="layout-name">
-            Name
-            <input
-                    id="layout-name"
-                    name="name"
-                    type="text"
-                    value="{{ layout.name }}"
-                    required
-            >
-        </label>
+        <form
+                method="post"
+                action="{{ form_action }}"
+                data-mode="{{ mode }}"
+        >
+            <label for="layout-name">
+                Name
+                <input
+                        id="layout-name"
+                        name="name"
+                        type="text"
+                        value="{{ layout.name }}"
+                        required
+                >
+            </label>
 
-        <label for="layout-content-type">
-            Content-Type
-            <input
-                    id="layout-content-type"
-                    name="content_type"
-                    type="text"
-                    value="{{ layout.content_type }}"
-                    list="layout-content-types"
-            >
-        </label>
+            <label for="layout-content-type">
+                Content-Type
+                <input
+                        id="layout-content-type"
+                        name="content_type"
+                        type="text"
+                        value="{{ layout.content_type }}"
+                        list="layout-content-types"
+                >
+            </label>
 
-        <datalist id="layout-content-types">
-            {% for content_type in content_types %}
-            <option value="{{ content_type }}">
-                {% endfor %}
-        </datalist>
+            <datalist id="layout-content-types">
+                {% for content_type in content_types %}
+                <option value="{{ content_type }}">
+                    {% endfor %}
+            </datalist>
 
-        <label for="layout-body">
-            Body
-            <textarea
-                    id="layout-body"
-                    name="body"
-                    rows="16"
-                    spellcheck="false"
-            >{{ layout.body }}</textarea>
-        </label>
+            <label for="layout-body">
+                Body
+                <textarea
+                        id="layout-body"
+                        name="body"
+                        rows="16"
+                        spellcheck="false"
+                >{{ layout.body }}</textarea>
+            </label>
 
-        <footer class="form-actions" data-actions-position="left">
-            <div class="form-actions-buttons">
-                <button type="submit" name="commit">
-                    Save and Close
-                </button>
+            <footer class="form-actions" data-actions-position="left">
+                <div class="form-actions-buttons">
+                    <button type="submit" name="commit">
+                        Save and Close
+                    </button>
 
-                <button type="submit" name="continue" class="secondary">
-                    Save and Continue Editing
-                </button>
+                    <button type="submit" name="continue" class="secondary">
+                        Save and Continue Editing
+                    </button>
 
-                <span>or <a href="/layout">Cancel</a></span>
-            </div>
-        </footer>
-    </form>
+                    <span>or <a href="/layout">Cancel</a></span>
+                </div>
+            </footer>
+        </form>
+    </section>
 {% endblock %}

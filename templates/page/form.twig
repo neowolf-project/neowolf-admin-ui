@@ -24,19 +24,19 @@
 {% endblock %}
 
 {% block content %}
-    <header class="page-header">
-        <div>
-            <h1>{{ is_add ? 'Add Page' : 'Edit Page' }}</h1>
-            <p>
-                {{ is_add
-                ? 'Create a new page.'
-                : 'Manage the page content and settings.'
-                }}
-            </p>
-        </div>
-    </header>
+    <section class="page">
+        <header class="page-header">
+            <div>
+                <h1>{{ is_add ? 'Add Page' : 'Edit Page' }}</h1>
+                <p>
+                    {{ is_add
+                    ? 'Create a new page.'
+                    : 'Manage the page content and settings.'
+                    }}
+                </p>
+            </div>
+        </header>
 
-    <div>
         <form
                 id="page-edit-form"
                 class="page-edit"
@@ -105,7 +105,6 @@
                     <h2>Metadata</h2>
 
                     <div class="fields-grid">
-
                         {% if is_add or page.slug is not null %}
                             <div class="field field-span-2">
                                 <label for="page-slug">Slug</label>
@@ -583,7 +582,7 @@
                 </div>
             </footer>
         </form>
-    </div>
+    </section>
 
     <dialog
             id="add-part-dialog"
