@@ -22,37 +22,57 @@
 
                 <ul>
                     <li>
-                        <button
-                                type="button"
-                                class="secondary"
-                                data-sortable-toggle="layout-index"
-                                aria-pressed="false"
-                                aria-keyshortcuts="Alt+Shift+R"
-                                aria-describedby="layout-reorder-help"
-                                data-tooltip="Toggle with Alt+Shift+R"
-                                data-placement="left"
-                        >
-                            Reorder
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                                type="button"
-                                class="secondary admin-index-reset-order"
-                                data-admin-index-target="layout-index"
-                        >
-                            Reset
-                        </button>
-                    </li>
-
-                    <li>
                         <a
                                 href="/layout/add"
-                                class="admin-button"
+                                class="admin-button admin-toolbar-button"
+                                aria-label="Add layout"
+                                data-tooltip="Add layout"
+                                data-placement="top"
                         >
-                            Add Layout
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                            >
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
                         </a>
+                    </li>
+                    <li>
+                        <button
+                                type="button"
+                                class="secondary admin-toolbar-button"
+                                data-sortable-toggle="layout-index"
+                                aria-pressed="false"
+                                aria-label="Enable reorder"
+                                aria-keyshortcuts="Alt+Shift+R"
+                                aria-describedby="layout-reorder-help"
+                                data-tooltip="Enable reorder (Alt+Shift+R)"
+                                data-placement="top"
+                        >
+                            <svg
+                                    class="icon-reorder"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                            >
+                                <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
+                            </svg>
+
+                            <svg
+                                    class="icon-reorder-active"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    hidden
+                            >
+                                <path d="M12 2v20M2 12h20"/>
+                                <path d="m8 6 4-4 4 4"/>
+                                <path d="m8 18 4 4 4-4"/>
+                                <path d="m6 8-4 4 4 4"/>
+                                <path d="m18 8 4 4-4 4"/>
+                            </svg>
+                        </button>
                     </li>
                 </ul>
             </nav>
@@ -124,6 +144,7 @@
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         aria-hidden="true"
+                                        focusable="false"
                                 >
                                     <path d="M3 6h18"/>
                                     <path d="M8 6V4h8v2"/>

@@ -15,17 +15,23 @@ window.Neowolf = window.Neowolf || {};
         listSelector: '[data-sortable-list]',
         itemSelector: '[data-sortable-item]',
         labelSelector: '[data-sortable-label]',
-        interactiveSelector: 'a, button, input, select, textarea, [contenteditable="true"]',
+        interactiveSelector:
+            'a, button, input, select, textarea, [contenteditable="true"]',
         animation: 150,
         focusFirstOnEnable: true,
     };
 
     function getItems(state) {
-        return helper.directChildren(state.list, state.options.itemSelector);
+        return helper.directChildren(
+            state.list,
+            state.options.itemSelector
+        );
     }
 
     function getId(item) {
-        return item.dataset.id ?? item.dataset.sortableId ?? '';
+        return item.dataset.id
+            ?? item.dataset.sortableId
+            ?? '';
     }
 
     function getLabel(state, item) {
@@ -33,18 +39,24 @@ window.Neowolf = window.Neowolf || {};
             return state.options.getLabel(item);
         }
 
-        return item.querySelector(state.options.labelSelector)?.textContent.trim()
+        return item
+                .querySelector(state.options.labelSelector)
+                ?.textContent
+                .trim()
             || item.dataset.label
             || getId(item)
             || 'Item';
     }
 
     function getOrder(state) {
-        return getItems(state).map(getId).filter(Boolean);
+        return getItems(state)
+            .map(getId)
+            .filter(Boolean);
     }
 
     function getPosition(state, item) {
         const items = getItems(state);
+
         return {
             position: helper.positionOf(items, item),
             total: items.length,
@@ -56,10 +68,14 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function emitChange(state, reason = 'reorder') {
-        helper.emit(state.root, 'neowolf:sortable-flat-change', {
-            order: getOrder(state),
-            reason,
-        });
+        helper.emit(
+            state.root,
+            'neowolf:sortable-flat-change',
+            {
+                order: getOrder(state),
+                reason,
+            }
+        );
     }
 
     function applyOrder(state, order) {
@@ -95,18 +111,32 @@ window.Neowolf = window.Neowolf || {};
         });
     }
 
-    function setActiveItem(state, item, {focus = true, speak = true} = {}) {
-        if (!item) return;
+    function setActiveItem(
+        state,
+        item,
+        {focus = true, speak = true} = {}
+    ) {
+        if (!item) {
+            return;
+        }
 
         getItems(state).forEach((candidate) => {
-            candidate.tabIndex = candidate === item ? 0 : -1;
+            candidate.tabIndex = candidate === item
+                ? 0
+                : -1;
         });
 
-        if (focus) item.focus();
+        if (focus) {
+            item.focus();
+        }
 
         if (speak) {
             const {position, total} = getPosition(state, item);
-            announce(state, `${getLabel(state, item)}, position ${position} of ${total}.`);
+
+            announce(
+                state,
+                `${getLabel(state, item)}, position ${position} of ${total}.`
+            );
         }
     }
 
@@ -119,7 +149,9 @@ window.Neowolf = window.Neowolf || {};
                 return;
             }
 
-            item.tabIndex = index === 0 ? 0 : -1;
+            item.tabIndex = index === 0
+                ? 0
+                : -1;
         });
     }
 
@@ -132,39 +164,70 @@ window.Neowolf = window.Neowolf || {};
 
         let targetIndex = index;
 
-        if (direction === 'up') targetIndex--;
-        if (direction === 'down') targetIndex++;
-        if (direction === 'first') targetIndex = 0;
-        if (direction === 'last') targetIndex = items.length - 1;
+        if (direction === 'up') {
+            targetIndex--;
+        }
+
+        if (direction === 'down') {
+            targetIndex++;
+        }
+
+        if (direction === 'first') {
+            targetIndex = 0;
+        }
+
+        if (direction === 'last') {
+            targetIndex = items.length - 1;
+        }
 
         return {
             index,
-            targetIndex: helper.clamp(targetIndex, items.length),
+            targetIndex: helper.clamp(
+                targetIndex,
+                items.length
+            ),
         };
     }
 
     function focusRelative(state, item, direction) {
         const items = getItems(state);
-        const target = getTargetIndex(items, item, direction);
+        const target = getTargetIndex(
+            items,
+            item,
+            direction
+        );
 
         if (!target) {
             return;
         }
 
-        setActiveItem(state, items[target.targetIndex]);
+        setActiveItem(
+            state,
+            items[target.targetIndex]
+        );
     }
 
     function startKeyboardMove(state, item) {
-        if (state.movingItem) return;
+        if (state.movingItem) {
+            return;
+        }
 
         state.movingItem = item;
         state.orderBeforeMove = getOrder(state);
+
         item.classList.add('is-keyboard-moving');
 
-        const {position, total} = getPosition(state, item);
-        announce(state,
-            `${getLabel(state, item)} picked up. Position ${position} of ${total}. ` +
-            'Use arrow keys, Home or End to move. Press Space to place, or Escape to cancel.'
+        const {position, total} = getPosition(
+            state,
+            item
+        );
+
+        announce(
+            state,
+            `${getLabel(state, item)} picked up. `
+            + `Position ${position} of ${total}. `
+            + 'Use arrow keys, Home or End to move. '
+            + 'Press Space to place, or Escape to cancel.'
         );
     }
 
@@ -176,9 +239,16 @@ window.Neowolf = window.Neowolf || {};
         }
 
         const items = getItems(state);
-        const target = getTargetIndex(items, item, direction);
+        const target = getTargetIndex(
+            items,
+            item,
+            direction
+        );
 
-        if (!target || target.targetIndex === target.index) {
+        if (
+            !target
+            || target.targetIndex === target.index
+        ) {
             return;
         }
 
@@ -190,73 +260,149 @@ window.Neowolf = window.Neowolf || {};
             targetItem.before(item);
         }
 
-        setActiveItem(state, item, {speak: false});
+        setActiveItem(
+            state,
+            item,
+            {speak: false}
+        );
 
-        const {position, total} = getPosition(state, item);
+        const {position, total} = getPosition(
+            state,
+            item
+        );
 
         announce(
             state,
-            `${getLabel(state, item)} moved to position ${position} of ${total}.`
+            `${getLabel(state, item)} moved to `
+            + `position ${position} of ${total}.`
         );
     }
 
     function finishKeyboardMove(state) {
         const item = state.movingItem;
-        if (!item) return;
+
+        if (!item) {
+            return;
+        }
 
         item.classList.remove('is-keyboard-moving');
+
         state.movingItem = null;
         state.orderBeforeMove = null;
-        setActiveItem(state, item, {speak: false});
 
-        const {position, total} = getPosition(state, item);
-        announce(state, `${getLabel(state, item)} placed. Position ${position} of ${total}.`);
+        setActiveItem(
+            state,
+            item,
+            {speak: false}
+        );
+
+        const {position, total} = getPosition(
+            state,
+            item
+        );
+
+        announce(
+            state,
+            `${getLabel(state, item)} placed. `
+            + `Position ${position} of ${total}.`
+        );
+
         emitChange(state, 'keyboard');
     }
 
-    function cancelKeyboardMove(state, {announceCancellation = true} = {}) {
+    function cancelKeyboardMove(
+        state,
+        {announceCancellation = true} = {}
+    ) {
         const item = state.movingItem;
-        if (!item) return;
+
+        if (!item) {
+            return;
+        }
 
         const label = getLabel(state, item);
-        if (state.orderBeforeMove) applyOrder(state, state.orderBeforeMove);
+
+        if (state.orderBeforeMove) {
+            applyOrder(
+                state,
+                state.orderBeforeMove
+            );
+        }
 
         item.classList.remove('is-keyboard-moving');
+
         state.movingItem = null;
         state.orderBeforeMove = null;
-        setActiveItem(state, item, {speak: false});
 
-        if (announceCancellation) announce(state, `${label} move cancelled.`);
+        setActiveItem(
+            state,
+            item,
+            {speak: false}
+        );
+
+        if (announceCancellation) {
+            announce(
+                state,
+                `${label} move cancelled.`
+            );
+        }
     }
 
     function onItemKeydown(state, event) {
-        const item = event.target.closest(state.options.itemSelector);
-        if (!item || event.target !== item || !state.enabled) return;
+        const item = event.target.closest(
+            state.options.itemSelector
+        );
+
+        if (
+            !item
+            || event.target !== item
+            || !state.enabled
+        ) {
+            return;
+        }
 
         if (!state.movingItem) {
             const actions = {
-                ArrowUp: 'up', ArrowDown: 'down', Home: 'first', End: 'last',
+                ArrowUp: 'up',
+                ArrowDown: 'down',
+                Home: 'first',
+                End: 'last',
             };
 
             if (actions[event.key]) {
                 event.preventDefault();
-                focusRelative(state, item, actions[event.key]);
+
+                focusRelative(
+                    state,
+                    item,
+                    actions[event.key]
+                );
             } else if (event.code === 'Space') {
                 event.preventDefault();
                 startKeyboardMove(state, item);
             }
+
             return;
         }
 
-        if (item !== state.movingItem) return;
+        if (item !== state.movingItem) {
+            return;
+        }
 
         const actions = {
-            ArrowUp: 'up', ArrowDown: 'down', Home: 'first', End: 'last',
+            ArrowUp: 'up',
+            ArrowDown: 'down',
+            Home: 'first',
+            End: 'last',
         };
 
         if (actions[event.key]) {
             event.preventDefault();
-            moveKeyboardItem(state, actions[event.key]);
+
+            moveKeyboardItem(
+                state,
+                actions[event.key]
+            );
         } else if (event.code === 'Space') {
             event.preventDefault();
             finishKeyboardMove(state);
@@ -264,20 +410,29 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function enablePointerSorting(state) {
-        if (state.sortable || typeof window.Sortable === 'undefined') return;
+        if (
+            state.sortable
+            || typeof window.Sortable === 'undefined'
+        ) {
+            return;
+        }
 
-        state.sortable = window.Sortable.create(state.list, {
-            animation: state.options.animation,
-            draggable: state.options.itemSelector,
-            filter: state.options.interactiveSelector,
-            preventOnFilter: false,
-            ghostClass: 'sortable-ghost',
-            chosenClass: 'sortable-chosen',
-            dragClass: 'sortable-drag',
-            onEnd() {
-                emitChange(state, 'pointer');
-            },
-        });
+        state.sortable = window.Sortable.create(
+            state.list,
+            {
+                animation: state.options.animation,
+                draggable: state.options.itemSelector,
+                filter: state.options.interactiveSelector,
+                preventOnFilter: false,
+                ghostClass: 'sortable-ghost',
+                chosenClass: 'sortable-chosen',
+                dragClass: 'sortable-drag',
+
+                onEnd() {
+                    emitChange(state, 'pointer');
+                },
+            }
+        );
     }
 
     function disablePointerSorting(state) {
@@ -285,13 +440,63 @@ window.Neowolf = window.Neowolf || {};
         state.sortable = null;
     }
 
-    function setEnabled(state, enabled, {focusFirst = false} = {}) {
-        if (state.enabled === enabled) return;
+    function syncReorderToggle(state) {
+        const toggle = state.toggle;
+
+        if (!toggle) {
+            return;
+        }
+
+        const enabled = state.enabled;
+        const label = enabled
+            ? 'Finish reordering'
+            : 'Enable reorder';
+
+        toggle.setAttribute(
+            'aria-label',
+            label
+        );
+
+        toggle.setAttribute(
+            'aria-pressed',
+            String(enabled)
+        );
+
+        toggle.dataset.tooltip = enabled
+            ? 'Finish reordering (Alt+Shift+R)'
+            : 'Enable reorder (Alt+Shift+R)';
+
+        toggle
+            .querySelector('.icon-reorder')
+            ?.toggleAttribute(
+                'hidden',
+                enabled
+            );
+
+        toggle
+            .querySelector('.icon-reorder-active')
+            ?.toggleAttribute(
+                'hidden',
+                !enabled
+            );
+    }
+
+    function setEnabled(
+        state,
+        enabled,
+        {focusFirst = false} = {}
+    ) {
+        if (state.enabled === enabled) {
+            return;
+        }
 
         if (!enabled) {
-            cancelKeyboardMove(state, {
-                announceCancellation: false,
-            });
+            cancelKeyboardMove(
+                state,
+                {
+                    announceCancellation: false,
+                }
+            );
         }
 
         state.enabled = enabled;
@@ -301,17 +506,7 @@ window.Neowolf = window.Neowolf || {};
             enabled
         );
 
-        if (state.toggle) {
-            state.toggle.setAttribute(
-                'aria-pressed',
-                String(enabled)
-            );
-
-            state.toggle.textContent = enabled
-                ? 'Finish reordering'
-                : 'Reorder';
-        }
-
+        syncReorderToggle(state);
         setItemsFocusable(state, enabled);
 
         if (enabled) {
@@ -319,7 +514,9 @@ window.Neowolf = window.Neowolf || {};
 
             announce(
                 state,
-                'Reorder mode enabled. Use arrow keys to navigate and Space to pick up an item.'
+                'Reorder mode enabled. '
+                + 'Use arrow keys to navigate and '
+                + 'Space to pick up an item.'
             );
 
             if (focusFirst) {
@@ -342,12 +539,26 @@ window.Neowolf = window.Neowolf || {};
     }
 
     function init(root, options = {}) {
-        if (!(root instanceof HTMLElement)) return null;
-        if (states.has(root)) return states.get(root).api;
+        if (!(root instanceof HTMLElement)) {
+            return null;
+        }
 
-        const settings = {...defaults, ...options};
-        const list = root.querySelector(settings.listSelector);
-        if (!list) return null;
+        if (states.has(root)) {
+            return states.get(root).api;
+        }
+
+        const settings = {
+            ...defaults,
+            ...options,
+        };
+
+        const list = root.querySelector(
+            settings.listSelector
+        );
+
+        if (!list) {
+            return null;
+        }
 
         const toggle = helper.getToggle(root);
 
@@ -367,35 +578,78 @@ window.Neowolf = window.Neowolf || {};
         const api = {
             enable: () => setEnabled(state, true),
             disable: () => setEnabled(state, false),
-            toggle: () => setEnabled(state, !state.enabled),
+            toggle: () => setEnabled(
+                state,
+                !state.enabled
+            ),
             getOrder: () => getOrder(state),
-            applyOrder: (order) => applyOrder(state, order),
+            applyOrder: (order) => applyOrder(
+                state,
+                order
+            ),
             isEnabled: () => state.enabled,
         };
+
         state.api = api;
         states.set(root, state);
 
         helper.registerShortcutController({
             root,
             toggle,
+
             isEnabled: () => state.enabled,
-            toggleMode: () => setEnabled(state, !state.enabled, {focusFirst: true}),
+
+            toggleMode: () => setEnabled(
+                state,
+                !state.enabled,
+                {focusFirst: true}
+            ),
+
             cancelMove: () => {
-                if (!state.movingItem) return false;
+                if (!state.movingItem) {
+                    return false;
+                }
+
                 cancelKeyboardMove(state);
                 return true;
             },
-            disable: () => setEnabled(state, false),
+
+            disable: () => setEnabled(
+                state,
+                false
+            ),
         });
 
-        list.addEventListener('keydown', (event) => onItemKeydown(state, event));
-        toggle?.addEventListener('click', () => setEnabled(state, !state.enabled, {
-            focusFirst: settings.focusFirstOnEnable && !Neowolf.interaction?.isUsingPointer?.(),
-        }));
+        list.addEventListener(
+            'keydown',
+            (event) => onItemKeydown(
+                state,
+                event
+            )
+        );
+
+        toggle?.addEventListener(
+            'click',
+            () => setEnabled(
+                state,
+                !state.enabled,
+                {
+                    focusFirst:
+                        settings.focusFirstOnEnable
+                        && !Neowolf.interaction
+                            ?.isUsingPointer?.(),
+                }
+            )
+        );
+
         return api;
     }
 
-    Neowolf.sortableFlatTree = {init};
+    Neowolf.sortableFlatTree = {
+        init,
+    };
 
-    document.querySelectorAll('[data-sortable-flat-tree]').forEach((root) => init(root));
+    document
+        .querySelectorAll('[data-sortable-flat-tree]')
+        .forEach((root) => init(root));
 })();
