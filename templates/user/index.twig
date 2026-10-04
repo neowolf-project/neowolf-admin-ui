@@ -13,78 +13,68 @@
 
 {% block content %}
     <section class="user" data-plugin-id="user">
-        <header>
-            <nav aria-label="User actions">
-                <ul>
-                    <li>
-                        <h1>Users</h1>
-                    </li>
-                </ul>
+        <header class="admin-page-header">
+            <h1>Users</h1>
 
-                <ul>
-                    <li>
-                        <a
-                                href="/user/add"
-                                class="admin-button admin-toolbar-button"
-                                aria-label="Add user"
-                                data-tooltip="Add user"
-                                data-placement="top"
-                        >
-                            <svg
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                            >
-                                <path d="M12 5v14M5 12h14"/>
-                            </svg>
-                        </a>
-                    </li>
+            <div class="admin-page-actions">
+                <a
+                        href="/user/add"
+                        class="admin-button admin-toolbar-button"
+                        aria-label="Add user"
+                        data-tooltip="Add user"
+                        data-placement="top"
+                >
+                    <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                </a>
 
-                    <li>
-                        <button
-                                type="button"
-                                class="secondary admin-toolbar-button"
-                                data-sortable-toggle="user-index"
-                                aria-pressed="false"
-                                aria-label="Enable reorder"
-                                aria-keyshortcuts="Alt+Shift+R"
-                                aria-describedby="user-reorder-help"
-                                data-tooltip="Enable reorder (Alt+Shift+R)"
-                                data-placement="top"
-                        >
-                            <svg
-                                    class="icon-reorder"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                            >
-                                <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
-                            </svg>
+                <button
+                        type="button"
+                        class="secondary admin-toolbar-button"
+                        data-sortable-toggle="user-index"
+                        aria-pressed="false"
+                        aria-label="Enable reorder"
+                        aria-keyshortcuts="Alt+Shift+R"
+                        aria-describedby="user-reorder-help"
+                        data-tooltip="Enable reorder (Alt+Shift+R)"
+                        data-placement="top"
+                >
+                    <svg
+                            class="icon-reorder"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
+                    </svg>
 
-                            <svg
-                                    class="icon-reorder-active"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    hidden
-                            >
-                                <path d="M12 2v20M2 12h20"/>
-                                <path d="m8 6 4-4 4 4"/>
-                                <path d="m8 18 4 4 4-4"/>
-                                <path d="m6 8-4 4 4 4"/>
-                                <path d="m18 8 4 4-4 4"/>
-                            </svg>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+                    <svg
+                            class="icon-reorder-active"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 2v20M2 12h20"/>
+                        <path d="m8 6 4-4 4 4"/>
+                        <path d="m8 18 4 4 4-4"/>
+                        <path d="m6 8-4 4 4 4"/>
+                        <path d="m18 8 4 4-4 4"/>
+                    </svg>
+                </button>
+            </div>
         </header>
 
         <p
                 id="user-reorder-help"
                 class="admin-index-reorder-help"
         >
-            Reorder: drag an item, or press Alt+Shift+R and use the arrow keys. Press Space to pick up and place an item; Escape cancels and exits reorder mode.
+            Reorder: drag an item, or press Alt+Shift+R and use the arrow keys.
+            Press Space to pick up and place an item; Escape cancels and exits reorder mode.
         </p>
 
         <div
@@ -105,6 +95,7 @@
             <div
                     class="admin-index-list"
                     data-sortable-list
+                    role="list"
                     aria-label="Users"
             >
                 {% for user in users %}
@@ -113,6 +104,7 @@
                             class="user-row"
                             data-sortable-item
                             data-id="{{ user.id }}"
+                            role="listitem"
                     >
                         <div class="user-info">
                             <a
@@ -146,14 +138,19 @@
                                 <button
                                         type="button"
                                         class="icon-button delete"
-                                        aria-label="{{ user.protected ? 'Delete unavailable for ' ~ user.name : 'Delete ' ~ user.name }}"
+                                        aria-label="{{ user.protected
+                                        ? 'Delete unavailable for ' ~ user.name
+                                        : 'Delete ' ~ user.name
+                                        }}"
                                         {% if not user.protected %}
                                             data-tooltip="Delete"
                                             data-placement="top"
                                             data-delete-user="{{ user.id }}"
                                             data-delete-name="{{ user.name }}"
                                         {% endif %}
-                                        {% if user.protected %}disabled{% endif %}
+                                        {% if user.protected %}
+                                            disabled
+                                        {% endif %}
                                 >
                                     <svg
                                             viewBox="0 0 24 24"
@@ -175,12 +172,14 @@
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <p class="users-empty">
-                        No users found.
-                    </p>
                 {% endfor %}
             </div>
+
+            {% if users is empty %}
+                <p class="users-empty">
+                    No users found.
+                </p>
+            {% endif %}
 
             <div
                     class="admin-index-reorder-status visually-hidden"

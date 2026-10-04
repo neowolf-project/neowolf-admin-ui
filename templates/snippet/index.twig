@@ -11,71 +11,61 @@
 {% endblock %}
 
 {% block content %}
-    <section class="snippet">
-        <header>
-            <nav aria-label="Snippet actions">
-                <ul>
-                    <li>
-                        <h1>Snippets</h1>
-                    </li>
-                </ul>
+    <section class="snippet" data-plugin-id="snippet">
+        <header class="admin-page-header">
+            <h1>Snippets</h1>
 
-                <ul>
-                    <li>
-                        <a
-                                href="/snippet/add"
-                                class="admin-button admin-toolbar-button"
-                                aria-label="Add snippet"
-                                data-tooltip="Add snippet"
-                                data-placement="top"
-                        >
-                            <svg
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                            >
-                                <path d="M12 5v14M5 12h14"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <button
-                                type="button"
-                                class="secondary admin-toolbar-button"
-                                data-sortable-toggle="snippet-index"
-                                aria-pressed="false"
-                                aria-label="Enable reorder"
-                                aria-keyshortcuts="Alt+Shift+R"
-                                aria-describedby="snippet-reorder-help"
-                                data-tooltip="Enable reorder (Alt+Shift+R)"
-                                data-placement="top"
-                        >
-                            <svg
-                                    class="icon-reorder"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                            >
-                                <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
-                            </svg>
+            <div class="admin-page-actions">
+                <a
+                        href="/snippet/add"
+                        class="admin-button admin-toolbar-button"
+                        aria-label="Add snippet"
+                        data-tooltip="Add snippet"
+                        data-placement="top"
+                >
+                    <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                </a>
 
-                            <svg
-                                    class="icon-reorder-active"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    hidden
-                            >
-                                <path d="M12 2v20M2 12h20"/>
-                                <path d="m8 6 4-4 4 4"/>
-                                <path d="m8 18 4 4 4-4"/>
-                                <path d="m6 8-4 4 4 4"/>
-                                <path d="m18 8 4 4-4 4"/>
-                            </svg>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+                <button
+                        type="button"
+                        class="secondary admin-toolbar-button"
+                        data-sortable-toggle="snippet-index"
+                        aria-pressed="false"
+                        aria-label="Enable reorder"
+                        aria-keyshortcuts="Alt+Shift+R"
+                        aria-describedby="snippet-reorder-help"
+                        data-tooltip="Enable reorder (Alt+Shift+R)"
+                        data-placement="top"
+                >
+                    <svg
+                            class="icon-reorder"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>
+                    </svg>
+
+                    <svg
+                            class="icon-reorder-active"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                            focusable="false"
+                    >
+                        <path d="M12 2v20M2 12h20"/>
+                        <path d="m8 6 4-4 4 4"/>
+                        <path d="m8 18 4 4 4-4"/>
+                        <path d="m6 8-4 4 4 4"/>
+                        <path d="m18 8 4 4-4 4"/>
+                    </svg>
+                </button>
+            </div>
         </header>
 
         <p

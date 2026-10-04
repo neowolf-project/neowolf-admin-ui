@@ -200,14 +200,10 @@
     </svg>
 
     <section class="page" data-plugin-id="page">
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <h1>Pages</h1>
-                    </li>
-                </ul>
+        <header class="page-header">
+            <h1>Pages</h1>
 
+            <nav class="page-actions" aria-label="Page actions">
                 <ul>
                     <li>
                         <button
@@ -234,7 +230,6 @@
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                     focusable="false"
-                                    hidden
                             >
                                 <path d="M12 2v20M2 12h20"/>
                                 <path d="m8 6 4-4 4 4"/>
@@ -250,6 +245,7 @@
                                 type="button"
                                 id="toggle-all-nodes"
                                 class="secondary admin-toolbar-button"
+                                data-expanded="false"
                                 aria-label="Expand all"
                                 data-tooltip="Expand all"
                                 data-placement="top"
@@ -268,7 +264,6 @@
                                     viewBox="0 0 24 24"
                                     aria-hidden="true"
                                     focusable="false"
-                                    hidden
                             >
                                 <path d="m6 17 6-6 6 6M6 11l6-6 6 6"/>
                             </svg>
@@ -314,28 +309,33 @@
                 {{ _self.nodes(pages) }}
             </ul>
         </div>
+
+        <p
+                id="tree-demo-message"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+        ></p>
     </section>
-
-    <p
-            id="tree-demo-message"
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-    ></p>
-
-    {# dialogs continue here #}
 
     <dialog aria-labelledby="layout-page-dialog-title" id="layout-page-dialog">
         <article>
             <header>
                 <form method="dialog">
-                    <button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+                    <button
+                            aria-label="Close"
+                            rel="prev"
+                            type="submit"
+                            value="cancel"
+                    ></button>
                 </form>
+
                 <h2 id="layout-page-dialog-title">Change Layout</h2>
             </header>
 
             <form id="layout-page-form">
                 <label for="page-layout-field">Layout</label>
+
                 <select id="page-layout-field" name="layout">
                     <option value="Default">Default</option>
                     <option value="News">News</option>
@@ -346,10 +346,18 @@
             </form>
 
             <footer>
-                <button class="secondary" id="cancel-layout-page-button" type="button">
+                <button
+                        class="secondary"
+                        id="cancel-layout-page-button"
+                        type="button"
+                >
                     Cancel
                 </button>
-                <button id="confirm-layout-page-button" type="button">
+
+                <button
+                        id="confirm-layout-page-button"
+                        type="button"
+                >
                     Save
                 </button>
             </footer>
@@ -360,13 +368,20 @@
         <article>
             <header>
                 <form method="dialog">
-                    <button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+                    <button
+                            aria-label="Close"
+                            rel="prev"
+                            type="submit"
+                            value="cancel"
+                    ></button>
                 </form>
+
                 <h2 id="status-page-dialog-title">Change Status</h2>
             </header>
 
             <form id="status-page-form">
                 <label for="page-status-field">Status</label>
+
                 <select id="page-status-field" name="status">
                     <option value="Draft">Draft</option>
                     <option value="Preview">Preview</option>
@@ -377,10 +392,18 @@
             </form>
 
             <footer>
-                <button class="secondary" id="cancel-status-page-button" type="button">
+                <button
+                        class="secondary"
+                        id="cancel-status-page-button"
+                        type="button"
+                >
                     Cancel
                 </button>
-                <button id="confirm-status-page-button" type="button">
+
+                <button
+                        id="confirm-status-page-button"
+                        type="button"
+                >
                     Save
                 </button>
             </footer>
@@ -395,8 +418,14 @@
         <article>
             <header>
                 <form method="dialog">
-                    <button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+                    <button
+                            aria-label="Close"
+                            rel="prev"
+                            type="submit"
+                            value="cancel"
+                    ></button>
                 </form>
+
                 <h2 id="view-page-dialog-title">View Page</h2>
             </header>
 
@@ -414,13 +443,20 @@
         <article>
             <header>
                 <form method="dialog">
-                    <button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+                    <button
+                            aria-label="Close"
+                            rel="prev"
+                            type="submit"
+                            value="cancel"
+                    ></button>
                 </form>
+
                 <h2 id="add-page-dialog-title">Add Page</h2>
             </header>
 
             <form id="add-page-form">
                 <label for="page-title-field">Title</label>
+
                 <input
                         autocomplete="off"
                         id="page-title-field"
@@ -431,10 +467,18 @@
             </form>
 
             <footer>
-                <button class="secondary" id="cancel-add-page-button" type="button">
+                <button
+                        class="secondary"
+                        id="cancel-add-page-button"
+                        type="button"
+                >
                     Cancel
                 </button>
-                <button id="confirm-add-page-button" type="button">
+
+                <button
+                        id="confirm-add-page-button"
+                        type="button"
+                >
                     Add
                 </button>
             </footer>
@@ -449,18 +493,32 @@
         <article>
             <header>
                 <form method="dialog">
-                    <button aria-label="Close" rel="prev" type="submit" value="cancel"></button>
+                    <button
+                            aria-label="Close"
+                            rel="prev"
+                            type="submit"
+                            value="cancel"
+                    ></button>
                 </form>
+
                 <h2 id="delete-page-dialog-title">Delete Page</h2>
             </header>
 
             <p id="delete-page-message"></p>
 
             <footer>
-                <button class="secondary" id="cancel-delete-page-button" type="button">
+                <button
+                        class="secondary"
+                        id="cancel-delete-page-button"
+                        type="button"
+                >
                     Cancel
                 </button>
-                <button id="confirm-delete-page-button" type="button">
+
+                <button
+                        id="confirm-delete-page-button"
+                        type="button"
+                >
                     Delete
                 </button>
             </footer>

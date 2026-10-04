@@ -64,7 +64,6 @@
     --neowolf-tab-active-background: var(--pico-primary-background);
     --neowolf-tab-active-color: var(--pico-primary-inverse, #fff);
     --neowolf-tab-active-hover-background: var(--pico-primary-hover-background);
-
 }
 
 [data-theme="dark"] {
@@ -117,8 +116,7 @@ html.using-mouse :is(input, select, textarea):focus {
     box-shadow: none !important;
 }
 
-body,
-.page-header h1 {
+body {
     margin: 0;
 }
 
@@ -146,7 +144,9 @@ body,
     justify-content: space-between;
     min-height: var(--neowolf-header-height);
     padding: 0 1.5rem;
-    border-bottom: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border-bottom:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
     background: var(--pico-card-background-color);
 }
 
@@ -223,7 +223,9 @@ body,
     grid-row: 2;
     min-width: 0;
     padding: 1.5rem 1rem;
-    border-right: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border-right:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
 }
 
 .admin-sidebar nav ul {
@@ -283,12 +285,8 @@ body,
     filter: invert(1);
 }
 
-.nav-section,
-.page-header p {
-    color: var(--pico-muted-color);
-}
-
 .nav-section {
+    color: var(--pico-muted-color);
     margin: 1.5rem 0 0.5rem;
     padding: 0 0.75rem;
     font-size: 0.75rem;
@@ -311,7 +309,14 @@ body,
     padding: var(--neowolf-page-padding);
 }
 
-.page-header {
+
+/*
+ * Page headers.
+ *
+ * Provides a shared heading and action layout for admin views.
+ */
+
+.admin-page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -319,8 +324,20 @@ body,
     margin-bottom: 2rem;
 }
 
-.page-header p {
+.admin-page-header h1 {
+    margin: 0;
+}
+
+.admin-page-header p {
     margin: 0.25rem 0 0;
+    color: var(--pico-muted-color);
+}
+
+.admin-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
 }
 
 
@@ -331,10 +348,13 @@ body,
 .admin-footer {
     grid-column: 1 / -1;
     padding: 1rem 1.5rem;
-    border-top: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border-top:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
     color: var(--pico-muted-color);
     font-size: 0.8rem;
 }
+
 
 /*
  * Button links.
@@ -347,7 +367,8 @@ body,
     --pico-background-color: var(--pico-primary-background);
     --pico-border-color: var(--pico-primary-border);
     --pico-color: var(--pico-primary-inverse);
-    --pico-box-shadow: var(--pico-button-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+    --pico-box-shadow:
+            var(--pico-button-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
 
     display: inline-flex;
     align-items: center;
@@ -398,10 +419,14 @@ nav li :is(button, .admin-button) {
     height: auto;
     margin: 0;
     padding:
-            calc(var(--pico-nav-link-spacing-vertical) - var(--pico-border-width) * 2)
+            calc(
+                    var(--pico-nav-link-spacing-vertical)
+                    - var(--pico-border-width) * 2
+            )
             var(--pico-nav-link-spacing-horizontal);
     line-height: var(--pico-line-height);
 }
+
 
 /*
  * Form fields.
@@ -529,6 +554,7 @@ fieldset.two-column > legend {
     height: var(--neowolf-scroll-icon-size);
 }
 
+
 /*
  * Tooltip interaction.
  *
@@ -544,6 +570,7 @@ body:has([data-tooltip]:hover)
     animation: none;
     opacity: 0;
 }
+
 
 /*
  * Generic backend dialogs.
@@ -592,7 +619,21 @@ dialog article header :is(a, button)[rel="prev"]:hover {
  * Admin toolbar controls.
  */
 
+.admin-toolbar-button {
+    display: inline-grid;
+    box-sizing: border-box;
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    place-items: center;
+    margin: 0;
+    padding: 0.375rem;
+    line-height: 1;
+}
+
 .admin-toolbar-button svg {
+    display: block;
     width: 1.25rem;
     height: 1.25rem;
     fill: none;
@@ -602,15 +643,30 @@ dialog article header :is(a, button)[rel="prev"]:hover {
     stroke-linejoin: round;
 }
 
-.admin-toolbar-button svg[hidden] {
+/*
+ * Reorder controls.
+ *
+ * JavaScript owns the aria-pressed state. CSS controls which icon is shown.
+ */
+
+[data-sortable-toggle] .icon-reorder-active {
     display: none;
 }
+
+[data-sortable-toggle][aria-pressed="true"] .icon-reorder {
+    display: none;
+}
+
+[data-sortable-toggle][aria-pressed="true"] .icon-reorder-active {
+    display: block;
+}
+
 
 /*
  * Plugin presentation.
  *
  * Non-core plugin destinations are regular navigation links. Their visual
- * presentation may be changed without changing the underlying navigation.
+ * presentation may change without changing the underlying navigation.
  */
 
 body[data-core="false"] .plugin-navigation a {
@@ -618,17 +674,34 @@ body[data-core="false"] .plugin-navigation a {
     text-decoration: none;
 }
 
+/*
+ * Presentation toggle.
+ */
+
 .plugin-presentation-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-grid;
+    place-items: center;
     padding: 0.5rem;
 }
 
 .plugin-presentation-toggle svg {
+    grid-area: 1 / 1;
     width: 1.25rem;
     height: 1.25rem;
 }
+
+/*
+ * The icon represents the presentation the user can switch to.
+ */
+
+body[data-plugin-presentation="tabs"] .plugin-icon-tabs {
+    display: none;
+}
+
+body[data-plugin-presentation="sidebar"] .plugin-icon-sidebar {
+    display: none;
+}
+
 
 /*
  * Tabs presentation.
@@ -651,8 +724,9 @@ body[data-core="false"][data-plugin-presentation="tabs"]
             - 8rem
     );
 
-    border: var(--neowolf-border-width)
-    solid var(--neowolf-layout-border-color);
+    border:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
     border-radius: var(--pico-border-radius);
 }
 
@@ -665,8 +739,9 @@ body[data-core="false"][data-plugin-presentation="tabs"]
     margin: 0;
     padding: 0;
 
-    border-bottom: var(--neowolf-border-width)
-    solid var(--neowolf-layout-border-color);
+    border-bottom:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
 }
 
 body[data-core="false"][data-plugin-presentation="tabs"]
@@ -729,6 +804,7 @@ body[data-core="false"][data-plugin-presentation="tabs"]
     padding: var(--neowolf-plugin-content-padding);
 }
 
+
 /*
  * Sidebar presentation.
  *
@@ -755,13 +831,17 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
     margin: 0;
     padding: 0;
 
-    border-left: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border-left:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
 }
 
 body[data-core="false"][data-plugin-presentation="sidebar"]
 .plugin-presentation.plugin-navigation-bordered
 .plugin-navigation {
-    border: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+    border:
+            var(--neowolf-border-width)
+            solid var(--neowolf-layout-border-color);
     border-radius: var(--pico-border-radius);
     overflow: hidden;
 }
@@ -780,7 +860,9 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
             var(--neowolf-plugin-sidebar-navigation-padding-y)
             var(--neowolf-plugin-navigation-padding-x);
 
-    border-left: var(--neowolf-plugin-active-border-width) solid transparent;
+    border-left:
+            var(--neowolf-plugin-active-border-width)
+            solid transparent;
 }
 
 body[data-core="false"][data-plugin-presentation="sidebar"]
@@ -811,20 +893,6 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
 @media (max-width: 50rem) {
     body[data-core="false"][data-plugin-presentation="sidebar"]
     .plugin-presentation {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-areas:
-            "navigation"
-            "content";
-    }
-}
-
-
-/*
- * Responsive plugin presentation.
- */
-
-@media (max-width: 50rem) {
-    body[data-core="false"][data-plugin-presentation="sidebar"] .plugin-presentation {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "navigation"
@@ -915,7 +983,9 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
         display: block;
         width: 1.5rem;
         margin-inline: auto;
-        border-top: var(--neowolf-border-width) solid var(--pico-muted-border-color);
+        border-top:
+                var(--neowolf-border-width)
+                solid var(--pico-muted-border-color);
     }
 }
 
@@ -964,7 +1034,9 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
     .admin-sidebar {
         padding: 0.75rem 1rem;
         border-right: 0;
-        border-bottom: var(--neowolf-border-width) solid var(--neowolf-layout-border-color);
+        border-bottom:
+                var(--neowolf-border-width)
+                solid var(--neowolf-layout-border-color);
     }
 
     .admin-sidebar nav ul {
@@ -991,9 +1063,13 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
         padding: var(--neowolf-page-padding-narrow);
     }
 
-    .page-header {
+    .admin-page-header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .admin-page-actions {
+        margin-left: 0;
     }
 }
 
@@ -1008,4 +1084,3 @@ body[data-core="false"][data-plugin-presentation="sidebar"]
         white-space: normal;
     }
 }
-

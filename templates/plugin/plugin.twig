@@ -4,54 +4,56 @@
 
 {% block content %}
     <section class="plugin" data-plugin-id="{{ plugin.id }}">
-        <header class="page-header">
+        <header class="admin-page-header">
             <div>
                 <h1>{{ plugin.name }}</h1>
                 <p>{{ plugin.description }}</p>
             </div>
 
             {% if not plugin.core %}
-                <button
-                        type="button"
-                        class="plugin-presentation-toggle secondary outline"
-                        data-plugin-presentation-toggle
-                        aria-label="Switch plugin navigation to sidebar"
-                        data-tooltip="Switch plugin navigation to sidebar"
-                        data-placement="left"
-                >
-                    <svg
-                            class="plugin-icon-sidebar"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
+                <div class="admin-page-actions">
+                    <button
+                            type="button"
+                            class="plugin-presentation-toggle secondary outline"
+                            data-plugin-presentation-toggle
+                            aria-label="Switch plugin navigation to sidebar"
+                            data-tooltip="Switch plugin navigation to sidebar"
+                            data-placement="left"
                     >
-                        <rect x="3" y="4" width="18" height="16" rx="1"/>
-                        <path d="M16 4v16"/>
-                    </svg>
+                        <svg
+                                class="plugin-icon-sidebar"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                                focusable="false"
+                        >
+                            <rect x="3" y="4" width="18" height="16" rx="1"/>
+                            <path d="M16 4v16"/>
+                        </svg>
 
-                    <svg
-                            class="plugin-icon-tabs"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                            hidden
-                    >
-                        <rect x="3" y="4" width="18" height="16" rx="1"/>
-                        <path d="M3 9h18"/>
-                        <path d="M8 4v5"/>
-                        <path d="M13 4v5"/>
-                    </svg>
-                </button>
+                        <svg
+                                class="plugin-icon-tabs"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                                focusable="false"
+                        >
+                            <rect x="3" y="4" width="18" height="16" rx="1"/>
+                            <path d="M3 9h18"/>
+                            <path d="M8 4v5"/>
+                            <path d="M13 4v5"/>
+                        </svg>
+                    </button>
+                </div>
             {% endif %}
-
         </header>
 
         <div class="plugin-presentation plugin-navigation-bordered">
