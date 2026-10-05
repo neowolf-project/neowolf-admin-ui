@@ -12,21 +12,29 @@
             </p>
 
             <div class="admin-header-actions">
-                <p class="admin-user">
-                    You are currently logged in as
-                    <a href="#">Administrator</a>
+                <button
+                        type="button"
+                        class="admin-user"
+                        popovertarget="admin-user-menu"
+                >
+                    Administrator
+                    <span aria-hidden="true">▾</span>
+                </button>
 
-                    <span aria-hidden="true">|</span>
-
-                    <a href="#">Log Out</a>
-
-                    <span aria-hidden="true">|</span>
+                <div
+                        id="admin-user-menu"
+                        class="admin-user-menu"
+                        popover
+                >
+                    <a href="#">Profile</a>
 
                     <a href="#" target="_blank" rel="noopener noreferrer">
                         View Site
                         <span class="visually-hidden">(opens in new tab)</span>
                     </a>
-                </p>
+
+                    <a href="#">Log Out</a>
+                </div>
 
                 {% include 'partials/theme-toggle.twig' %}
             </div>
