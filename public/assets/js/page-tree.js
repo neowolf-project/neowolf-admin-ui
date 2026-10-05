@@ -35,15 +35,11 @@ window.Neowolf = window.Neowolf || {};
         ?? Neowolf.tree?.getStatusRegion(pageTree);
 
     const layoutDialog = document.getElementById('layout-page-dialog');
-    const layoutPageForm = document.getElementById('layout-page-form');
     const pageLayoutField = document.getElementById('page-layout-field');
     const cancelLayoutButton = document.getElementById('cancel-layout-page-button');
-    const confirmLayoutButton = document.getElementById('confirm-layout-page-button');
     const statusDialog = document.getElementById('status-page-dialog');
-    const statusPageForm = document.getElementById('status-page-form');
     const pageStatusField = document.getElementById('page-status-field');
     const cancelStatusButton = document.getElementById('cancel-status-page-button');
-    const confirmStatusButton = document.getElementById('confirm-status-page-button');
     const viewDialog = document.getElementById('view-page-dialog');
     const viewPageUrl = document.getElementById('view-page-url');
     const closeViewButton = document.getElementById('close-view-page-button');
@@ -1067,9 +1063,6 @@ window.Neowolf = window.Neowolf || {};
         return node.querySelectorAll('.tree-node').length;
     }
 
-    function wireDialogButton(button, callback) {
-        button?.addEventListener('click', callback);
-    }
 
     toggleAllButton?.addEventListener('click', () => {
         const shouldCollapse = areAllNodesExpanded();
@@ -1209,32 +1202,32 @@ window.Neowolf = window.Neowolf || {};
         layoutDialog.close('cancel');
     });
 
-    confirmLayoutButton.addEventListener('click', () => {
-        layoutPageForm.requestSubmit();
-    });
-
-    layoutPageForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
+    pageLayoutField.addEventListener('change', () => {
         const node = pendingLayoutNode;
         const layoutButton = pendingLayoutButton;
-        const nextLayout = pageLayoutField.value;
 
         if (!node || !layoutButton) {
             return;
         }
 
         const previousLayout = layoutButton.textContent.trim();
+        const nextLayout = pageLayoutField.value;
+
+        if (previousLayout === nextLayout) {
+            layoutDialog.close('cancel');
+            return;
+        }
 
         layoutButton.textContent = nextLayout;
         syncLayoutButton(node);
         notifyTreeChange('layout', {node});
 
-        layoutDialog.close('save');
+        layoutDialog.close('change');
 
         announce(
             `${getNodeTitle(node)} layout changed from `
-            + `${previousLayout} to ${nextLayout}.`);
+            + `${previousLayout} to ${nextLayout}.`
+        );
     });
 
     layoutDialog.addEventListener('close', () => {
@@ -1250,33 +1243,33 @@ window.Neowolf = window.Neowolf || {};
         statusDialog.close('cancel');
     });
 
-    confirmStatusButton.addEventListener('click', () => {
-        statusPageForm.requestSubmit();
-    });
-
-    statusPageForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
+    pageStatusField.addEventListener('change', () => {
         const node = pendingStatusNode;
         const statusButton = pendingStatusButton;
-        const nextStatus = pageStatusField.value;
 
         if (!node || !statusButton) {
             return;
         }
 
         const previousStatus = statusButton.textContent.trim();
+        const nextStatus = pageStatusField.value;
+
+        if (previousStatus === nextStatus) {
+            statusDialog.close('cancel');
+            return;
+        }
 
         statusButton.textContent = nextStatus;
         syncStatusButton(node);
         syncNodeUrls(node);
         notifyTreeChange('status', {node});
 
-        statusDialog.close('save');
+        statusDialog.close('change');
 
         announce(
             `${getNodeTitle(node)} status changed from `
-            + `${previousStatus} to ${nextStatus}.`);
+            + `${previousStatus} to ${nextStatus}.`
+        );
     });
 
     statusDialog.addEventListener('close', () => {
