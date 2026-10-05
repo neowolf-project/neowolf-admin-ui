@@ -1,0 +1,59 @@
+.aria-page-tree,
+.aria-page-tree [role="group"] {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aria-page-tree [role="group"] {
+    margin-left: 2rem;
+}
+
+.aria-page-tree [role="treeitem"] {
+    display: block;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.aria-tree-row {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 2.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--pico-border-radius);
+}
+
+.aria-page-tree [role="treeitem"]:focus > .aria-tree-row {
+    outline: 2px solid var(--pico-primary-focus);
+    outline-offset: 2px;
+}
+
+.aria-page-tree [role="treeitem"][aria-expanded="false"] > [role="group"] {
+    display: none;
+}
+
+.aria-page-tree [role="treeitem"] > .aria-tree-row::before {
+    width: 1.5rem;
+    flex: 0 0 1.5rem;
+    content: "";
+}
+
+.aria-page-tree [role="treeitem"][aria-expanded="true"] > .aria-tree-row::before {
+    content: "▾";
+}
+
+.aria-page-tree [role="treeitem"][aria-expanded="false"] > .aria-tree-row::before {
+    content: "▸";
+}
+
+.aria-tree-title {
+    font-weight: 500;
+}
+
+.aria-tree-help {
+    margin-top: 1.5rem;
+    color: var(--pico-muted-color);
+}

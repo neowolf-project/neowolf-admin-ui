@@ -10,6 +10,7 @@ use NeowolfAdmin\Controller\PluginController;
 use NeowolfAdmin\Controller\SettingController;
 use NeowolfAdmin\Controller\SnippetController;
 use NeowolfAdmin\Controller\UserController;
+use NeowolfAdmin\Controller\PageAriaController;
 
 return static function (RouteCollector $routes): void {
     $routes->get('/', [PageController::class, 'index']);
@@ -20,6 +21,7 @@ return static function (RouteCollector $routes): void {
     $routes->get('/auth/forgot', [AuthController::class, 'forgot']);
     $routes->get('/auth/register', [AuthController::class, 'register']);
 
+    $routes->get('/page/aria', [PageAriaController::class, 'index']);
     $routes->get('/page/add/{parent_id:\d+}', [PageController::class, 'add']);
     $routes->get('/page/edit/{id:\d+}', [PageController::class, 'edit']);
 

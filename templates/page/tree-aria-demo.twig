@@ -1,0 +1,127 @@
+{% extends 'admin.twig' %}
+
+{% set active_section = 'pages' %}
+
+{% block title %}ARIA Page Tree Demo · Neowolf{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ asset('assets/css/page-tree-aria-demo.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="aria-tree-demo">
+        <header class="admin-page-header">
+            <div>
+                <h1>ARIA Page Tree Demo</h1>
+                <p>
+                    Experimental accessible page hierarchy using the ARIA tree pattern.
+                </p>
+            </div>
+        </header>
+
+        <ul
+            class="aria-page-tree"
+            id="aria-page-tree"
+            role="tree"
+            aria-label="Pages"
+        >
+            <li
+                role="treeitem"
+                aria-expanded="true"
+                tabindex="0"
+            >
+                <div class="aria-tree-row">
+                    <span class="aria-tree-title">Home</span>
+                </div>
+
+                <ul role="group">
+                    <li
+                        role="treeitem"
+                        aria-expanded="true"
+                        tabindex="-1"
+                    >
+                        <div class="aria-tree-row">
+                            <span class="aria-tree-title">About</span>
+                        </div>
+
+                        <ul role="group">
+                            <li role="treeitem" tabindex="-1">
+                                <div class="aria-tree-row">
+                                    <span class="aria-tree-title">Team</span>
+                                </div>
+                            </li>
+
+                            <li role="treeitem" tabindex="-1">
+                                <div class="aria-tree-row">
+                                    <span class="aria-tree-title">History</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li
+                        role="treeitem"
+                        aria-expanded="true"
+                        tabindex="-1"
+                    >
+                        <div class="aria-tree-row">
+                            <span class="aria-tree-title">News</span>
+                        </div>
+
+                        <ul role="group">
+                            <li role="treeitem" tabindex="-1">
+                                <div class="aria-tree-row">
+                                    <span class="aria-tree-title">Local News</span>
+                                </div>
+                            </li>
+
+                            <li role="treeitem" tabindex="-1">
+                                <div class="aria-tree-row">
+                                    <span class="aria-tree-title">Archive</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li
+                        role="treeitem"
+                        aria-expanded="true"
+                        tabindex="-1"
+                    >
+                        <div class="aria-tree-row">
+                            <span class="aria-tree-title">Events</span>
+                        </div>
+
+                        <ul role="group">
+                            <li role="treeitem" tabindex="-1">
+                                <div class="aria-tree-row">
+                                    <span class="aria-tree-title">Workshops</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li role="treeitem" tabindex="-1">
+                        <div class="aria-tree-row">
+                            <span class="aria-tree-title">Contact</span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <p
+            class="aria-tree-help"
+            id="aria-tree-help"
+        >
+            Use Up and Down Arrow to move between pages.
+            Use Right Arrow to expand or enter a branch.
+            Use Left Arrow to collapse or move to the parent.
+            Home and End move to the first and last visible page.
+        </p>
+    </section>
+{% endblock %}
+
+{% block admin_scripts %}
+    <script src="{{ asset('assets/js/page-tree-aria-demo.js') }}"></script>
+{% endblock %}
