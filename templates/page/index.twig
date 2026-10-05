@@ -6,6 +6,16 @@
     {% for page in pages %}
         {% set protected_label = page.protected ? ', protected page' : '' %}
 
+        {% set layout_label = page.protected
+            ? 'Layout for ' ~ page.title ~ ' cannot be changed, current layout: ' ~ page.layout
+            : 'Change layout for ' ~ page.title ~ ', current layout: ' ~ page.layout
+        %}
+
+        {% set status_label = page.protected
+            ? 'Status for ' ~ page.title ~ ' cannot be changed, current status: ' ~ page.status
+            : 'Change status for ' ~ page.title ~ ', current status: ' ~ page.status
+        %}
+
         <li
                 class="tree-node"
                 data-page-id="{{ page.id }}"
@@ -55,7 +65,7 @@
                         <button
                                 type="button"
                                 class="drag-handle"
-                                aria-label="Move page"
+                                aria-label="Move {{ page.title }}"
                                 data-tooltip="Move page"
                         >
                             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -69,6 +79,7 @@
                     <button
                             type="button"
                             class="layout-button"
+                            aria-label="{{ layout_label }}"
                             data-tooltip="{{ page.protected ? 'Layout cannot be changed' : 'Change layout' }}"
                             {% if page.protected %}disabled{% endif %}
                     >
@@ -80,6 +91,7 @@
                     <button
                             type="button"
                             class="status-badge"
+                            aria-label="{{ status_label }}"
                             data-tooltip="{{ page.protected ? 'Status cannot be changed' : 'Change status' }}"
                             {% if page.protected %}disabled{% endif %}
                     >
@@ -115,7 +127,10 @@
                     <button
                             type="button"
                             class="tree-action normal-action secondary copy-button"
-                            aria-label="{{ page.protected ? page.title ~ ' cannot be copied' : 'Copy ' ~ page.title }}"
+                            aria-label="{{ page.protected
+                            ? page.title ~ ' cannot be copied'
+                            : 'Copy ' ~ page.title
+                            }}"
                             data-tooltip="{{ page.protected ? page.title ~ ' cannot be copied' : 'Copy page' }}"
                             {% if page.protected %}disabled{% endif %}
                     >
@@ -128,8 +143,14 @@
                     <button
                             type="button"
                             class="tree-action normal-action secondary delete-button"
-                            aria-label="{{ page.protected or not page.deletable ? page.title ~ ' cannot be deleted' : 'Delete ' ~ page.title }}"
-                            data-tooltip="{{ page.protected or not page.deletable ? page.title ~ ' cannot be deleted' : 'Delete page' }}"
+                            aria-label="{{ page.protected or not page.deletable
+                            ? page.title ~ ' cannot be deleted'
+                            : 'Delete ' ~ page.title
+                            }}"
+                            data-tooltip="{{ page.protected or not page.deletable
+                            ? page.title ~ ' cannot be deleted'
+                            : 'Delete page'
+                            }}"
                             {% if page.protected or not page.deletable %}disabled{% endif %}
                     >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -333,17 +354,15 @@
                 <h2 id="layout-page-dialog-title">Change Layout</h2>
             </header>
 
-            <form id="layout-page-form">
-                <label for="page-layout-field">Layout</label>
+            <label for="page-layout-field">Layout</label>
 
-                <select id="page-layout-field" name="layout">
-                    <option value="Default">Default</option>
-                    <option value="News">News</option>
-                    <option value="Article">Article</option>
-                    <option value="Landing">Landing</option>
-                    <option value="Contact">Contact</option>
-                </select>
-            </form>
+            <select id="page-layout-field" name="layout">
+                <option value="Default">Default</option>
+                <option value="News">News</option>
+                <option value="Article">Article</option>
+                <option value="Landing">Landing</option>
+                <option value="Contact">Contact</option>
+            </select>
 
             <footer>
                 <button
@@ -352,13 +371,6 @@
                         type="button"
                 >
                     Cancel
-                </button>
-
-                <button
-                        id="confirm-layout-page-button"
-                        type="button"
-                >
-                    Save
                 </button>
             </footer>
         </article>
@@ -379,17 +391,15 @@
                 <h2 id="status-page-dialog-title">Change Status</h2>
             </header>
 
-            <form id="status-page-form">
-                <label for="page-status-field">Status</label>
+            <label for="page-status-field">Status</label>
 
-                <select id="page-status-field" name="status">
-                    <option value="Draft">Draft</option>
-                    <option value="Preview">Preview</option>
-                    <option value="Published">Published</option>
-                    <option value="Hidden">Hidden</option>
-                    <option value="Archived">Archived</option>
-                </select>
-            </form>
+            <select id="page-status-field" name="status">
+                <option value="Draft">Draft</option>
+                <option value="Preview">Preview</option>
+                <option value="Published">Published</option>
+                <option value="Hidden">Hidden</option>
+                <option value="Archived">Archived</option>
+            </select>
 
             <footer>
                 <button
@@ -398,13 +408,6 @@
                         type="button"
                 >
                     Cancel
-                </button>
-
-                <button
-                        id="confirm-status-page-button"
-                        type="button"
-                >
-                    Save
                 </button>
             </footer>
         </article>
@@ -477,7 +480,8 @@
 
                 <button
                         id="confirm-add-page-button"
-                        type="button"
+                        type="submit"
+                        form="add-page-form"
                 >
                     Add
                 </button>
