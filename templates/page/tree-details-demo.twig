@@ -1,0 +1,84 @@
+{% extends 'admin.twig' %}
+
+{% set active_section = 'pages' %}
+
+{% block title %}Details Page Tree Demo · Neowolf{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ asset('assets/css/page-tree-details-demo.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="details-tree-demo">
+        <header class="admin-page-header">
+            <div>
+                <h1>Details Page Tree Demo</h1>
+                <p>
+                    Experimental accessible page hierarchy using native details and summary elements.
+                </p>
+            </div>
+        </header>
+
+        <div
+                class="details-page-tree"
+                id="details-page-tree"
+                aria-label="Pages"
+        >
+            <details open>
+                <summary>Home</summary>
+
+                <div class="details-tree-children">
+                    <details open>
+                        <summary>About</summary>
+
+                        <div class="details-tree-children">
+                            <div class="details-tree-leaf">
+                                <span>Team</span>
+                            </div>
+
+                            <div class="details-tree-leaf">
+                                <span>History</span>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details open>
+                        <summary>News</summary>
+
+                        <div class="details-tree-children">
+                            <div class="details-tree-leaf">
+                                <span>Local News</span>
+                            </div>
+
+                            <div class="details-tree-leaf">
+                                <span>Archive</span>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details open>
+                        <summary>Events</summary>
+
+                        <div class="details-tree-children">
+                            <div class="details-tree-leaf">
+                                <span>Workshops</span>
+                            </div>
+                        </div>
+                    </details>
+
+                    <div class="details-tree-leaf">
+                        <span>Contact</span>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <p class="details-tree-help">
+            Expand and collapse page groups using their disclosure controls.
+        </p>
+    </section>
+{% endblock %}
+
+{% block admin_scripts %}
+    <script src="{{ asset('assets/js/page-tree-details-demo.js') }}"></script>
+{% endblock %}

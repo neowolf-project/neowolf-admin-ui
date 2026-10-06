@@ -1,0 +1,145 @@
+.details-tree-demo {
+    --tree-indent: 1.75rem;
+    --tree-line: var(--pico-muted-border-color);
+}
+
+.details-page-tree {
+    margin-top: 1.5rem;
+}
+
+/*
+ * Nodes
+ */
+.details-page-tree details,
+.details-tree-leaf {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Summary / disclosure control
+ */
+.details-page-tree summary {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 2rem;
+    padding: 0.25rem 0;
+
+    color: var(--pico-color);
+    cursor: pointer;
+    list-style: none;
+
+    /* Override framework disclosure styling. */
+    background-image: none;
+}
+
+.details-page-tree summary::-webkit-details-marker {
+    display: none;
+}
+
+.details-page-tree summary::marker {
+    content: "";
+}
+
+/*
+ * Blades may provide its own summary indicator.
+ */
+.details-page-tree summary::after {
+    display: none;
+    content: none;
+}
+
+/*
+ * Disclosure arrow
+ */
+.details-page-tree summary::before {
+    content: "";
+    display: block;
+    flex: 0 0 auto;
+
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.75rem;
+
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
+}
+
+.details-page-tree details[open] > summary::before {
+    transform: rotate(45deg);
+}
+
+/*
+ * Children
+ */
+.details-tree-children {
+    position: relative;
+    margin-left: 0.25rem;
+    padding-left: var(--tree-indent);
+}
+
+/*
+ * Vertical branch
+ */
+.details-tree-children::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 1rem;
+    left: 0.25rem;
+
+    border-left: 1px solid var(--tree-line);
+}
+
+/*
+ * Horizontal branches
+ */
+.details-tree-children > details::before,
+.details-tree-children > .details-tree-leaf::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    left: calc(-1 * var(--tree-indent) + 0.25rem);
+
+    width: calc(var(--tree-indent) - 0.75rem);
+
+    border-top: 1px solid var(--tree-line);
+}
+
+/*
+ * Leaf nodes
+ */
+.details-tree-leaf {
+    display: flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.25rem 0;
+
+    color: var(--pico-color);
+}
+
+/*
+ * Interaction
+ */
+.details-page-tree summary:hover {
+    color: var(--pico-primary-hover);
+}
+
+.details-page-tree summary:focus-visible {
+    border-radius: var(--pico-border-radius);
+    outline: var(--pico-outline-width) solid var(--pico-primary-focus);
+    outline-offset: 0.125rem;
+}
+
+/*
+ * Help
+ */
+.details-tree-help {
+    margin-top: 1.5rem;
+    color: var(--pico-muted-color);
+}
